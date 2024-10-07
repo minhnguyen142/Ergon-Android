@@ -16,7 +16,8 @@
         android:src="@drawable/icon_close"
         app:tint="@color/white"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:layout_editor_absoluteY="10dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/IconShare"
@@ -26,7 +27,8 @@
         android:src="@drawable/hierarchy2"
         app:tint="@color/white"
         tools:layout_editor_absoluteX="365dp"
-        tools:layout_editor_absoluteY="5dp" />
+        tools:layout_editor_absoluteY="5dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/bookCoverDetail"
@@ -215,6 +217,7 @@
         android:src="@drawable/like_state"
         app:tint="@color/white"
         tools:layout_editor_absoluteX="324dp"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:layout_editor_absoluteY="10dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

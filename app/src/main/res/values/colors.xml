@@ -6,4 +6,7 @@
     <color name="light_teal">#3A8891</color>
     <color name="button_green">#55EFC4</color>
     <color name="detail">#ECF2F9</color>
+    <color name="blue">#74B9FF</color>
+    <color name="yellow">#FFEAA7</color>
+    <color name="gray">#C2D6DD</color>
 </resources>

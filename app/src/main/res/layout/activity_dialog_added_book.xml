@@ -61,7 +61,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/btn_border_round"
                     android:text="Để sau"
                     android:textColor="@color/button_green" />
 

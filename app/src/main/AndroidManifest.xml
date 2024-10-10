@@ -31,13 +31,13 @@
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.project.NhapThongTinCaNhan"
-            android:exported="true">
-        </activity>
-        <activity
             android:name="com.example.project.TaoPassWord"
             android:exported="true">
         </activity>
+        <activity
+        android:name="com.example.project.NhapThongTinCaNhan"
+        android:exported="true">
+    </activity>
         <activity
             android:name="com.example.project.Start"
             android:exported="true">

@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.btl_book.R;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class EnterOTP extends AppCompatActivity {
 
     private EditText otpInput1, otpInput2, otpInput3, otpInput4, otpInput5;
@@ -77,6 +80,9 @@ public class EnterOTP extends AppCompatActivity {
                 // Kiểm tra xem mã otp có nhập đủ hay không
                 if (otpNumber1.isEmpty() || otpNumber2.isEmpty() || otpNumber3.isEmpty() || otpNumber4.isEmpty() || otpNumber5.isEmpty()) {
                     Toast.makeText(EnterOTP.this, "Vui lòng nhập đủ mã OTP", Toast.LENGTH_SHORT).show();
+                } else if (!areOTPNumbersUnique(otpNumber1, otpNumber2, otpNumber3, otpNumber4, otpNumber5)) {
+                    // Kiểm tra tính duy nhất của các số OTP
+                    Toast.makeText(EnterOTP.this, "Các số trong mã OTP phải khác nhau", Toast.LENGTH_SHORT).show();
                 } else {
                     // Chuyển sang màn hình đăng nhập nếu mã otp hợp lệ
                     Intent continueSDT = new Intent(EnterOTP.this, TaoPassWord.class);
@@ -84,5 +90,16 @@ public class EnterOTP extends AppCompatActivity {
                 }
             }
         });
+    }
+    // Hàm kiểm tra tính duy nhất của các số OTP
+    private boolean areOTPNumbersUnique(String... otpNumbers) {
+        Set<String> otpSet = new HashSet<>();
+        for (String otp : otpNumbers) {
+            if (!otpSet.add(otp)) {
+                // Nếu không thể thêm một phần tử nào đó vào Set, nghĩa là có số trùng nhau
+                return false;
+            }
+        }
+        return true;
     }
 }

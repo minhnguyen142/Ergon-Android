@@ -27,6 +27,9 @@ public class TaoPassWord extends AppCompatActivity {
         setContentView(R.layout.activity_tao_pass_word);
         btnContinuePassWord = findViewById(R.id.btnContinuePassWord);
         imgbtnBackPassword = findViewById(R.id.imgbtnBackPassword);
+        usernameEditText = findViewById(R.id.usernameEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        confirmPassword = findViewById(R.id.confirmPassword);
 
         imgbtnBackPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +49,11 @@ public class TaoPassWord extends AppCompatActivity {
 
                 // Kiểm tra xem username, password, confirm có được nhập hay không
                 if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
-                    Toast.makeText(TaoPassWord.this, "Vui lòng nhập đủ mã OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaoPassWord.this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (password.length() < 8) {
+                    Toast.makeText(TaoPassWord.this, "Mật khẩu phải có ít nhất 8 ký tự", Toast.LENGTH_SHORT).show();
+                } else if (!password.equals(confirm)) {
+                    Toast.makeText(TaoPassWord.this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
                 } else {
                     // Chuyển sang màn hình nhập thông tin cá nhân nếu hợp lệ
                     Intent continueSDT = new Intent(TaoPassWord.this,  NhapThongTinCaNhan.class);

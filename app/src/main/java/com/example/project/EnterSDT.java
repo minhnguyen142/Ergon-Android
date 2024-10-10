@@ -17,6 +17,8 @@ import com.example.btl_book.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EnterSDT extends AppCompatActivity {
 
@@ -57,7 +59,10 @@ public class EnterSDT extends AppCompatActivity {
 
                 // Kiểm tra xem số điện thoại có được nhập hay không
                 if (phoneNumber.isEmpty()) {
-                    Toast.makeText(EnterSDT.this, "Vui lòng nhập số điên thoại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EnterSDT.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
+                } else if (!isValidPhoneNumber(phoneNumber)) {
+                    // Kiểm tra định dạng và độ dài số điện thoại
+                    Toast.makeText(EnterSDT.this, "Số điện thoại không hợp lệ. Vui lòng nhập đủ 10 số.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Chuyển sang màn hình EnterOTP nếu số điện thoại hợp lệ
                     Intent continueSDT = new Intent(EnterSDT.this, EnterOTP.class);
@@ -65,5 +70,14 @@ public class EnterSDT extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Hàm kiểm tra định dạng số điện thoại (đúng 10 chữ số)
+    private boolean isValidPhoneNumber(String phoneNumberEditText){
+        // Kiểm tra xem số điện thoại có 10 chữ số và chỉ bao gồm số
+        String regex = "^[0-9]{10}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(phoneNumberEditText);
+        return matcher.matches();
     }
 }

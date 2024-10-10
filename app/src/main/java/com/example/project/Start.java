@@ -37,7 +37,6 @@ public class Start extends AppCompatActivity {
         buttonItemList.add(new ButtonItem(R.drawable.baseline_psychology_24, "Tâm lý học"));
         buttonItemList.add(new ButtonItem(R.drawable.baseline_menu_book_24, "Triết học"));
         buttonItemList.add(new ButtonItem(R.drawable.baseline_temple_buddhist_24, "Tôn giáo & Tâm linh"));
-        buttonItemList.add(new ButtonItem(R.drawable.baseline_school_24, "Văn học"));
         buttonItemList.add(new ButtonItem(R.drawable.baseline_health_and_safety_24, "Sức khỏe & Phong cách sống"));
         buttonItemList.add(new ButtonItem(R.drawable.baseline_history_24, "Lịch sử & Văn hóa"));
         buttonItemList.add(new ButtonItem(R.drawable.baseline_smartphone_24, "Công nghệ"));

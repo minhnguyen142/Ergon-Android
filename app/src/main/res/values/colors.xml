@@ -3,7 +3,7 @@
     <color name="background_color">#003F7F</color>
     <color name="white">#FFFFFF</color>
     <color name="button_disabled_color">#B0BEC5</color>
-    <color name="button_enabled_color">#FF8C00</color>
+    <color name="button_enabled_color">#55EFC4</color>
     <color name="black">#000000</color>
     <color name="colorAccent">#003F7F</color>
     <color name="colorGray">#B0BEC5</color>"

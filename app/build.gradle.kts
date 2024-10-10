@@ -3,17 +3,18 @@ plugins {
 }
 
 android {
-    namespace = "com.example.project"
+    namespace = "com.example.btl_book"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.project"
-        minSdk = 26
+        applicationId = "com.example.btl_book"
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -33,6 +34,7 @@ android {
 
 dependencies {
 
+    implementation("com.android.support:appcompat-v7:23.2.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

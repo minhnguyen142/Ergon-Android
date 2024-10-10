@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#357C97"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.example.project.MainActivity">
 
 
     <ImageView
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="Đăng nhập bằng Facebook"
             android:textColor="#4267B2"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:text="Đăng nhập bằng Gmail"
             android:textColor="#4267B2"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
@@ -97,7 +97,7 @@
         android:textSize="25dp"
         android:text="Hoặc" />
 
-    <!-- Phone and iCloud buttons -->
+    <!-- Phone buttons -->
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -109,23 +109,11 @@
 
         <ImageButton
             android:id="@+id/imgbtnPhone"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#357C97"
-            android:layout_marginStart="65dp"
             app:srcCompat="@drawable/phone" />
-
-        <ImageButton
-            android:id="@+id/imgbtnIcloud"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="#357C97"
-            android:layout_marginEnd="65dp"
-            app:srcCompat="@drawable/icloud" />
 
     </LinearLayout>
 

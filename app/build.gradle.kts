@@ -34,7 +34,6 @@ android {
 
 dependencies {
 
-    implementation("com.android.support:appcompat-v7:23.2.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

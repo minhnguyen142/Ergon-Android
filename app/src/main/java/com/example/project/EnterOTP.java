@@ -7,6 +7,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.btl_book.R;
+
 public class EnterOTP extends AppCompatActivity {
 
     private EditText otpInput1, otpInput2, otpInput3, otpInput4, otpInput5;

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#357C97"
-    tools:context=".EnterSDT">
+    tools:context=".NhapThongTinCaNhan">
 
 
     <ImageButton

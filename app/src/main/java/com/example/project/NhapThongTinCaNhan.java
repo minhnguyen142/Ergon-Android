@@ -10,6 +10,8 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.btl_book.R;
+
 public class NhapThongTinCaNhan extends AppCompatActivity {
 
     private EditText edtName;

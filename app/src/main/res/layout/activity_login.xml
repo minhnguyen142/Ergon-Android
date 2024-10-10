@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#357C97"
-    tools:context=".TaoPassWord">
+    tools:context=".Login">
 
 
     <ImageButton
@@ -46,7 +46,6 @@
             android:layout_height="60dp"
             android:background="@drawable/rounded_button_background"
             android:hint="Nhập tài khoản"
-            android:textColorHint="@color/black"
             android:inputType="text"
             android:layout_margin="10dp"
             android:textColor="@color/black"/>
@@ -58,19 +57,6 @@
             android:layout_height="60dp"
             android:background="@drawable/rounded_button_background"
             android:hint="Nhập mật khẩu"
-            android:textColorHint="@color/black"
-            android:inputType="textPassword"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"/>
-
-        <!-- Nhập lại mật khẩu -->
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:background="@drawable/rounded_button_background"
-            android:hint="Nhập lại mật khẩu"
-            android:textColorHint="@color/black"
             android:inputType="textPassword"
             android:layout_margin="10dp"
             android:textColor="@color/black"/>
@@ -83,7 +69,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#55EFC4"
         android:text="Button" />
 </LinearLayout>

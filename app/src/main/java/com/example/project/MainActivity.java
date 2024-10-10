@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,11 +34,22 @@ public class MainActivity extends AppCompatActivity {
         FacebookLoginText = findViewById(R.id.FacebookLoginText);
         GmailLoginText = findViewById(R.id.GmailLoginText);
 
+        // Xử lý sự kiện nhấn nút Facebook
         imgbtnFb.setOnClickListener(v -> openFacebookApp(MainActivity.this));
         FacebookLoginText.setOnClickListener(v -> openFacebookApp(MainActivity.this));
 
+        // Xử lý sự kiện nhấn nút Gmail
         imgbtnGmail.setOnClickListener(v -> openGmailApp(MainActivity.this));
         GmailLoginText.setOnClickListener(v -> openGmailApp(MainActivity.this));
+
+        //Xử lý sự kiện nhấn nút Phone
+        imgbtnPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EnterSDT.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Hàm mở ứng dụng Facebook hoặc trình duyệt web

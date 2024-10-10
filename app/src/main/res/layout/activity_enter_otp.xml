@@ -50,7 +50,7 @@
             android:inputType="number"
             android:maxLength="1"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/otpInput2"
@@ -62,7 +62,7 @@
             android:inputType="number"
             android:maxLength="1"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/otpInput3"
@@ -74,7 +74,7 @@
             android:inputType="number"
             android:maxLength="1"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/otpInput4"
@@ -86,7 +86,7 @@
             android:inputType="number"
             android:maxLength="1"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/otpInput5"
@@ -98,7 +98,7 @@
             android:inputType="number"
             android:maxLength="1"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/black"/>
 
 
     </LinearLayout>

@@ -44,8 +44,8 @@ public class EnterSDT extends AppCompatActivity {
         imgbtnBackSDT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(EnterSDT.this, MainActivity.class);
-                startActivity(back);
+                Intent backSDT = new Intent(EnterSDT.this, MainActivity.class);
+                startActivity(backSDT);
             }
         });
 

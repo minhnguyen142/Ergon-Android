@@ -79,11 +79,11 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnContinuePassWord"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:backgroundTint="#55EFC4"
-        android:text="Button" />
+        android:text="Tiếp tục" />
 </LinearLayout>

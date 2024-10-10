@@ -49,29 +49,6 @@ public class EnterSDT extends AppCompatActivity {
             }
         });
 
-        // Theo dõi sự thay đổi của trường nhập số điện thoại
-        phoneNumberEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Không cần làm gì trước khi thay đổi
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Kiểm tra xem người dùng có nhập số điện thoại hay không
-                if (s.length() > 0) {
-                    btnContinueSDT.setVisibility(View.VISIBLE); // Hiển thị nút Tiếp tục nếu có nhập
-                } else {
-                    btnContinueSDT.setVisibility(View.GONE); // Ẩn nút Tiếp tục nếu không nhập
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Không cần làm gì sau khi thay đổi
-            }
-        });
-
         // Xử lý khi nhấn nút Tiếp tục
         btnContinueSDT.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_read_now"
+        android:title="Đọc ngay"
+        android:icon="@drawable/ic_textalignleft" />
+
+    <item
+        android:id="@+id/action_review"
+        android:title="Viết đánh giá"
+        android:icon="@drawable/ic_messages2" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:title="Xóa tệp đã tải"
+        android:icon="@drawable/ic_trash" />
+
+    <item
+        android:id="@+id/action_share"
+        android:title="Chia sẻ"
+        android:icon="@drawable/hi" />
+</menu>

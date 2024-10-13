@@ -27,40 +27,42 @@
                 android:id="@+id/txt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:layout_marginTop="20dp"
                 android:text="Ergon xin chào!"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_marginTop="20dp" />
-
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/iv_search"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_search"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border_icon_search"
                 app:tint="@color/white"
-                android:background="@color/gray"
-                android:layout_gravity="end"/>
+                android:padding="5dp"
+                android:src="@drawable/ic_search" />
 
 
             <LinearLayout
                 android:id="@+id/title_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="375dp"
+                android:layout_height="166dp"
                 android:orientation="horizontal"
-                android:background="@color/gray"
+                android:background="@drawable/border_icon_title2"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center"
                 android:paddingBottom="30dp">
 
                 <ImageView
                     android:id="@+id/featured_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/white"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/border_detail"
                     android:src="@drawable/stevejob" />
 
                 <TextView
@@ -95,10 +97,12 @@
                         android:id="@+id/ic_ebook"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:background="@color/button_green"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/layer"
-                        app:tint="@color/white" />
+                        android:background="@drawable/border_icon_ebook"
+                        app:tint="@color/white"
+                        android:padding="16dp"
+                    />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -120,9 +124,10 @@
                         android:id="@+id/ic_van_hoc"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:background="@color/blue"
                         android:layout_marginBottom="5dp"
+                        android:background="@drawable/border_icon_vanhoc"
                         app:tint="@color/white"
+                        android:padding="16dp"
                         android:src="@drawable/layer" />
 
                     <TextView
@@ -145,7 +150,8 @@
                         android:layout_width="60dp"
                         android:layout_marginBottom="5dp"
                         android:layout_height="60dp"
-                        android:background="@color/yellow"
+                        android:background="@drawable/border_icon_tuduy"
+                        android:padding="16dp"
                         app:tint="@color/white"
                         android:src="@drawable/layer" />
 
@@ -175,7 +181,7 @@
                 android:id="@+id/trending_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/border_detail"
                 android:layout_marginTop="8dp"
                 android:paddingBottom="16dp"
                 android:scrollbars="none">
@@ -267,7 +273,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:background="@drawable/border_detail"
                 android:paddingBottom="16dp"
                 android:scrollbars="none">
 

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LibraryUI extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,8 @@ public class LibraryUI extends AppCompatActivity {
         ebookList.add(new Ebook("Nhà Giả Kim", "Paulo Coelho", R.drawable.nhagiakim, 5));
         ebookList.add(new Ebook("Bản chất của dối trá", "Dan Ariely", R.drawable.ban_chat_cua_doi_tra, 5));
         ebookList.add(new Ebook("Atomic Habits", "James Clear", R.drawable.atomic_habit, 5));
+
+
 
         // Set Adapter
         EbookAdapter ebookAdapter = new EbookAdapter(ebookList);

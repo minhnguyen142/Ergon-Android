@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1045501397437",
+    "firebase_url": "https://ergon-ac10d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ergon-ac10d",
+    "storage_bucket": "ergon-ac10d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045501397437:android:f93255086e5ce951206ad4",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBN8ohPFytbKzP7EYr_W-3K2fpAG1yOC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

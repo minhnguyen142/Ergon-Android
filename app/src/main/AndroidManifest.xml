@@ -16,9 +16,6 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".HomePage"
-            android:exported="false" />
-        <activity
             android:name=".Dialog_Added_Book"
             android:exported="false" />
         <activity
@@ -28,7 +25,7 @@
             android:name=".BookDetail"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

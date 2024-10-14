@@ -207,7 +207,7 @@
                             android:layout_height="100dp"
                             android:layout_marginBottom="8dp"
                             android:background="@color/white"
-                            android:src="@drawable/nhagiakim" />
+                             />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -231,7 +231,7 @@
                             android:layout_height="100dp"
                             android:layout_marginBottom="8dp"
                             android:background="@color/white"
-                            android:src="@drawable/tuduy" />
+                             />
 
 
                     </LinearLayout>
@@ -250,7 +250,7 @@
                             android:layout_height="100dp"
                             android:layout_marginBottom="8dp"
                             android:background="@color/white"
-                            android:src="@drawable/tuduy" />
+                             />
 
 
                     </LinearLayout>
@@ -296,7 +296,7 @@
                             android:id="@+id/iv_dexuat_book_1"
                             android:layout_width="70dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/nhagiakim"
+
                             android:background="@color/white"
                             android:layout_marginBottom="8dp" />
 
@@ -320,7 +320,6 @@
                             android:id="@+id/iv_dexuat_book_2"
                             android:layout_width="70dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/tuduy"
                             android:background="@color/white"
                             android:layout_marginBottom="8dp" />
                     </LinearLayout>
@@ -337,7 +336,6 @@
                             android:id="@+id/iv_dexuat_book_3"
                             android:layout_width="70dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/tuduy"
                             android:background="@color/white"
                             android:layout_marginBottom="8dp" />
                     </LinearLayout>

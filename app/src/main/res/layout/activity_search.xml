@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
-    <!-- Khu vực chứa icon search và text tìm kiếm -->
+
     <LinearLayout
         android:id="@+id/search_layout"
         android:layout_width="290sp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Nút tìm kiếm -->
+
         <ImageView
             android:id="@+id/iv_search"
             android:layout_width="40dp"
@@ -28,7 +28,7 @@
             android:src="@drawable/ic_search"
             android:padding="8dp"/>
 
-        <!-- Text "Tìm kiếm" nằm cạnh icon search -->
+
         <TextView
             android:id="@+id/tv_search_label"
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:textSize="18sp"/>
     </LinearLayout>
 
-    <!-- Lưới thể loại sách (ẩn ban đầu) -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategories"
         android:layout_width="match_parent"

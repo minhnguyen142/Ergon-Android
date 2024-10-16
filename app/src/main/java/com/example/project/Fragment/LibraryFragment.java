@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.Fragment;
 
 import android.os.Bundle;
 
@@ -8,13 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomepageFragment extends Fragment {
+import com.example.project.R;
 
+
+public class LibraryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_homepage, container, false);
+        return inflater.inflate(R.layout.fragment_library, container, false);
     }
 }

@@ -1,12 +1,13 @@
-package com.example.project;
+package com.example.project.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.project.Fragment.HomepageFragment;
+import com.example.project.Fragment.LibraryFragment;
+import com.example.project.Fragment.ProfileFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 

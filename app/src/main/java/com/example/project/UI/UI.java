@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.UI;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,9 +7,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.project.Adapter.ViewPagerAdapter;
+import com.example.project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Activity1 extends AppCompatActivity {
+public class UI extends AppCompatActivity {
 
     private ViewPager2 viewPager2;
     private BottomNavigationView bottomNavigationView;
@@ -18,7 +20,7 @@ public class Activity1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity);
+        setContentView(R.layout.bottom_navigation_bar);
         viewPager2 = findViewById(R.id.viewPager2);
         tvHistory = findViewById(R.id.tv_history);
         bottomNavigationView = findViewById(R.id.bottom_navigation);

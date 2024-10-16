@@ -1,16 +1,16 @@
-package com.example.project.History_book;
+package com.example.project.Class;
 
 public class Books {
     private String title;
     private String author;
 
     private int image;
-    private int progress;
+//    private int progress;
 
-    public Books(String author, int image, String title,int progress) {
+    public Books(String author, int image, String title) {
         this.author = author;
         this.image = image;
-        this.progress = progress;
+//        this.progress = progress;
         this.title = title;
     }
 
@@ -30,13 +30,13 @@ public class Books {
         this.image = image;
     }
 
-    public int getProgress() {
-        return progress;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
+//    public int getProgress() {
+//        return progress;
+//    }
+//
+//    public void setProgress(int progress) {
+//        this.progress = progress;
+//    }
 
     public String getTitle() {
         return title;

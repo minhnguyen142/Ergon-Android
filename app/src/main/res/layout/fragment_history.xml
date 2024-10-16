@@ -1,0 +1,54 @@
+<!-- res/layout/activity_main.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_700"
+    android:padding="16dp" >
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="395dp"
+        android:layout_height="102dp">
+
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="62dp"
+            android:layout_height="57dp"
+            android:background="@color/teal_700"
+            app:srcCompat="@drawable/ic_arrowleft" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="101dp"
+            android:layout_height="52dp"
+            android:layout_gravity="right"
+            android:background="@drawable/rounded_background_4"
+            android:gravity="center|right"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="170dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="55sp"
+            android:gravity="center"
+            android:text="Lịch sử đọc"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/frameLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="177dp"
+        android:background="@color/white" />
+
+</RelativeLayout>

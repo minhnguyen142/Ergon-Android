@@ -1,4 +1,4 @@
-package com.example.project.History_book;
+package com.example.project.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project.Class.Books;
 import com.example.project.R;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHo
     public Books_Adapter(List<Books> booksList) {
         this.booksList = booksList;
     }
+
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,31 +30,32 @@ public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Books_Adapter.BookViewHolder holder, int position) {
-        Books books = booksList.get(position);
-        holder.imageView.setImageResource(books.getImage());
-        holder.title.setText(books.getTitle());
-        holder.author.setText(books.getAuthor());
-        holder.progressBar.setProgress(books.getProgress());
+    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+        Books book = booksList.get(position);
+        holder.imageView.setImageResource(book.getImage());
+        holder.title.setText(book.getTitle());
+        holder.author.setText(book.getAuthor());
 
+
+        // holder.progressBar.setProgress(book.getProgress());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return booksList.size();
     }
+
     static class BookViewHolder extends RecyclerView.ViewHolder {
         TextView title, author;
-        ProgressBar progressBar;
+//        ProgressBar progressBar;
         ImageView imageView;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imageView = itemView.findViewById(R.id.imageView);
             title = itemView.findViewById(R.id.tv2);
             author = itemView.findViewById(R.id.tv3);
-            progressBar = itemView.findViewById(R.id.progressBar);
+//            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }

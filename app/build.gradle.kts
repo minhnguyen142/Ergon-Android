@@ -33,7 +33,8 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.google.android.material:material:1.10.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -41,8 +42,7 @@ dependencies {
     implementation(libs.circleimageview)
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
-    implementation(libs.glide)
-    annotationProcessor(libs.compiler)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

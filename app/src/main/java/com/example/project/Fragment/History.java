@@ -1,6 +1,7 @@
 package com.example.project.Fragment;
 
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,42 +12,45 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.project.Class.Books;
 import com.example.project.Adapter.Books_Adapter;
 import com.example.project.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryFragment extends Fragment {
+public class History extends Fragment {
 
     private RecyclerView recyclerView;
     private Books_Adapter bookAdapter;
     private List<Books> bookList;
     private Spinner spinner;
     private ImageButton btnBack;
+    private DatabaseReference booksRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-
         btnBack = view.findViewById(R.id.button_back);
         recyclerView = view.findViewById(R.id.recyclerView);
         spinner = view.findViewById(R.id.spinner);
-
+        booksRef = FirebaseDatabase.getInstance().getReference("books");
         setUpSpinner();
-        initializeBookList();
         setUpRecyclerView();
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (requireActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    requireActivity().getSupportFragmentManager().popBackStack();
-                } else {
-                    requireActivity().finish();
-                }
+        loadBooksFromFirebase();
+        btnBack.setOnClickListener(v -> {
+            if (requireActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            } else {
+                requireActivity().finish();
             }
         });
 
@@ -60,16 +64,38 @@ public class HistoryFragment extends Fragment {
         spinner.setAdapter(adapter);
     }
 
-    private void initializeBookList() {
-        bookList = new ArrayList<>();
-        bookList.add(new Books("Nhà Giả Kim", R.drawable.ic_launcher_background, "Paul Coelho"));
-        bookList.add(new Books("Tư Duy Nhanh và Chậm", R.drawable.ic_launcher_background, "Daniel Kahneman"));
-        bookList.add(new Books("Đôi Ngả Dùng Người Dài", R.drawable.ic_launcher_background, "Tuấn Anh"));
-    }
-
     private void setUpRecyclerView() {
+
+        bookList = new ArrayList<>();
         bookAdapter = new Books_Adapter(bookList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(bookAdapter);
+    }
+
+    private void loadBooksFromFirebase() {
+        booksRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                bookList.clear();
+
+
+                for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
+                    Books book = bookSnapshot.getValue(Books.class);
+                    if (book != null) {
+                        bookList.add(book);
+                    }
+                }
+
+
+                bookAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getContext(), "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

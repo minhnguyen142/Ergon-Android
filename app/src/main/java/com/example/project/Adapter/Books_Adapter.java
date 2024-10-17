@@ -4,12 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.project.Class.Books;
 import com.example.project.R;
 
@@ -32,12 +32,12 @@ public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHo
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Books book = booksList.get(position);
-        holder.imageView.setImageResource(book.getImage());
         holder.title.setText(book.getTitle());
         holder.author.setText(book.getAuthor());
-
-
-        // holder.progressBar.setProgress(book.getProgress());
+        Glide.with(holder.itemView.getContext())
+                .load(book.getCoverUrl())
+                .placeholder(R.drawable.ic_launcher_background) // Placeholder image
+                .into(holder.imageView);
     }
 
     @Override
@@ -47,7 +47,6 @@ public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHo
 
     static class BookViewHolder extends RecyclerView.ViewHolder {
         TextView title, author;
-//        ProgressBar progressBar;
         ImageView imageView;
 
         public BookViewHolder(@NonNull View itemView) {
@@ -55,7 +54,6 @@ public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHo
             imageView = itemView.findViewById(R.id.imageView);
             title = itemView.findViewById(R.id.tv2);
             author = itemView.findViewById(R.id.tv3);
-//            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }

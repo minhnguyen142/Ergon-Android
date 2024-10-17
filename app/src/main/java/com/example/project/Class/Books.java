@@ -3,46 +3,44 @@ package com.example.project.Class;
 public class Books {
     private String title;
     private String author;
+    private String contentDescription;
+    private String coverUrl;
+    private String genre;
+    private String pdfUrl;
 
-    private int image;
-//    private int progress;
+    public Books() {
+    }
 
-    public Books(String author, int image, String title) {
-        this.author = author;
-        this.image = image;
-//        this.progress = progress;
+    public Books(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl) {
         this.title = title;
+        this.author = author;
+        this.contentDescription = contentDescription;
+        this.coverUrl = coverUrl;
+        this.genre = genre;
+        this.pdfUrl = pdfUrl;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public String getContentDescription() {
+        return contentDescription;
     }
 
-    public int getImage() {
-        return image;
+    public String getCoverUrl() {
+        return coverUrl;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public String getGenre() {
+        return genre;
     }
 
-//    public int getProgress() {
-//        return progress;
-//    }
-//
-//    public void setProgress(int progress) {
-//        this.progress = progress;
-//    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public String getPdfUrl() {
+        return pdfUrl;
     }
 }

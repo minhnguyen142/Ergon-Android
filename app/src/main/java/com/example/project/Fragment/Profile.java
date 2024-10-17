@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.project.R;
 
-public class ProfileFragment extends Fragment {
+public class Profile extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,7 +23,7 @@ public class ProfileFragment extends Fragment {
         LinearLayout linearHistory = view.findViewById(R.id.linear_History);
         linearHistory.setOnClickListener(v -> {
 
-            HistoryFragment historyFragment = new HistoryFragment();
+            History historyFragment = new History();
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, historyFragment);

@@ -1,4 +1,4 @@
-package com.example.project.UI;
+package com.example.project.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

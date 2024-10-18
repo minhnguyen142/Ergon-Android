@@ -1,4 +1,4 @@
-package com.example.project.Fragment;
+package com.example.project.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -14,8 +14,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.project.Class.Books;
-import com.example.project.Adapter.Books_Adapter;
+import com.example.project.adapter.BookAdapter;
+import com.example.project.model.Book;
 import com.example.project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,8 +29,8 @@ import java.util.List;
 public class History extends Fragment {
 
     private RecyclerView recyclerView;
-    private Books_Adapter bookAdapter;
-    private List<Books> bookList;
+    private BookAdapter bookAdapter;
+    private List<Book> bookList;
     private Spinner spinner;
     private ImageButton btnBack;
     private DatabaseReference booksRef;
@@ -67,7 +67,7 @@ public class History extends Fragment {
     private void setUpRecyclerView() {
 
         bookList = new ArrayList<>();
-        bookAdapter = new Books_Adapter(bookList);
+        bookAdapter = new BookAdapter(bookList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(bookAdapter);
     }
@@ -81,7 +81,7 @@ public class History extends Fragment {
 
 
                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
-                    Books book = bookSnapshot.getValue(Books.class);
+                    Book book = bookSnapshot.getValue(Book.class);
                     if (book != null) {
                         bookList.add(book);
                     }

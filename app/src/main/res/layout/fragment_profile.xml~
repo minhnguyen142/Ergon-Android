@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal_700"
-    tools:context=".UI.Activity1">
+    tools:context=".ui.UI">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -92,83 +92,94 @@
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="329dp"
+                android:layout_height="78dp"
+                android:background="@drawable/rounded_background_2">
 
-                <TableRow
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10sp"
+                                android:layout_weight="1"
+                                android:text="Cấp độ" />
+
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="10sp"
                             android:layout_weight="1"
-                            android:gravity="start"
-                            android:text="Cấp độ" />
+                            android:gravity="end"
+                            android:text="6 giờ để lên cấp" />
+                    </TableRow>
 
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="6 giờ để lên cấp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10sp"
+                                android:layout_weight="1"
+                                android:autoSizeTextType="uniform"
+                                android:bufferType="normal"
+                                android:layerType="none"
+                                android:text="Người đọc"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:typeface="normal" />
+
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/textView7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="10sp"
                             android:layout_weight="1"
-                            android:autoSizeTextType="uniform"
-                            android:bufferType="normal"
-                            android:layerType="none"
-                            android:text="Người đọc"
+                            android:gravity="end"
+                            android:text="Mọt sách"
                             android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:typeface="normal" />
+                            android:textStyle="bold" />
+                    </TableRow>
 
-                    </LinearLayout>
+                </TableLayout>
 
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="Mọt sách"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </TableRow>
-
-            </TableLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar3"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                <ProgressBar
+                    android:id="@+id/progressBar3"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="35sp"
+                    android:layout_marginRight="10sp" />
+            </FrameLayout>
 
             <!-- Progress Section -->
             <!--            <LinearLayout-->

@@ -1,4 +1,4 @@
-package com.example.project.Adapter;
+package com.example.project.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,33 +10,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.project.Class.Books;
+import com.example.project.model.Book;
 import com.example.project.R;
 
 import java.util.List;
 
-public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHolder> {
-    private List<Books> booksList;
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
+    private List<Book> booksList;
 
-    public Books_Adapter(List<Books> booksList) {
+    public BookAdapter(List<Book> booksList) {
         this.booksList = booksList;
     }
 
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false); // Sử dụng layout item_history
         return new BookViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Books book = booksList.get(position);
+        Book book = booksList.get(position);
         holder.title.setText(book.getTitle());
         holder.author.setText(book.getAuthor());
         Glide.with(holder.itemView.getContext())
                 .load(book.getCoverUrl())
-                .placeholder(R.drawable.ic_launcher_background) // Placeholder image
                 .into(holder.imageView);
     }
 

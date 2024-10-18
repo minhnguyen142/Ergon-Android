@@ -43,12 +43,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="381dp"
+        android:layout_height="573dp"
         android:layout_below="@+id/frameLayout"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="177dp"
-        android:background="@color/white" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rounded_background_2" />
 
 </RelativeLayout>

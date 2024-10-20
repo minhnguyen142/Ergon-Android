@@ -26,7 +26,7 @@
             android:name=".BookDetail"
             android:exported="false" />
         <activity
-            android:name=".UI.UI"
+            android:name=".ui.Menu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

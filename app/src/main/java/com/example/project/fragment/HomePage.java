@@ -1,4 +1,4 @@
-package com.example.project.Fragment;
+package com.example.project.fragment;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -25,17 +25,10 @@ public class HomePage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-
-        // Initialize views
         trendingBook1 = view.findViewById(R.id.iv_trending_book_1);
         recommendedBook1 = view.findViewById(R.id.iv_dexuat_book_1);
-
-        // Initialize Firebase Database reference
         db = FirebaseDatabase.getInstance().getReference("Ergon");
-
-        // Load data from Firebase
         loadBooksFromFirebase();
 
         return view;
@@ -49,8 +42,6 @@ public class HomePage extends Fragment {
                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
                     String imageUrl = bookSnapshot.child("imageUrl").getValue(String.class);
                     String title = bookSnapshot.child("title").getValue(String.class);
-
-                    // Load images into ImageViews using Glide
                     if (count == 0 && imageUrl != null) {
                         Glide.with(getContext())
                                 .load(imageUrl)
@@ -61,7 +52,7 @@ public class HomePage extends Fragment {
                                 .into(recommendedBook1);
                     }
                     count++;
-                    if (count >= 2) break; // Load only two books
+                    if (count >= 2) break;
                 }
             }
 

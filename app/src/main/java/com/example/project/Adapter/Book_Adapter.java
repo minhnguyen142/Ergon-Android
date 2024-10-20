@@ -1,4 +1,4 @@
-package com.example.project.Adapter;
+package com.example.project.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.project.Class.Books;
+import com.example.project.entity.Books;
 import com.example.project.R;
 
 import java.util.List;
 
-public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHolder> {
+public class Book_Adapter extends RecyclerView.Adapter<com.example.project.adapter.Book_Adapter.BookViewHolder> {
     private List<Books> booksList;
 
-    public Books_Adapter(List<Books> booksList) {
+    public Book_Adapter(List<Books> booksList) {
         this.booksList = booksList;
     }
 

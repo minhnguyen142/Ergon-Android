@@ -1,4 +1,4 @@
-package com.example.project.Class;
+package com.example.project.entity;
 
 public class Books {
     private String title;

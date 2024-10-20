@@ -92,15 +92,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/ic_ebook"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/border_icon_ebook"
                         android:padding="16dp"
-                        android:src="@drawable/layer"
-                        app:tint="@color/white" />
+                        android:src="@drawable/layer" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -119,15 +118,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/ic_van_hoc"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/border_icon_vanhoc"
                         android:padding="16dp"
-                        android:src="@drawable/layer"
-                        app:tint="@color/white" />
+                        android:src="@drawable/layer" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -144,15 +142,14 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/ic_ki_nang"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/border_icon_tuduy"
                         android:padding="16dp"
-                        android:src="@drawable/layer"
-                        app:tint="@color/white" />
+                        android:src="@drawable/layer" />
 
                     <TextView
                         android:layout_width="wrap_content"

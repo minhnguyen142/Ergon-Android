@@ -42,6 +42,7 @@ public class HomePage extends Fragment {
                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
                     String imageUrl = bookSnapshot.child("imageUrl").getValue(String.class);
                     String title = bookSnapshot.child("title").getValue(String.class);
+
                     if (count == 0 && imageUrl != null) {
                         Glide.with(getContext())
                                 .load(imageUrl)

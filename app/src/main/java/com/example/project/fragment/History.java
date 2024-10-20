@@ -14,8 +14,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.project.entity.Books;
 import com.example.project.R;
+import com.example.project.adapter.BookAdapter;
+import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +29,8 @@ import java.util.List;
 public class History extends Fragment {
 
     private RecyclerView recyclerView;
-    private com.example.project.adapter.Book_Adapter bookAdapter;
-    private List<Books> bookList;
+    private BookAdapter bookAdapter;
+    private List<Book> bookList;
     private Spinner spinner;
     private ImageButton btnBack;
     private DatabaseReference booksRef;
@@ -64,9 +65,8 @@ public class History extends Fragment {
     }
 
     private void setUpRecyclerView() {
-
         bookList = new ArrayList<>();
-        bookAdapter = new com.example.project.adapter.Book_Adapter(bookList);
+        bookAdapter = new BookAdapter(bookList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(bookAdapter);
     }
@@ -75,24 +75,18 @@ public class History extends Fragment {
         booksRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 bookList.clear();
-
-
                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
-                    Books book = bookSnapshot.getValue(Books.class);
+                    Book book = bookSnapshot.getValue(Book.class);
                     if (book != null) {
                         bookList.add(book);
                     }
                 }
-
-
                 bookAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 Toast.makeText(getContext(), "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

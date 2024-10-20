@@ -1,6 +1,6 @@
-package com.example.project.entity;
+package com.example.project.model;
 
-public class Books {
+public class Book {
     private String title;
     private String author;
     private String contentDescription;
@@ -8,10 +8,10 @@ public class Books {
     private String genre;
     private String pdfUrl;
 
-    public Books() {
+    public Book() {
     }
 
-    public Books(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl) {
+    public Book(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl) {
         this.title = title;
         this.author = author;
         this.contentDescription = contentDescription;

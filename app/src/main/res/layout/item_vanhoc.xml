@@ -1,0 +1,19 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <ImageView
+            android:id="@+id/bookimage"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

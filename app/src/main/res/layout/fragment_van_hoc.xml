@@ -14,7 +14,7 @@
         android:background="@color/teal_700">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btnVhback"
             android:layout_width="43dp"
             android:layout_height="45dp"
             android:background="@color/teal_700"
@@ -22,11 +22,20 @@
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="97dp"
+            android:layout_width="130dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="45sp"
+            android:layout_marginTop="50sp"
             android:gravity="center"
             android:text="Văn Học"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler2"
+            android:layout_width="match_parent"
+            android:layout_height="561dp"
+            android:layout_marginTop="120sp"
+            android:background="@drawable/rounded_background_2" />
     </FrameLayout>
 </RelativeLayout>

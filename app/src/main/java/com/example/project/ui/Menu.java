@@ -11,7 +11,7 @@ import com.example.project.adapter.ViewPagerAdapter;
 import com.example.project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class UI extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
 
     private ViewPager2 viewPager2;
     private BottomNavigationView bottomNavigationView;

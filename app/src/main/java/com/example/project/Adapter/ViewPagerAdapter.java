@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.project.Fragment.History;
 import com.example.project.Fragment.HomePage;
 import com.example.project.Fragment.Library;
 import com.example.project.Fragment.Profile;
@@ -29,6 +30,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new Library();
             case 2:
                 return new Profile();
+            case 3:
+                return new History();
             default:
                 return new HomePage();
         }

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.project.Adapter.Books_Adapter;
+import com.example.project.Adapter.ImageAdapter;
 import com.example.project.Class.Books;
 import com.example.project.R;
 import com.google.firebase.database.DataSnapshot;
@@ -27,8 +27,7 @@ public class HomePage extends Fragment {
     private List<Books> trendingBooks, recommendedBooks;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
 
@@ -56,7 +55,7 @@ public class HomePage extends Fragment {
                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
                     Books book = bookSnapshot.getValue(Books.class);
 
-                    if (book != null && book.getCoverUrl() != null) { // Kiểm tra xem book có hợp lệ không
+                    if (book != null && book.getCoverUrl() != null) {
                         if (count < 5) { // First 5 books for Trending
                             trendingBooks.add(book);
                         } else if (count < 10) { // Next 5 books for Recommended
@@ -80,13 +79,27 @@ public class HomePage extends Fragment {
     }
 
     private void setUpRecyclerView(View view) {
+        // Prepare image URLs for trending books
+        List<String> trendingImageUrls = new ArrayList<>();
+        for (Books book : trendingBooks) {
+            trendingImageUrls.add(book.getCoverUrl());
+        }
+
+        // Prepare image URLs for recommended books
+        List<String> recommendedImageUrls = new ArrayList<>();
+        for (Books book : recommendedBooks) {
+            recommendedImageUrls.add(book.getCoverUrl());
+        }
+
+        // Set up RecyclerView for trending books
         RecyclerView trendingRecyclerView = view.findViewById(R.id.recycler_trending);
         trendingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        trendingRecyclerView.setAdapter(new Books_Adapter(trendingBooks));
+        trendingRecyclerView.setAdapter(new ImageAdapter(trendingImageUrls));
 
+        // Set up RecyclerView for recommended books
         RecyclerView recommendedRecyclerView = view.findViewById(R.id.recycler_dexuat);
         recommendedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recommendedRecyclerView.setAdapter(new Books_Adapter(recommendedBooks));
+        recommendedRecyclerView.setAdapter(new ImageAdapter(recommendedImageUrls));
     }
 
 }

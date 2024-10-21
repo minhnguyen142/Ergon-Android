@@ -8,16 +8,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.project.fragment.HomePage;
 import com.example.project.fragment.Library;
 import com.example.project.fragment.Profile;
+import com.example.project.fragment.History;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
-
-
-
 
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
-
 
     @NonNull
     @Override
@@ -29,6 +26,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new Library();
             case 2:
                 return new Profile();
+            case 3:
+                return new History();
             default:
                 return new HomePage();
         }
@@ -36,6 +35,6 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4; // Adjusted to handle 4 fragments
     }
 }

@@ -1,19 +1,24 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:elevation="4dp">
+    android:layout_margin="15sp"
+    android:orientation="vertical"
+    android:padding="8dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
         <ImageView
-            android:id="@+id/bookimage"
-            android:layout_width="120dp"
-            android:layout_height="180dp"
+            android:id="@+id/bookImg"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
             android:scaleType="centerCrop" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/bookTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="8dp"
+            android:text="Tên sách"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+</LinearLayout>

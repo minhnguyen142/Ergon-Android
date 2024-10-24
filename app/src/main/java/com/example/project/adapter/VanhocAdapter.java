@@ -1,41 +1,52 @@
-package com.example.project.adapter;
+package com.example.project.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.project.R;
 import com.example.project.model.Book;
 
 import java.util.List;
 
-public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.BookViewHolder> {
+public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocViewHolder> {
 
     private List<Book> bookList;
 
-    public void VanHocAdapter(List<Book> bookList) {
+    public VanhocAdapter(List<Book> bookList) {
         this.bookList = bookList;
     }
 
     @NonNull
     @Override
-    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public VanhocViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vanhoc, parent, false);
-        return new BookViewHolder(view);
+        return new VanhocViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VanhocViewHolder holder, int position) {
         Book book = bookList.get(position);
+        String imageUrl = book.getCoverUrl();
+
+
+        Log.d("VanhocAdapter", "Image URL: " + imageUrl);
+
+
         Glide.with(holder.itemView.getContext())
-                .load(book.getCoverUrl())
-                .placeholder(R.drawable.ic_launcher_background)
+                .load(imageUrl)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(16)))
                 .into(holder.imageView);
+        holder.bookTitle.setText(book.getTitle());
     }
 
     @Override
@@ -43,14 +54,15 @@ public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.BookViewHo
         return bookList.size();
     }
 
-    public static class BookViewHolder extends RecyclerView.ViewHolder {
+    public static class VanhocViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
+        TextView bookTitle;
 
-        public BookViewHolder(@NonNull View itemView) {
+        public VanhocViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.bookimage);
+            imageView = itemView.findViewById(R.id.bookImg);
+            bookTitle = itemView.findViewById(R.id.bookTitle);
         }
     }
 }
-

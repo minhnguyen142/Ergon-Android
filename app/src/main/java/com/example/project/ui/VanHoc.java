@@ -1,67 +1,57 @@
-package com.example.project.fragment;
+package com.example.project.ui;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.example.project.Adapter.VanhocAdapter;
 import com.example.project.R;
-import com.example.project.adapter.BookAdapter;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanHoc extends Fragment {
+public class VanHoc extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton btnBack;
-    private BookAdapter bookAdapter;
+    private VanhocAdapter vanhocAdapter;
     private List<Book> bookList;
     private DatabaseReference booksRef;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_van_hoc, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_van_hoc);
 
-        recyclerView = view.findViewById(R.id.recycler2);
-        btnBack = view.findViewById(R.id.btnVhback);
+        recyclerView = findViewById(R.id.recycler2);
+        btnBack = findViewById(R.id.btnVhback);
 
-        // Thiết lập RecyclerView
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+
         bookList = new ArrayList<>();
-        bookAdapter = new BookAdapter(bookList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(bookAdapter);
+        vanhocAdapter = new VanhocAdapter(bookList);
+        recyclerView.setAdapter(vanhocAdapter);
 
         booksRef = FirebaseDatabase.getInstance().getReference("books");
         loadBooksFromFirebase();
 
-        btnBack.setOnClickListener(v -> {
-            if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            } else {
-                getActivity().finish();
-            }
-        });
-
-        return view;
+        btnBack.setOnClickListener(v -> finish());
     }
 
     private void loadBooksFromFirebase() {
-        booksRef.addValueEventListener(new ValueEventListener() {
+        Query query = booksRef.orderByChild("genre").equalTo("Văn học");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 bookList.clear();
@@ -71,13 +61,14 @@ public class VanHoc extends Fragment {
                         bookList.add(book);
                     }
                 }
-                bookAdapter.notifyDataSetChanged();
+                vanhocAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VanHoc.this, "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

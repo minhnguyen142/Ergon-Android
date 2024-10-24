@@ -1,15 +1,14 @@
 package com.example.project.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.project.ui.History;
 import com.example.project.R;
 
 public class Profile extends Fragment {
@@ -22,14 +21,8 @@ public class Profile extends Fragment {
 
         LinearLayout linearHistory = view.findViewById(R.id.linear_History);
         linearHistory.setOnClickListener(v -> {
-
-            History historyFragment = new History();
-            FragmentManager fragmentManager = getParentFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, historyFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-
+            Intent intent = new Intent(getActivity(), History.class);
+            startActivity(intent);
         });
 
         return view;

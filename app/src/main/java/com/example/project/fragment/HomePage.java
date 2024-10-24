@@ -1,17 +1,24 @@
 package com.example.project.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.project.adapter.ImageAdapter;
-import com.example.project.model.Book;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.project.Adapter.ImageAdapter;
 import com.example.project.R;
+import com.example.project.SpaceItemDecoration;
+import com.example.project.ui.Ebook;
+import com.example.project.ui.VanHoc;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,83 +30,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends Fragment {
-
-    private DatabaseReference db;
-    private List<Book> trendingBooks, recommendedBooks;
+    private RecyclerView recyclerView;
+    private ImageAdapter imageAdapter;
+    private List<Book> bookList;
+    private DatabaseReference databaseReference;
+    private ImageButton btnVanHoc, btnEbook;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        recyclerView = view.findViewById(R.id.recycler_trending);
+        btnVanHoc = view.findViewById(R.id.ic_van_hoc);
+        btnEbook = view.findViewById(R.id.ic_ebook);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 
+        bookList = new ArrayList<>();
+        imageAdapter = new ImageAdapter(bookList);
+        recyclerView.setAdapter(imageAdapter);
 
-        db = FirebaseDatabase.getInstance().getReference("Ergon");
+        int spaceInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
 
-        trendingBooks = new ArrayList<>();
-        recommendedBooks = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("books");
+        fetchBooksFromFirebase();
 
-
-        loadBooksFromFirebase(view);
+        btnVanHoc.setOnClickListener(v-> {
+            Intent intent = new Intent(getActivity(), VanHoc.class);
+            startActivity(intent);
+        });
+        btnEbook.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Ebook.class);
+            startActivity(intent);
+        });
 
         return view;
     }
 
-    private void loadBooksFromFirebase(View view) {
-        db.child("books").addListenerForSingleValueEvent(new ValueEventListener() {
+    private void fetchBooksFromFirebase() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                trendingBooks.clear();
-                recommendedBooks.clear();
-
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bookList.clear();
                 int count = 0;
-                for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
-                    Book book = bookSnapshot.getValue(Book.class);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if (count >= 10) break;
 
-                    if (book != null && book.getCoverUrl() != null) {
-                        if (count < 5) { // First 5 books for Trending
-                            trendingBooks.add(book);
-                        } else if (count < 10) { // Next 5 books for Recommended
-                            recommendedBooks.add(book);
-                        }
+                    Book book = dataSnapshot.getValue(Book.class);
+                    if (book != null) {
+                        bookList.add(book);
                         count++;
                     }
-
-                    if (count >= 10) break;
                 }
-
-
-                setUpRecyclerView(view);
+                imageAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Failed to load data", Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Failed to load books.", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    private void setUpRecyclerView(View view) {
-
-        List<String> trendingImageUrls = new ArrayList<>();
-        for (Book book : trendingBooks) {
-            trendingImageUrls.add(book.getCoverUrl());
-        }
-
-
-        List<String> recommendedImageUrls = new ArrayList<>();
-        for (Book book : recommendedBooks) {
-            recommendedImageUrls.add(book.getCoverUrl());
-        }
-
-
-        RecyclerView trendingRecyclerView = view.findViewById(R.id.recycler_trending);
-        trendingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        trendingRecyclerView.setAdapter(new ImageAdapter(trendingImageUrls));
-
-        
-        RecyclerView recommendedRecyclerView = view.findViewById(R.id.recycler_dexuat);
-        recommendedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recommendedRecyclerView.setAdapter(new ImageAdapter(recommendedImageUrls));
-    }
-
 }

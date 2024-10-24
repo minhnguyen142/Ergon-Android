@@ -1,3 +1,4 @@
+
 package com.example.project.ui;
 
 import android.annotation.SuppressLint;
@@ -7,8 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.project.Adapter.ViewPagerAdapter;
 import com.example.project.R;
-import com.example.project.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Menu extends AppCompatActivity {
@@ -16,20 +17,16 @@ public class Menu extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private BottomNavigationView bottomNavigationView;
     private TextView tvHistory;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation_bar);
-
         viewPager2 = findViewById(R.id.viewPager2);
         tvHistory = findViewById(R.id.tv_history);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
-
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -44,9 +41,9 @@ public class Menu extends AppCompatActivity {
                         bottomNavigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
                         break;
                 }
+
             }
         });
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
@@ -61,5 +58,9 @@ public class Menu extends AppCompatActivity {
             }
             return false;
         });
+
+
+
+
     }
 }

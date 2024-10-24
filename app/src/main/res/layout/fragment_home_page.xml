@@ -41,7 +41,6 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="30dp"
-
                 android:background="@drawable/border_icon_search"
                 android:padding="7dp"
                 android:src="@drawable/ic_search"
@@ -201,7 +200,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_trending"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="150dp"
                     android:scrollbars="horizontal"
                     android:paddingLeft="20dp"

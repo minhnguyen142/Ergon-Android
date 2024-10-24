@@ -13,7 +13,8 @@ firebaseStorage = "21.0.1"
 googleGmsGoogleServices = "4.4.2"
 glide = "5.0.0-rc01"
 compiler = "5.0.0-rc01"
-firebaseFirestore = "25.1.0" # Giữ lại firebaseFirestore từ nhánh main
+firebaseFirestore = "25.1.0"
+glideTransformations = "4.3.0" # Giữ lại firebaseFirestore từ nhánh main
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -28,7 +29,8 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "compiler" }
-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" } # Giữ lại từ nhánh main
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+glide-transformations = { group = "jp.wasabeef", name = "glide-transformations", version.ref = "glideTransformations" } # Giữ lại từ nhánh main
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

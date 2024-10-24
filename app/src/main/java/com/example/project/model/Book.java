@@ -7,19 +7,24 @@ public class Book {
     private String coverUrl;
     private String genre;
     private String pdfUrl;
+    private Boolean trend;
 
     public Book() {
     }
 
-    public Book(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl) {
+    public Book(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl, Boolean trend) {
         this.title = title;
         this.author = author;
         this.contentDescription = contentDescription;
         this.coverUrl = coverUrl;
         this.genre = genre;
         this.pdfUrl = pdfUrl;
+        this.trend = trend;
     }
 
+    public Boolean getTrend() {
+        return trend;
+    }
     public String getTitle() {
         return title;
     }

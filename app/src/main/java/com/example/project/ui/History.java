@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.project.Adapter.BookAdapter;
+import com.example.project.adapter.BookAdapter;
 import com.example.project.R;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;

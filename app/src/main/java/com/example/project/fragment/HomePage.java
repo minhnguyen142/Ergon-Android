@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.Adapter.ImageAdapter;
+import com.example.project.adapter.ImageAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.Ebook;
@@ -30,32 +30,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends Fragment {
-    private RecyclerView recyclerView;
-    private ImageAdapter imageAdapter;
-    private List<Book> bookList;
+    private RecyclerView recyclerTrending, recyclerDexuat;
+    private ImageAdapter trendingAdapter, dexuatAdapter;
+    private List<Book> trendingBooks, dexuatBooks;
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        recyclerView = view.findViewById(R.id.recycler_trending);
-        btnVanHoc = view.findViewById(R.id.ic_van_hoc);
-        btnEbook = view.findViewById(R.id.ic_ebook);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
 
-        bookList = new ArrayList<>();
-        imageAdapter = new ImageAdapter(bookList);
-        recyclerView.setAdapter(imageAdapter);
+
+        recyclerTrending = view.findViewById(R.id.recycler_trending);
+        LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerTrending.setLayoutManager(trendingLayoutManager);
+
+        trendingBooks = new ArrayList<>();
+        trendingAdapter = new ImageAdapter(trendingBooks);
+        recyclerTrending.setAdapter(trendingAdapter);
+
+
+        recyclerDexuat = view.findViewById(R.id.recycler_dexuat);
+        LinearLayoutManager dexuatLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerDexuat.setLayoutManager(dexuatLayoutManager);
+
+        dexuatBooks = new ArrayList<>();
+        dexuatAdapter = new ImageAdapter(dexuatBooks);
+        recyclerDexuat.setAdapter(dexuatAdapter);
+
 
         int spaceInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
+        recyclerTrending.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
+        recyclerDexuat.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference("books");
         fetchBooksFromFirebase();
 
-        btnVanHoc.setOnClickListener(v-> {
+
+        btnVanHoc = view.findViewById(R.id.ic_van_hoc);
+        btnEbook = view.findViewById(R.id.ic_ebook);
+        btnVanHoc.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), VanHoc.class);
             startActivity(intent);
         });
@@ -71,18 +86,24 @@ public class HomePage extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                bookList.clear();
-                int count = 0;
+                trendingBooks.clear();
+                dexuatBooks.clear();
+                int trendingCount = 0;
+                int dexuatCount = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if (count >= 10) break;
-
                     Book book = dataSnapshot.getValue(Book.class);
                     if (book != null) {
-                        bookList.add(book);
-                        count++;
+                        if (trendingCount < 10) {
+                            trendingBooks.add(book);
+                            trendingCount++;
+                        } else if (dexuatCount < 10) {
+                            dexuatBooks.add(book);
+                            dexuatCount++;
+                        }
                     }
                 }
-                imageAdapter.notifyDataSetChanged();
+                trendingAdapter.notifyDataSetChanged();
+                dexuatAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -92,3 +113,5 @@ public class HomePage extends Fragment {
         });
     }
 }
+
+

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.btl_book"
+    namespace = "com.example.project"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.btl_book"
+        applicationId = "com.example.project"
         minSdk = 31
         targetSdk = 34
         versionCode = 1

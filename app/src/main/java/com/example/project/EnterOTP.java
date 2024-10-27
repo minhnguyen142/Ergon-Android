@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.project.model.Book;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -23,12 +22,15 @@ import java.util.Set;
 public class EnterOTP extends AppCompatActivity {
 
     private EditText otpInput1, otpInput2, otpInput3, otpInput4, otpInput5;
-    Button btnContinueOTP;
-    ImageButton imgbtnBackOTP;
+    private Button btnContinueOTP;
+    private ImageButton imgbtnBackOTP;
+    private String verificationId; // Để lưu verificationId
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_otp);
+
         btnContinueOTP = findViewById(R.id.btnContinueOTP);
         imgbtnBackOTP = findViewById(R.id.imgbtnBackOTP);
 
@@ -39,39 +41,24 @@ public class EnterOTP extends AppCompatActivity {
         otpInput4 = findViewById(R.id.otpInput4);
         otpInput5 = findViewById(R.id.otpInput5);
 
+        // Nhận verificationId từ intent
+        verificationId = getIntent().getStringExtra("verificationId");
+
         // Thiết lập tự động chuyển ô khi nhập
         setupOTPInput(otpInput1, otpInput2);
         setupOTPInput(otpInput2, otpInput3);
         setupOTPInput(otpInput3, otpInput4);
         setupOTPInput(otpInput4, otpInput5);
-    }
-
-    private void setupOTPInput(final EditText currentInput, final EditText nextInput) {
-        currentInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() == 1) {
-                    nextInput.requestFocus(); // Chuyển đến ô tiếp theo khi nhập xong
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
 
         imgbtnBackOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent backOTP = new Intent(EnterOTP.this, EnterSDT.class);
                 startActivity(backOTP);
+                finish(); // Kết thúc màn hình hiện tại
             }
         });
 
-        String verificationId = getIntent().getStringExtra("verificationId");
-        String phoneNumber = getIntent().getStringExtra("phoneNumber");
         // Xử lý khi nhấn nút Tiếp tục
         btnContinueOTP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +77,23 @@ public class EnterOTP extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void setupOTPInput(final EditText currentInput, final EditText nextInput) {
+        currentInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 1) {
+                    nextInput.requestFocus(); // Chuyển đến ô tiếp theo khi nhập xong
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
 
     private void verifyOTPCode(String verificationId, String otpCode) {
@@ -106,6 +109,7 @@ public class EnterOTP extends AppCompatActivity {
                         // Đăng nhập thành công, chuyển sang màn hình tiếp theo
                         Intent intent = new Intent(EnterOTP.this, TaoPassWord.class);
                         startActivity(intent);
+                        finish(); // Kết thúc màn hình hiện tại
                     } else {
                         // Nếu OTP sai hoặc hết hạn
                         Toast.makeText(EnterOTP.this, "Xác thực OTP không thành công.", Toast.LENGTH_SHORT).show();

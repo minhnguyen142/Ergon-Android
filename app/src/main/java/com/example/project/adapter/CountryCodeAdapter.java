@@ -14,42 +14,29 @@ import com.example.project.R;
 import java.util.List;
 
 public class CountryCodeAdapter extends ArrayAdapter<CountryCode> {
-
-    private Context context;
-    private List<CountryCode> countryCodeList;
-
-    public CountryCodeAdapter(Context context, List<CountryCode> countryCodeList) {
-        super(context, 0, countryCodeList);
-        this.context = context;
-        this.countryCodeList = countryCodeList;
+    public CountryCodeAdapter(Context context, List<CountryCode> countries) {
+        super(context, 0, countries);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return initView(position, convertView, parent);
-    }
+        CountryCode country = getItem(position);
 
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return initView(position, convertView, parent);
-    }
-
-    private View initView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_country_spinner, parent, false);
         }
 
-        ImageView imageViewFlag = convertView.findViewById(R.id.flagImage);
-        TextView textViewCountryCode = convertView.findViewById(R.id.countryCode);
+        ImageView countryFlag = convertView.findViewById(R.id.flagImage);
+        TextView countryCode = convertView.findViewById(R.id.countryCode);
 
-        CountryCode currentItem = getItem(position);
-
-        if (currentItem != null) {
-            imageViewFlag.setImageResource(currentItem.getFlagImage());
-            textViewCountryCode.setText(currentItem.getCountryCode());
-        }
+        countryFlag.setImageResource(country.getFlagImage());
+        countryCode.setText(country.getCountryCode());
 
         return convertView;
     }
-}
 
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        return getView(position, convertView, parent);
+    }
+}

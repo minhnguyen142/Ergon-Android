@@ -9,5 +9,10 @@
         <item>Cũ nhất</item>
         <item>Đang cập nhật</item>
     </string-array>
-
+    <string-array name="country_codes">
+        <item>+84</item> <!-- Việt Nam -->
+        <item>+1</item>  <!-- Hoa Kỳ -->
+        <item>+44</item> <!-- Vương Quốc Anh -->
+        <item>+81</item> <!-- Nhật Bản -->
+    </string-array>
 </resources>

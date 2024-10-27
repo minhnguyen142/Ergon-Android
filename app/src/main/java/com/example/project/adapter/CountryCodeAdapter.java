@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.btl_book.R;
+import com.example.project.CountryCode;
+import com.example.project.R;
 
 import java.util.List;
 

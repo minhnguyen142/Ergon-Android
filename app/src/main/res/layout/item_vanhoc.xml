@@ -7,8 +7,8 @@
 
         <ImageView
             android:id="@+id/bookImg"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_width="170dp"
+            android:layout_height="220dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop" />
 

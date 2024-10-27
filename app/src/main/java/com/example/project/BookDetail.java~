@@ -25,9 +25,9 @@ public class BookDetail extends AppCompatActivity {
     private TextView bookTitleDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
     private Button readButton, addLibraryButton;
     private DatabaseReference databaseReference;
-     // Thêm
+    private ImageButton backButton; // Thêm
 
-
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,7 @@ public class BookDetail extends AppCompatActivity {
         bookPriceDetail = findViewById(R.id.bookPriceDetail);
         readButton = findViewById(R.id.readButton);
         addLibraryButton = findViewById(R.id.addLibrary);
+        backButton = findViewById(R.id.IconCLose);
 
         Intent intent = getIntent();
         String bookImage = intent.getStringExtra("book_image");
@@ -52,6 +53,9 @@ public class BookDetail extends AppCompatActivity {
             fetchBookDetailsFromFirebase(bookImage);
         }
 
+//        backButton.setOnClickListener(v -> {
+//            finish();
+//        });
     }
 
     private void fetchBookDetailsFromFirebase(String bookImage) { // Thêm

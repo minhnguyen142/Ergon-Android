@@ -13,21 +13,26 @@
         android:layout_width="28dp"
         android:layout_height="34dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="276dp"
         android:src="@drawable/like_state"
+        app:layout_constraintEnd_toStartOf="@+id/IconShare"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toEndOf="@+id/IconCLose"
         app:tint="@color/white"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="324dp"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:layout_editor_absoluteY="5dp" />
 
     <ImageView
         android:id="@+id/IconCLose"
         android:layout_width="35dp"
         android:layout_height="34dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/icon_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="10dp"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -36,10 +41,10 @@
         android:layout_height="42dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/hierarchy2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white"
-        tools:layout_editor_absoluteX="365dp"
-        tools:layout_editor_absoluteY="5dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="5dp" />
 
     <ImageView
         android:id="@+id/bookCoverDetail"

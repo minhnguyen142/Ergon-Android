@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class BookDetail extends AppCompatActivity {
 
-    private ImageView bookCoverDetail;
+    private ImageView bookCoverDetail, btnback;
     private TextView bookTitleDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
     private Button readButton, addLibraryButton;
     private DatabaseReference databaseReference;
@@ -40,6 +40,7 @@ public class BookDetail extends AppCompatActivity {
         bookPriceDetail = findViewById(R.id.bookPriceDetail);
         readButton = findViewById(R.id.readButton);
         addLibraryButton = findViewById(R.id.addLibrary);
+        btnback = findViewById(R.id.IconCLose);
 
         Intent intent = getIntent();
         String bookImage = intent.getStringExtra("book_image");
@@ -51,6 +52,10 @@ public class BookDetail extends AppCompatActivity {
 
             fetchBookDetailsFromFirebase(bookImage);
         }
+
+        btnback.setOnClickListener(v -> {
+            finish();
+        });
 
     }
 

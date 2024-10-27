@@ -1,0 +1,183 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">PROJECT</string>\r\n    <!-- TODO: Remove or change this placeholder text -->\r\n    <string name=\"hello_blank_fragment\">Hello blank fragment</string>\r\n\r\n\r\n    <string-array name=\"spinner_items\"\r\n        type=\"boil\">\r\n        <item>Mới nhất</item>\r\n        <item>Cũ nhất</item>\r\n        <item>Đang cập nhật</item>\r\n    </string-array>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	
++++ b/app/src/main/res/values/strings.xml	
+@@ -4,8 +4,7 @@
+     <string name="hello_blank_fragment">Hello blank fragment</string>
+ 
+ 
+-    <string-array name="spinner_items"
+-        type="boil">
++    <string-array name="spinner_items" type="boil">
+         <item>Mới nhất</item>
+         <item>Cũ nhất</item>
+         <item>Đang cập nhật</item>
+Index: app/src/main/java/com/example/project/Adapter/ViewPagerAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.project.Adapter;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentActivity;\r\nimport androidx.viewpager2.adapter.FragmentStateAdapter;\r\n\r\nimport com.example.project.Fragment.HomePage;\r\nimport com.example.project.Fragment.Library;\r\nimport com.example.project.Fragment.Profile;\r\n\r\npublic class ViewPagerAdapter extends FragmentStateAdapter {\r\n\r\n\r\n\r\n\r\n    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {\r\n        super(fragmentActivity);\r\n    }\r\n\r\n\r\n    @NonNull\r\n    @Override\r\n    public Fragment createFragment(int position) {\r\n        switch (position) {\r\n            case 0:\r\n                return new HomePage();\r\n            case 1:\r\n                return new Library();\r\n            case 2:\r\n                return new Profile();\r\n            default:\r\n                return new HomePage();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return 3;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/project/Adapter/ViewPagerAdapter.java b/app/src/main/java/com/example/project/Adapter/ViewPagerAdapter.java
+--- a/app/src/main/java/com/example/project/Adapter/ViewPagerAdapter.java	
++++ b/app/src/main/java/com/example/project/Adapter/ViewPagerAdapter.java	
+@@ -24,13 +24,13 @@
+     public Fragment createFragment(int position) {
+         switch (position) {
+             case 0:
+-                return new HomePage();
++                return new Profile();
+             case 1:
+                 return new Library();
+             case 2:
+-                return new Profile();
++                return new HomePage();
+             default:
+-                return new HomePage();
++                return new Profile();
+         }
+     }
+ 
+Index: app/src/main/res/drawable/ic_arrowleft.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:width=\"20dp\"\r\n    android:height=\"20dp\"\r\n    android:viewportWidth=\"20\"\r\n    android:viewportHeight=\"20\">\r\n  <path\r\n      android:pathData=\"M7.975,4.942L2.917,10L7.975,15.058M17.083,10H3.058\"\r\n      android:strokeLineJoin=\"round\"\r\n      android:strokeWidth=\"1.5\"\r\n      android:fillColor=\"#00000000\"\r\n      android:strokeColor=\"#002D5A\"\r\n      android:strokeLineCap=\"round\"/>\r\n</vector>\r\n
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_arrowleft.xml b/app/src/main/res/drawable/ic_arrowleft.xml
+--- a/app/src/main/res/drawable/ic_arrowleft.xml	
++++ b/app/src/main/res/drawable/ic_arrowleft.xml	
+@@ -1,13 +1,5 @@
+-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="20dp"
+-    android:height="20dp"
+-    android:viewportWidth="20"
+-    android:viewportHeight="20">
+-  <path
+-      android:pathData="M7.975,4.942L2.917,10L7.975,15.058M17.083,10H3.058"
+-      android:strokeLineJoin="round"
+-      android:strokeWidth="1.5"
+-      android:fillColor="#00000000"
+-      android:strokeColor="#002D5A"
+-      android:strokeLineCap="round"/>
++<vector xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="true" android:height="24dp" android:tint="#000000" android:viewportHeight="24" android:viewportWidth="24" android:width="24dp">
++      
++    <path android:fillColor="@android:color/white" android:pathData="M15.41,16.59L10.83,12l4.58,-4.59L14,6l-6,6 6,6 1.41,-1.41z"/>
++    
+ </vector>
+Index: app/src/main/java/com/example/project/Adapter/Books_Adapter.java
+===================================================================
+diff --git a/app/src/main/java/com/example/project/Adapter/Books_Adapter.java b/app/src/main/java/com/example/project/Adapter/BookAdapter.java
+rename from app/src/main/java/com/example/project/Adapter/Books_Adapter.java
+rename to app/src/main/java/com/example/project/Adapter/BookAdapter.java
+--- a/app/src/main/java/com/example/project/Adapter/Books_Adapter.java	
++++ b/app/src/main/java/com/example/project/Adapter/BookAdapter.java	
+@@ -10,15 +10,15 @@
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import com.bumptech.glide.Glide;
+-import com.example.project.Class.Books;
++import com.example.project.Class.Book;
+ import com.example.project.R;
+ 
+ import java.util.List;
+ 
+-public class Books_Adapter extends RecyclerView.Adapter<Books_Adapter.BookViewHolder> {
+-    private List<Books> booksList;
++public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
++    private List<Book> booksList;
+ 
+-    public Books_Adapter(List<Books> booksList) {
++    public BookAdapter(List<Book> booksList) {
+         this.booksList = booksList;
+     }
+ 
+@@ -31,7 +31,7 @@
+ 
+     @Override
+     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+-        Books book = booksList.get(position);
++        Book book = booksList.get(position);
+         holder.title.setText(book.getTitle());
+         holder.author.setText(book.getAuthor());
+         Glide.with(holder.itemView.getContext())
+Index: app/src/main/java/com/example/project/Class/Books.java
+===================================================================
+diff --git a/app/src/main/java/com/example/project/Class/Books.java b/app/src/main/java/com/example/project/Class/Book.java
+rename from app/src/main/java/com/example/project/Class/Books.java
+rename to app/src/main/java/com/example/project/Class/Book.java
+--- a/app/src/main/java/com/example/project/Class/Books.java	
++++ b/app/src/main/java/com/example/project/Class/Book.java	
+@@ -1,6 +1,6 @@
+ package com.example.project.Class;
+ 
+-public class Books {
++public class Book {
+     private String title;
+     private String author;
+     private String contentDescription;
+@@ -8,10 +8,10 @@
+     private String genre;
+     private String pdfUrl;
+ 
+-    public Books() {
++    public Book() {
+     }
+ 
+-    public Books(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl) {
++    public Book(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl) {
+         this.title = title;
+         this.author = author;
+         this.contentDescription = contentDescription;
+Index: app/src/main/java/com/example/project/Fragment/History.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.project.Fragment;\r\n\r\nimport android.os.Bundle;\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.ImageButton;\r\nimport android.widget.Spinner;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.project.Class.Books;\r\nimport com.example.project.Adapter.Books_Adapter;\r\nimport com.example.project.R;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class History extends Fragment {\r\n\r\n    private RecyclerView recyclerView;\r\n    private Books_Adapter bookAdapter;\r\n    private List<Books> bookList;\r\n    private Spinner spinner;\r\n    private ImageButton btnBack;\r\n    private DatabaseReference booksRef;\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        View view = inflater.inflate(R.layout.fragment_history, container, false);\r\n\r\n        btnBack = view.findViewById(R.id.button_back);\r\n        recyclerView = view.findViewById(R.id.recyclerView);\r\n        spinner = view.findViewById(R.id.spinner);\r\n        booksRef = FirebaseDatabase.getInstance().getReference(\"books\");\r\n        setUpSpinner();\r\n        setUpRecyclerView();\r\n        loadBooksFromFirebase();\r\n        btnBack.setOnClickListener(v -> {\r\n            if (requireActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {\r\n                requireActivity().getSupportFragmentManager().popBackStack();\r\n            } else {\r\n                requireActivity().finish();\r\n            }\r\n        });\r\n\r\n        return view;\r\n    }\r\n\r\n    private void setUpSpinner() {\r\n        String[] items = getResources().getStringArray(R.array.spinner_items);\r\n        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, items);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        spinner.setAdapter(adapter);\r\n    }\r\n\r\n    private void setUpRecyclerView() {\r\n\r\n        bookList = new ArrayList<>();\r\n        bookAdapter = new Books_Adapter(bookList);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));\r\n        recyclerView.setAdapter(bookAdapter);\r\n    }\r\n\r\n    private void loadBooksFromFirebase() {\r\n        booksRef.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n\r\n                bookList.clear();\r\n\r\n\r\n                for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {\r\n                    Books book = bookSnapshot.getValue(Books.class);\r\n                    if (book != null) {\r\n                        bookList.add(book);\r\n                    }\r\n                }\r\n\r\n\r\n                bookAdapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n                Toast.makeText(getContext(), \"Failed to load books data: \" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/project/Fragment/History.java b/app/src/main/java/com/example/project/Fragment/History.java
+--- a/app/src/main/java/com/example/project/Fragment/History.java	
++++ b/app/src/main/java/com/example/project/Fragment/History.java	
+@@ -14,8 +14,8 @@
+ import android.widget.Spinner;
+ import android.widget.Toast;
+ 
+-import com.example.project.Class.Books;
+-import com.example.project.Adapter.Books_Adapter;
++import com.example.project.Class.Book;
++import com.example.project.Adapter.BookAdapter;
+ import com.example.project.R;
+ import com.google.firebase.database.DataSnapshot;
+ import com.google.firebase.database.DatabaseError;
+@@ -29,8 +29,8 @@
+ public class History extends Fragment {
+ 
+     private RecyclerView recyclerView;
+-    private Books_Adapter bookAdapter;
+-    private List<Books> bookList;
++    private BookAdapter bookAdapter;
++    private List<Book> bookList;
+     private Spinner spinner;
+     private ImageButton btnBack;
+     private DatabaseReference booksRef;
+@@ -67,7 +67,7 @@
+     private void setUpRecyclerView() {
+ 
+         bookList = new ArrayList<>();
+-        bookAdapter = new Books_Adapter(bookList);
++        bookAdapter = new BookAdapter(bookList);
+         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+         recyclerView.setAdapter(bookAdapter);
+     }
+@@ -81,7 +81,7 @@
+ 
+ 
+                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
+-                    Books book = bookSnapshot.getValue(Books.class);
++                    Book book = bookSnapshot.getValue(Book.class);
+                     if (book != null) {
+                         bookList.add(book);
+                     }

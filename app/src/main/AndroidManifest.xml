@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,7 +15,22 @@
         android:theme="@style/Theme.PROJECT"
         tools:targetApi="31">
         <activity
-            android:name="com.example.project.MainActivity"
+            android:name=".ui.Ebook"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Dialog_Added_Book"
+            android:exported="false" />
+        <activity
+            android:name=".ShareBook"
+            android:exported="false" />
+        <activity
+            android:name=".BookDetail"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Menu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,30 +39,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.project.EnterSDT"
-            android:exported="true">
-        </activity>
+            android:name=".ui.History"
+            android:exported="false" />
         <activity
-            android:name="com.example.project.EnterOTP"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name="com.example.project.TaoPassWord"
-            android:exported="true">
-        </activity>
-        <activity
-        android:name="com.example.project.NhapThongTinCaNhan"
-        android:exported="true">
-    </activity>
-        <activity
-            android:name="com.example.project.Start"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name="com.example.project.Login"
-            android:exported="true">
-        </activity>
+            android:name=".ui.VanHoc"
+            android:exported="false" />
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

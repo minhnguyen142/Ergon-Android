@@ -1,4 +1,4 @@
-package com.example.project.Adapter;
+package com.example.project.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +37,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Glide.with(holder.itemView.getContext())
                 .load(book.getCoverUrl())
                 .into(holder.imageView);
+
     }
 
     @Override

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.Adapter.ImageAdapter;
+import com.example.project.adapter.ImageAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.model.Book;

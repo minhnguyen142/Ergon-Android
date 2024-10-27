@@ -14,7 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.Adapter.ImageAdapter;
+import com.example.project.BookDetail;
+import com.example.project.adapter.ImageOnlyAdapter; // Chỉnh sửa
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.Ebook;
@@ -30,32 +31,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends Fragment {
-    private RecyclerView recyclerView;
-    private ImageAdapter imageAdapter;
-    private List<Book> bookList;
+    private RecyclerView recyclerTrending, recyclerDexuat;
+    private ImageOnlyAdapter trendingAdapter, dexuatAdapter; // Chỉnh sửa
+    private List<String> trendingBookImages, dexuatBookImages; // Chỉnh sửa
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        recyclerView = view.findViewById(R.id.recycler_trending);
-        btnVanHoc = view.findViewById(R.id.ic_van_hoc);
-        btnEbook = view.findViewById(R.id.ic_ebook);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
 
-        bookList = new ArrayList<>();
-        imageAdapter = new ImageAdapter(bookList);
-        recyclerView.setAdapter(imageAdapter);
+        recyclerTrending = view.findViewById(R.id.recycler_trending);
+        LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerTrending.setLayoutManager(trendingLayoutManager);
+
+        trendingBookImages = new ArrayList<>(); // Chỉnh sửa
+        trendingAdapter = new ImageOnlyAdapter(trendingBookImages, this::openBookDetail); // Chỉnh sửa
+        recyclerTrending.setAdapter(trendingAdapter);
+
+        recyclerDexuat = view.findViewById(R.id.recycler_dexuat);
+        LinearLayoutManager dexuatLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerDexuat.setLayoutManager(dexuatLayoutManager);
+
+        dexuatBookImages = new ArrayList<>(); // Chỉnh sửa
+        dexuatAdapter = new ImageOnlyAdapter(dexuatBookImages, this::openBookDetail); // Chỉnh sửa
+        recyclerDexuat.setAdapter(dexuatAdapter);
 
         int spaceInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
+        recyclerTrending.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
+        recyclerDexuat.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("books");
         fetchBooksFromFirebase();
 
-        btnVanHoc.setOnClickListener(v-> {
+        btnVanHoc = view.findViewById(R.id.ic_van_hoc);
+        btnEbook = view.findViewById(R.id.ic_ebook);
+        btnVanHoc.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), VanHoc.class);
             startActivity(intent);
         });
@@ -71,18 +82,24 @@ public class HomePage extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                bookList.clear();
-                int count = 0;
+                trendingBookImages.clear(); // Chỉnh sửa
+                dexuatBookImages.clear(); // Chỉnh sửa
+                int trendingCount = 0;
+                int dexuatCount = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if (count >= 10) break;
-
                     Book book = dataSnapshot.getValue(Book.class);
                     if (book != null) {
-                        bookList.add(book);
-                        count++;
+                        if (trendingCount < 10) {
+                            trendingBookImages.add(book.getCoverUrl()); // Chỉnh sửa
+                            trendingCount++;
+                        } else if (dexuatCount < 10) {
+                            dexuatBookImages.add(book.getCoverUrl()); // Chỉnh sửa
+                            dexuatCount++;
+                        }
                     }
                 }
-                imageAdapter.notifyDataSetChanged();
+                trendingAdapter.notifyDataSetChanged(); // Chỉnh sửa
+                dexuatAdapter.notifyDataSetChanged(); // Chỉnh sửa
             }
 
             @Override
@@ -90,5 +107,11 @@ public class HomePage extends Fragment {
                 Toast.makeText(getContext(), "Failed to load books.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void openBookDetail(String bookImage) { // Chỉnh sửa
+        Intent intent = new Intent(getActivity(), BookDetail.class);
+        intent.putExtra("book_image", bookImage); // Chỉnh sửa
+        startActivity(intent);
     }
 }

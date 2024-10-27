@@ -10,36 +10,45 @@
 
     <ImageView
         android:id="@+id/bookIcon"
-        android:layout_width="28dp"
-        android:layout_height="34dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/like_state"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_like_state"
+        android:background="?attr/selectableItemBackground"
         app:tint="@color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="324dp"
-        tools:layout_editor_absoluteY="10dp" />
+        android:contentDescription="Favorite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/IconShare"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp" />
 
     <ImageView
         android:id="@+id/IconCLose"
-        android:layout_width="35dp"
-        android:layout_height="34dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
         android:src="@drawable/icon_close"
+        android:background="?attr/selectableItemBackground"
         app:tint="@color/white"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="10dp"
-        tools:ignore="MissingConstraints" />
+        android:contentDescription="Back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
 
     <ImageView
         android:id="@+id/IconShare"
-        android:layout_width="30dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/hierarchy2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_hierarchy2"
+        android:background="?attr/selectableItemBackground"
         app:tint="@color/white"
-        tools:layout_editor_absoluteX="365dp"
-        tools:layout_editor_absoluteY="5dp"
-        tools:ignore="MissingConstraints" />
+        android:contentDescription="Share"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
 
     <ImageView
         android:id="@+id/bookCoverDetail"

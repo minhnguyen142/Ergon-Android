@@ -15,6 +15,19 @@
         android:theme="@style/Theme.PROJECT"
         tools:targetApi="31">
         <activity
+            android:name=".VerifyCode"
+            android:exported="false" />
+        <!-- MainActivity được đặt là màn hình khởi động đầu tiên với exported=true -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Các activity khác đều được đặt exported=false -->
+        <activity
             android:name=".ui.Ebook"
             android:exported="false" />
         <activity
@@ -27,17 +40,29 @@
             android:name=".ShareBook"
             android:exported="false" />
         <activity
+            android:name=".EnterOTP"
+            android:exported="false" />
+        <activity
+            android:name=".EnterSDT"
+            android:exported="true" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".NhapThongTinCaNhan"
+            android:exported="false" />
+        <activity
+            android:name=".TaoPassWord"
+            android:exported="false" />
+        <activity
+            android:name=".Start"
+            android:exported="false" />
+        <activity
             android:name=".BookDetail"
             android:exported="false" />
         <activity
             android:name=".ui.Menu"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ui.History"
             android:exported="false" />

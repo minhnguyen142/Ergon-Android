@@ -1,4 +1,4 @@
-package com.example.project.adapter;
+package com.example.project.Adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;

@@ -42,7 +42,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ryclerDx"
-                    android:layout_width="114dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp" />
             </TableRow>
@@ -70,7 +70,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ryclerTrend"
-                    android:layout_width="130dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp" />
             </TableRow>
@@ -97,7 +97,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ryclerVh"
-                    android:layout_width="match_parent"
+                    android:layout_width="340dp"
                     android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>

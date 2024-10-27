@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.BookDetail;
-import com.example.project.adapter.ImageOnlyAdapter; // Chỉnh sửa
+import com.example.project.adapter.ImageOnlyAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.Ebook;
@@ -45,16 +45,16 @@ public class HomePage extends Fragment {
         LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerTrending.setLayoutManager(trendingLayoutManager);
 
-        trendingBookImages = new ArrayList<>(); // Chỉnh sửa
-        trendingAdapter = new ImageOnlyAdapter(trendingBookImages, this::openBookDetail); // Chỉnh sửa
+        trendingBookImages = new ArrayList<>();
+        trendingAdapter = new ImageOnlyAdapter(trendingBookImages, this::openBookDetail);
         recyclerTrending.setAdapter(trendingAdapter);
 
         recyclerDexuat = view.findViewById(R.id.recycler_dexuat);
         LinearLayoutManager dexuatLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerDexuat.setLayoutManager(dexuatLayoutManager);
 
-        dexuatBookImages = new ArrayList<>(); // Chỉnh sửa
-        dexuatAdapter = new ImageOnlyAdapter(dexuatBookImages, this::openBookDetail); // Chỉnh sửa
+        dexuatBookImages = new ArrayList<>();
+        dexuatAdapter = new ImageOnlyAdapter(dexuatBookImages, this::openBookDetail);
         recyclerDexuat.setAdapter(dexuatAdapter);
 
         int spaceInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
@@ -109,9 +109,9 @@ public class HomePage extends Fragment {
         });
     }
 
-    private void openBookDetail(String bookImage) { // Chỉnh sửa
+    private void openBookDetail(String bookImage) {
         Intent intent = new Intent(getActivity(), BookDetail.class);
-        intent.putExtra("book_image", bookImage); // Chỉnh sửa
+        intent.putExtra("book_image", bookImage);
         startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.project.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -8,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.Adapter.VanhocAdapter;
+import com.example.project.BookDetail;
+import com.example.project.adapter.ImageOnlyAdapter;
 import com.example.project.R;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
@@ -24,8 +26,8 @@ import java.util.List;
 public class VanHoc extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton btnBack;
-    private VanhocAdapter vanhocAdapter;
-    private List<Book> bookList;
+    private ImageOnlyAdapter vanhocAdapter;
+    private List<String> bookList;
     private DatabaseReference booksRef;
 
     @Override
@@ -40,7 +42,7 @@ public class VanHoc extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         bookList = new ArrayList<>();
-        vanhocAdapter = new VanhocAdapter(bookList);
+        vanhocAdapter = new ImageOnlyAdapter(bookList, this::openBookDetail);
         recyclerView.setAdapter(vanhocAdapter);
 
         booksRef = FirebaseDatabase.getInstance().getReference("books");
@@ -58,7 +60,7 @@ public class VanHoc extends AppCompatActivity {
                 for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
                     Book book = bookSnapshot.getValue(Book.class);
                     if (book != null) {
-                        bookList.add(book);
+                        bookList.add(book.getCoverUrl());
                     }
                 }
                 vanhocAdapter.notifyDataSetChanged();
@@ -70,5 +72,10 @@ public class VanHoc extends AppCompatActivity {
             }
         });
 
+    }
+    private void openBookDetail(String bookImage) {
+        Intent intent = new Intent(this, BookDetail.class);
+        intent.putExtra("book_image", bookImage);
+        startActivity(intent);
     }
 }

@@ -56,13 +56,13 @@ public class Start extends AppCompatActivity {
 
                 // Cập nhật thanh progress
                 progressBar.setProgress(selectedCount);
-                buttonAdapter.notifyItemChanged(position);
+                 buttonAdapter.notifyItemChanged(position);
 
                 // Gọi hàm kiểm tra form
                 validateForm();
             }
         });
-
+ 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(buttonAdapter);
 

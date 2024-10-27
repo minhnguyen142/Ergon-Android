@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.btl_book.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -67,30 +70,49 @@ public class EnterOTP extends AppCompatActivity {
             }
         });
 
+        String verificationId = getIntent().getStringExtra("verificationId");
+        String phoneNumber = getIntent().getStringExtra("phoneNumber");
         // Xử lý khi nhấn nút Tiếp tục
         btnContinueOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String otpNumber1 = otpInput1.getText().toString().trim();
-                String otpNumber2 = otpInput2.getText().toString().trim();
-                String otpNumber3 = otpInput3.getText().toString().trim();
-                String otpNumber4 = otpInput4.getText().toString().trim();
-                String otpNumber5 = otpInput5.getText().toString().trim();
+                String otpNumber = otpInput1.getText().toString().trim() +
+                        otpInput2.getText().toString().trim() +
+                        otpInput3.getText().toString().trim() +
+                        otpInput4.getText().toString().trim() +
+                        otpInput5.getText().toString().trim();
 
-                // Kiểm tra xem mã otp có nhập đủ hay không
-                if (otpNumber1.isEmpty() || otpNumber2.isEmpty() || otpNumber3.isEmpty() || otpNumber4.isEmpty() || otpNumber5.isEmpty()) {
+                if (otpNumber.length() != 5) {
                     Toast.makeText(EnterOTP.this, "Vui lòng nhập đủ mã OTP", Toast.LENGTH_SHORT).show();
-                } else if (!areOTPNumbersUnique(otpNumber1, otpNumber2, otpNumber3, otpNumber4, otpNumber5)) {
-                    // Kiểm tra tính duy nhất của các số OTP
-                    Toast.makeText(EnterOTP.this, "Các số trong mã OTP phải khác nhau", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Chuyển sang màn hình đăng nhập nếu mã otp hợp lệ
-                    Intent continueSDT = new Intent(EnterOTP.this, TaoPassWord.class);
-                    startActivity(continueSDT);
+                    // Xác minh mã OTP với Firebase
+                    verifyOTPCode(verificationId, otpNumber);
                 }
             }
         });
+
     }
+
+    private void verifyOTPCode(String verificationId, String otpCode) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otpCode);
+        signInWithPhoneAuthCredential(credential);
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Đăng nhập thành công, chuyển sang màn hình tiếp theo
+                        Intent intent = new Intent(EnterOTP.this, TaoPassWord.class);
+                        startActivity(intent);
+                    } else {
+                        // Nếu OTP sai hoặc hết hạn
+                        Toast.makeText(EnterOTP.this, "Xác thực OTP không thành công.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     // Hàm kiểm tra tính duy nhất của các số OTP
     private boolean areOTPNumbersUnique(String... otpNumbers) {
         Set<String> otpSet = new HashSet<>();

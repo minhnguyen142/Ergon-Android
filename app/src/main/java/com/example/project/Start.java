@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.btl_book.R;
+import com.example.project.model.Book;
+import com.example.project.adapter.ButtonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -104,7 +104,7 @@
         android:layout_gravity="center"
         android:text="Tiếp tục"
         android:enabled="false"
-        android:backgroundTint="@color/button_disabled_color"
+        android:backgroundTint="@color/button_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerBirthYear"

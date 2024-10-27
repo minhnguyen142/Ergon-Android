@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.btl_book.R;
+import com.example.project.ButtonItem;
+import com.example.project.R;
 
 import java.util.List;
 

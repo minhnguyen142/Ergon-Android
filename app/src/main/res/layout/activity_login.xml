@@ -71,5 +71,5 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:backgroundTint="#55EFC4"
-        android:text="Button" />
+        android:text="Đăng nhập" />
 </LinearLayout>

@@ -14,7 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.adapter.ImageAdapter;
+import com.example.project.BookDetail;
+import com.example.project.adapter.ImageOnlyAdapter; // Chỉnh sửa
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.Ebook;
@@ -31,8 +32,8 @@ import java.util.List;
 
 public class HomePage extends Fragment {
     private RecyclerView recyclerTrending, recyclerDexuat;
-    private ImageAdapter trendingAdapter, dexuatAdapter;
-    private List<Book> trendingBooks, dexuatBooks;
+    private ImageOnlyAdapter trendingAdapter, dexuatAdapter; // Chỉnh sửa
+    private List<String> trendingBookImages, dexuatBookImages; // Chỉnh sửa
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook;
 
@@ -40,33 +41,28 @@ public class HomePage extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
 
-
         recyclerTrending = view.findViewById(R.id.recycler_trending);
         LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerTrending.setLayoutManager(trendingLayoutManager);
 
-        trendingBooks = new ArrayList<>();
-        trendingAdapter = new ImageAdapter(trendingBooks);
+        trendingBookImages = new ArrayList<>(); // Chỉnh sửa
+        trendingAdapter = new ImageOnlyAdapter(trendingBookImages, this::openBookDetail); // Chỉnh sửa
         recyclerTrending.setAdapter(trendingAdapter);
-
 
         recyclerDexuat = view.findViewById(R.id.recycler_dexuat);
         LinearLayoutManager dexuatLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerDexuat.setLayoutManager(dexuatLayoutManager);
 
-        dexuatBooks = new ArrayList<>();
-        dexuatAdapter = new ImageAdapter(dexuatBooks);
+        dexuatBookImages = new ArrayList<>(); // Chỉnh sửa
+        dexuatAdapter = new ImageOnlyAdapter(dexuatBookImages, this::openBookDetail); // Chỉnh sửa
         recyclerDexuat.setAdapter(dexuatAdapter);
-
 
         int spaceInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
         recyclerTrending.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
         recyclerDexuat.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
 
-
         databaseReference = FirebaseDatabase.getInstance().getReference("books");
         fetchBooksFromFirebase();
-
 
         btnVanHoc = view.findViewById(R.id.ic_van_hoc);
         btnEbook = view.findViewById(R.id.ic_ebook);
@@ -86,24 +82,24 @@ public class HomePage extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                trendingBooks.clear();
-                dexuatBooks.clear();
+                trendingBookImages.clear(); // Chỉnh sửa
+                dexuatBookImages.clear(); // Chỉnh sửa
                 int trendingCount = 0;
                 int dexuatCount = 0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Book book = dataSnapshot.getValue(Book.class);
                     if (book != null) {
                         if (trendingCount < 10) {
-                            trendingBooks.add(book);
+                            trendingBookImages.add(book.getCoverUrl()); // Chỉnh sửa
                             trendingCount++;
                         } else if (dexuatCount < 10) {
-                            dexuatBooks.add(book);
+                            dexuatBookImages.add(book.getCoverUrl()); // Chỉnh sửa
                             dexuatCount++;
                         }
                     }
                 }
-                trendingAdapter.notifyDataSetChanged();
-                dexuatAdapter.notifyDataSetChanged();
+                trendingAdapter.notifyDataSetChanged(); // Chỉnh sửa
+                dexuatAdapter.notifyDataSetChanged(); // Chỉnh sửa
             }
 
             @Override
@@ -112,6 +108,10 @@ public class HomePage extends Fragment {
             }
         });
     }
+
+    private void openBookDetail(String bookImage) { // Chỉnh sửa
+        Intent intent = new Intent(getActivity(), BookDetail.class);
+        intent.putExtra("book_image", bookImage); // Chỉnh sửa
+        startActivity(intent);
+    }
 }
-
-

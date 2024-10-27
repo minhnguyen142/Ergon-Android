@@ -1,6 +1,7 @@
-package com.example.project.Adapter;
+package com.example.project.adapter;
 
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.project.BookDetail;
 import com.example.project.R;
 import com.example.project.model.Book;
 
@@ -21,8 +23,10 @@ import java.util.List;
 public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocViewHolder> {
 
     private List<Book> bookList;
+    private Context context;
 
-    public VanhocAdapter(List<Book> bookList) {
+    public VanhocAdapter(List<Book> bookList, Context context) {
+        this.context = context;
         this.bookList = bookList;
     }
 
@@ -37,16 +41,16 @@ public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocView
     public void onBindViewHolder(@NonNull VanhocViewHolder holder, int position) {
         Book book = bookList.get(position);
         String imageUrl = book.getCoverUrl();
-
-
-        Log.d("VanhocAdapter", "Image URL: " + imageUrl);
-
-
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(16)))
                 .into(holder.imageView);
         holder.bookTitle.setText(book.getTitle());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, BookDetail.class);
+            intent.putExtra("book_image", book.getCoverUrl());
+            context.startActivity(intent);
+        });
     }
 
     @Override

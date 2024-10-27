@@ -1,5 +1,6 @@
 package com.example.project.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -8,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.Adapter.VanhocAdapter;
+import com.example.project.BookDetail;
+import com.example.project.adapter.ImageOnlyAdapter;
 import com.example.project.R;
+import com.example.project.adapter.VanhocAdapter;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +43,7 @@ public class VanHoc extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         bookList = new ArrayList<>();
-        vanhocAdapter = new VanhocAdapter(bookList);
+        vanhocAdapter = new VanhocAdapter(bookList, this);
         recyclerView.setAdapter(vanhocAdapter);
 
         booksRef = FirebaseDatabase.getInstance().getReference("books");

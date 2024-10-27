@@ -1,8 +1,10 @@
 package com.example.project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,10 +21,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class BookDetail extends AppCompatActivity {
 
-    private ImageView bookCoverDetail;
+    private ImageView bookCoverDetail, btnback;
     private TextView bookTitleDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
     private Button readButton, addLibraryButton;
-    private DatabaseReference databaseReference; // Thêm
+    private DatabaseReference databaseReference;
+     // Thêm
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class BookDetail extends AppCompatActivity {
         bookPriceDetail = findViewById(R.id.bookPriceDetail);
         readButton = findViewById(R.id.readButton);
         addLibraryButton = findViewById(R.id.addLibrary);
+        btnback = findViewById(R.id.IconCLose);
 
         Intent intent = getIntent();
         String bookImage = intent.getStringExtra("book_image");
@@ -47,6 +52,11 @@ public class BookDetail extends AppCompatActivity {
 
             fetchBookDetailsFromFirebase(bookImage);
         }
+
+        btnback.setOnClickListener(v -> {
+            finish();
+        });
+
     }
 
     private void fetchBookDetailsFromFirebase(String bookImage) { // Thêm
@@ -69,7 +79,6 @@ public class BookDetail extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-              
             }
         });
     }

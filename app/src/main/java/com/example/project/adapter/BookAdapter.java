@@ -1,5 +1,7 @@
 package com.example.project.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project.BookDetail;
 import com.example.project.R;
 import com.example.project.model.Book;
 
@@ -17,15 +20,17 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> booksList;
+    private Context context;
 
-    public BookAdapter(List<Book> booksList) {
+    public BookAdapter(Context context, List<Book> booksList) {
+        this.context = context;
         this.booksList = booksList;
     }
 
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false); // Sử dụng layout item_history
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false);
         return new BookViewHolder(view);
     }
 
@@ -37,7 +42,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Glide.with(holder.itemView.getContext())
                 .load(book.getCoverUrl())
                 .into(holder.imageView);
-
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, BookDetail.class);
+            intent.putExtra("book_image", book.getCoverUrl());
+            context.startActivity(intent);
+        });
     }
 
     @Override

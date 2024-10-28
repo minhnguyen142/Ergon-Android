@@ -34,7 +34,7 @@ public class TaoPassWord extends AppCompatActivity {
         imgbtnBackPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backPassWord = new Intent(TaoPassWord.this, EnterOTP.class);
+                Intent backPassWord = new Intent(TaoPassWord.this, EnterSDT.class);
                 startActivity(backPassWord);
             }
         });
@@ -56,7 +56,7 @@ public class TaoPassWord extends AppCompatActivity {
                     Toast.makeText(TaoPassWord.this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
                 } else {
                     // Chuyển sang màn hình nhập thông tin cá nhân nếu hợp lệ
-                    Intent continueSDT = new Intent(TaoPassWord.this,  NhapThongTinCaNhan.class);
+                    Intent continueSDT = new Intent(TaoPassWord.this,  Start.class);
                     startActivity(continueSDT);
                 }
             }

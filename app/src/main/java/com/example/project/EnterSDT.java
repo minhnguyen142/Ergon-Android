@@ -2,10 +2,10 @@ package com.example.project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,89 +25,81 @@ import java.util.concurrent.TimeUnit;
 
 public class EnterSDT extends AppCompatActivity {
 
-    private EditText phoneNumberEditText;
-    private Button btnContinueSDT;
-    private Spinner countryCodeSpinner;
-    private FirebaseAuth mAuth;
+    Button btnContinueSDT;
+    ImageButton imgbtnBackSDT;
+    EditText phoneNumberEditText;
+    FirebaseAuth mAuth;
+    String verificationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_sdt);
 
-        // Khởi tạo các view
+        Spinner countryCodeSpinner = findViewById(R.id.countryCodeSpinner);
         phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
         btnContinueSDT = findViewById(R.id.btnContinueSDT);
-        countryCodeSpinner = findViewById(R.id.countryCodeSpinner);
+        imgbtnBackSDT = findViewById(R.id.imgbtnBackSDT);
 
-        // Khởi tạo Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Tạo danh sách quốc gia
-        List<CountryCode> countries = new ArrayList<>();
-        countries.add(new CountryCode(R.drawable.vietnam, "+84"));
-        countries.add(new CountryCode(R.drawable.usa, "+1"));
-        // Bạn có thể thêm các quốc gia khác ở đây nếu cần
+        List<CountryCode> countryCodes = new ArrayList<>();
+        countryCodes.add(new CountryCode(R.drawable.usa, "+1"));
+        countryCodes.add(new CountryCode(R.drawable.vietnam, "+84"));
+        countryCodes.add(new CountryCode(R.drawable.france, "+33"));
 
-        // Khởi tạo adapter
-        CountryCodeAdapter adapter = new CountryCodeAdapter(this, countries);
+        CountryCodeAdapter adapter = new CountryCodeAdapter(this, countryCodes);
         countryCodeSpinner.setAdapter(adapter);
 
-        // Xử lý sự kiện khi nhấn nút Tiếp tục
-        btnContinueSDT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String mobile = phoneNumberEditText.getText().toString().trim();
-                String countryCode = ((CountryCode) countryCodeSpinner.getSelectedItem()).getCountryCode(); // Lấy mã quốc gia
+        imgbtnBackSDT.setOnClickListener(v -> {
+            Intent backSDT = new Intent(EnterSDT.this, MainActivity.class);
+            startActivity(backSDT);
+        });
 
-                // Kiểm tra số điện thoại
-                if (TextUtils.isEmpty(mobile)) {
-                    Toast.makeText(EnterSDT.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        btnContinueSDT.setOnClickListener(v -> {
+            String phoneNumber = phoneNumberEditText.getText().toString().trim();
 
-                // Gửi mã xác minh
-                sendVerificationCode(countryCode + mobile);
+            if (phoneNumber.isEmpty()) {
+                Toast.makeText(EnterSDT.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
+            } else if (!isValidPhoneNumber(phoneNumber)) {
+                Toast.makeText(EnterSDT.this, "Số điện thoại không hợp lệ. Vui lòng nhập đủ 10 số.", Toast.LENGTH_SHORT).show();
+            } else {
+                checkPhoneNumberInFirebase(phoneNumber);
             }
         });
     }
 
-    private void sendVerificationCode(String mobile) {
-        PhoneAuthProvider.verifyPhoneNumber(
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(mobile)
-                        .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(this)
-                        .setCallbacks(mCallbacks)
-                        .build()
-        );
+    private void checkPhoneNumberInFirebase(String phoneNumber) {
+        // Kiểm tra xem số điện thoại đã được đăng ký hay chưa
+        mAuth.fetchSignInMethodsForEmail(phoneNumber + "@example.com")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<String> signInMethods = task.getResult().getSignInMethods();
+                        if (signInMethods != null && !signInMethods.isEmpty()) {
+                            // Số điện thoại đã tồn tại, chuyển sang màn hình đăng nhập
+                            Toast.makeText(EnterSDT.this, "Số điện thoại đã tồn tại. Đang chuyển sang màn hình đăng nhập.", Toast.LENGTH_SHORT).show();
+                            Intent loginIntent = new Intent(EnterSDT.this, Login.class);
+                            startActivity(loginIntent);
+                        } else {
+                            // Số điện thoại chưa tồn tại, lưu số điện thoại và chuyển sang giao diện nhập thông tin bình thường
+                            savePhoneNumberToFirebase(phoneNumber);
+                        }
+                    }
+                });
     }
 
-    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-            String code = credential.getSmsCode();
-            if (code != null) {
-                navigateToEnterOTP(code);
-            }
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(EnterSDT.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onCodeSent(@NonNull String verificationId,
-                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
-            navigateToEnterOTP(verificationId);
-        }
-    };
-
-    private void navigateToEnterOTP(String verificationId) {
-        Intent intent = new Intent(EnterSDT.this, EnterOTP.class);
-        intent.putExtra("verificationId", verificationId);
+    private void savePhoneNumberToFirebase(String phoneNumber) {
+        // Thực hiện các thao tác để lưu số điện thoại vào Firebase
+        Toast.makeText(EnterSDT.this, "Số điện thoại mới, đang chuyển sang giao diện nhập thông tin.", Toast.LENGTH_SHORT).show();
+        // Chuyển sang giao diện nhập thông tin
+        Intent intent = new Intent(EnterSDT.this, NhapThongTinCaNhan.class);
+        intent.putExtra("phoneNumber", phoneNumber); // Truyền số điện thoại sang màn hình nhập thông tin
         startActivity(intent);
-        finish();
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumberEditText){
+        // Kiểm tra xem số điện thoại có 10 chữ số và chỉ bao gồm số
+        String regex = "^[0-9]{10}$";
+        return phoneNumberEditText.matches(regex);
     }
 }

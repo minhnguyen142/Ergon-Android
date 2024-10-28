@@ -1,0 +1,474 @@
+Index: app/src/main/java/com/example/project/EnterSDT.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.project;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.Spinner;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.example.project.adapter.CountryCodeAdapter;\r\nimport com.google.firebase.FirebaseException;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.PhoneAuthCredential;\r\nimport com.google.firebase.auth.PhoneAuthOptions;\r\nimport com.google.firebase.auth.PhoneAuthProvider;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.concurrent.TimeUnit;\r\n\r\npublic class EnterSDT extends AppCompatActivity {\r\n\r\n    Button btnContinueSDT;\r\n    ImageButton imgbtnBackSDT;\r\n    EditText phoneNumberEditText;\r\n    FirebaseAuth mAuth;\r\n    String verificationId;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_enter_sdt);\r\n\r\n        Spinner countryCodeSpinner = findViewById(R.id.countryCodeSpinner);\r\n        phoneNumberEditText = findViewById(R.id.phoneNumberEditText);\r\n        btnContinueSDT = findViewById(R.id.btnContinueSDT);\r\n        imgbtnBackSDT = findViewById(R.id.imgbtnBackSDT);\r\n\r\n\r\n        // Firebase Auth instance\r\n        mAuth = FirebaseAuth.getInstance();\r\n\r\n        List<CountryCode> countryCodes = new ArrayList<>();\r\n        countryCodes.add(new CountryCode(R.drawable.usa, \"+1\"));\r\n        countryCodes.add(new CountryCode(R.drawable.vietnam, \"+84\"));\r\n        countryCodes.add(new CountryCode(R.drawable.france, \"+33\"));\r\n        // Thêm các quốc gia khác vào đây\r\n\r\n        CountryCodeAdapter adapter = new CountryCodeAdapter(this, countryCodes);\r\n        countryCodeSpinner.setAdapter(adapter);\r\n\r\n        imgbtnBackSDT.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent backSDT = new Intent(EnterSDT.this, MainActivity.class);\r\n                startActivity(backSDT);\r\n            }\r\n        });\r\n\r\n        btnContinueSDT.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String phoneNumber = phoneNumberEditText.getText().toString().trim();\r\n\r\n                // Kiểm tra số điện thoại có hợp lệ không\r\n                if (phoneNumber.isEmpty()) {\r\n                    Toast.makeText(EnterSDT.this, \"Vui lòng nhập số điện thoại\", Toast.LENGTH_SHORT).show();\r\n                } else if (!isValidPhoneNumber(phoneNumber)) {\r\n                    Toast.makeText(EnterSDT.this, \"Số điện thoại không hợp lệ. Vui lòng nhập đủ 10 số.\", Toast.LENGTH_SHORT).show();\r\n                } else {\r\n                    // Gửi OTP tới số điện thoại qua Firebase Authentication\r\n                    sendVerificationCode(phoneNumber);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private void sendVerificationCode(String phoneNumber) {\r\n        FirebaseAuth auth = FirebaseAuth.getInstance();\r\n        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)\r\n                .setPhoneNumber(phoneNumber)        // Số điện thoại cần gửi OTP\r\n                .setTimeout(60L, TimeUnit.SECONDS)  // Thời gian chờ OTP (tính bằng giây)\r\n                .setActivity(this)                  // Activity khởi tạo việc xác thực\r\n                .setCallbacks(mCallbacks)           // Xử lý sự kiện khi OTP được gửi\r\n                .build();\r\n        PhoneAuthProvider.verifyPhoneNumber(options);\r\n    }\r\n\r\n\r\n    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =\r\n            new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {\r\n        String phoneNumber = phoneNumberEditText.getText().toString().trim();\r\n                @Override\r\n                public void onVerificationCompleted(PhoneAuthCredential credential) {\r\n                    // Nếu OTP được tự động xác thực thành công\r\n                    signInWithPhoneAuthCredential(credential);\r\n                }\r\n\r\n                @Override\r\n                public void onVerificationFailed(FirebaseException e) {\r\n                    Toast.makeText(EnterSDT.this, \"Xác thực thất bại: \" + e.getMessage(), Toast.LENGTH_LONG).show();\r\n                }\r\n\r\n                @Override\r\n                public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {\r\n                    super.onCodeSent(verificationId, token);\r\n                    // Truyền phoneNumber chính xác từ bên ngoài callback\r\n                    Intent intent = new Intent(EnterSDT.this, EnterOTP.class);\r\n                    intent.putExtra(\"phoneNumber\", phoneNumber); // Truyền số điện thoại sang màn hình OTP\r\n                    intent.putExtra(\"verificationId\", verificationId); // Truyền verificationId\r\n                    startActivity(intent);\r\n                }\r\n            };\r\n\r\n    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {\r\n        FirebaseAuth auth = FirebaseAuth.getInstance();\r\n        auth.signInWithCredential(credential)\r\n                .addOnCompleteListener(this, task -> {\r\n                    if (task.isSuccessful()) {\r\n                        // Đăng nhập thành công\r\n                        Toast.makeText(EnterSDT.this, \"Xác thực thành công!\", Toast.LENGTH_SHORT).show();\r\n                        // Chuyển sang màn hình chính hoặc trang đăng nhập\r\n                        Intent intent = new Intent(EnterSDT.this, MainActivity.class);\r\n                        startActivity(intent);\r\n                        finish(); // Đóng màn hình hiện tại\r\n                    } else {\r\n                        // Xác thực thất bại\r\n                        Toast.makeText(EnterSDT.this, \"Xác thực không thành công.\", Toast.LENGTH_SHORT).show();\r\n                    }\r\n                });\r\n    }\r\n\r\n\r\n    // Kiểm tra số điện thoại trong Firebase\r\n    private void checkPhoneNumberInFirebase(String phoneNumber) {\r\n        // Kiểm tra xem số điện thoại đã được đăng ký hay chưa\r\n        mAuth.fetchSignInMethodsForEmail(phoneNumber + \"@example.com\") // Tạo email ảo từ số điện thoại để kiểm tra\r\n                .addOnCompleteListener(task -> {\r\n                    if (task.isSuccessful()) {\r\n                        List<String> signInMethods = task.getResult().getSignInMethods();\r\n                        if (signInMethods != null && !signInMethods.isEmpty()) {\r\n                            // Số điện thoại đã tồn tại, chuyển sang màn hình đăng nhập\r\n                            Toast.makeText(EnterSDT.this, \"Số điện thoại đã tồn tại. Đang chuyển sang màn hình đăng nhập.\", Toast.LENGTH_SHORT).show();\r\n                            Intent loginIntent = new Intent(EnterSDT.this, Login.class);\r\n                            startActivity(loginIntent);\r\n                        } else {\r\n                            // Số điện thoại chưa tồn tại, gửi mã OTP\r\n                            sendOTP(phoneNumber);\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n\r\n    // Gửi mã OTP qua Firebase\r\n    private void sendOTP(String phoneNumber) {\r\n        PhoneAuthOptions options =\r\n                PhoneAuthOptions.newBuilder(mAuth)\r\n                        .setPhoneNumber(\"+84\" + phoneNumber)       // Số điện thoại cần xác thực\r\n                        .setTimeout(60L, TimeUnit.SECONDS) // Thời gian timeout\r\n                        .setActivity(this)                 // Activity hiện tại\r\n                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {\r\n                            @Override\r\n                            public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {\r\n                                // Xác minh thành công, có thể dùng credential để đăng nhập\r\n                            }\r\n\r\n                            @Override\r\n                            public void onVerificationFailed(@NonNull FirebaseException e) {\r\n                                // Xác minh thất bại\r\n                                Toast.makeText(EnterSDT.this, \"Xác minh thất bại: \" + e.getMessage(), Toast.LENGTH_SHORT).show();\r\n                            }\r\n\r\n                            @Override\r\n                            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {\r\n                                // Lưu verificationId để xác thực mã OTP sau\r\n                                EnterSDT.this.verificationId = verificationId;\r\n                                // Chuyển sang màn hình OTP\r\n                                Intent otpIntent = new Intent(EnterSDT.this, EnterOTP.class);\r\n                                otpIntent.putExtra(\"phoneNumber\", phoneNumber);\r\n                                otpIntent.putExtra(\"verificationId\", verificationId);\r\n                                startActivity(otpIntent);\r\n                            }\r\n                        })\r\n                        .build();\r\n        PhoneAuthProvider.verifyPhoneNumber(options);\r\n    }\r\n\r\n    private boolean isValidPhoneNumber(String phoneNumberEditText){\r\n        // Kiểm tra xem số điện thoại có 10 chữ số và chỉ bao gồm số\r\n        String regex = \"^[0-9]{10}$\";\r\n        return phoneNumberEditText.matches(regex);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/project/EnterSDT.java b/app/src/main/java/com/example/project/EnterSDT.java
+--- a/app/src/main/java/com/example/project/EnterSDT.java	(revision f8eac1fcc3ba0fdbc3ef82da137c2b7db3d299a8)
++++ b/app/src/main/java/com/example/project/EnterSDT.java	(date 1730124799222)
+@@ -41,105 +41,37 @@
+         btnContinueSDT = findViewById(R.id.btnContinueSDT);
+         imgbtnBackSDT = findViewById(R.id.imgbtnBackSDT);
+ 
+-
+-        // Firebase Auth instance
+         mAuth = FirebaseAuth.getInstance();
+ 
+         List<CountryCode> countryCodes = new ArrayList<>();
+         countryCodes.add(new CountryCode(R.drawable.usa, "+1"));
+         countryCodes.add(new CountryCode(R.drawable.vietnam, "+84"));
+         countryCodes.add(new CountryCode(R.drawable.france, "+33"));
+-        // Thêm các quốc gia khác vào đây
+ 
+         CountryCodeAdapter adapter = new CountryCodeAdapter(this, countryCodes);
+         countryCodeSpinner.setAdapter(adapter);
+ 
+-        imgbtnBackSDT.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent backSDT = new Intent(EnterSDT.this, MainActivity.class);
+-                startActivity(backSDT);
+-            }
++        imgbtnBackSDT.setOnClickListener(v -> {
++            Intent backSDT = new Intent(EnterSDT.this, MainActivity.class);
++            startActivity(backSDT);
+         });
+ 
+-        btnContinueSDT.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                String phoneNumber = phoneNumberEditText.getText().toString().trim();
++        btnContinueSDT.setOnClickListener(v -> {
++            String phoneNumber = phoneNumberEditText.getText().toString().trim();
+ 
+-                // Kiểm tra số điện thoại có hợp lệ không
+-                if (phoneNumber.isEmpty()) {
+-                    Toast.makeText(EnterSDT.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
+-                } else if (!isValidPhoneNumber(phoneNumber)) {
+-                    Toast.makeText(EnterSDT.this, "Số điện thoại không hợp lệ. Vui lòng nhập đủ 10 số.", Toast.LENGTH_SHORT).show();
+-                } else {
+-                    // Gửi OTP tới số điện thoại qua Firebase Authentication
+-                    sendVerificationCode(phoneNumber);
+-                }
+-            }
+-        });
+-    }
+-
+-    private void sendVerificationCode(String phoneNumber) {
+-        FirebaseAuth auth = FirebaseAuth.getInstance();
+-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
+-                .setPhoneNumber(phoneNumber)        // Số điện thoại cần gửi OTP
+-                .setTimeout(60L, TimeUnit.SECONDS)  // Thời gian chờ OTP (tính bằng giây)
+-                .setActivity(this)                  // Activity khởi tạo việc xác thực
+-                .setCallbacks(mCallbacks)           // Xử lý sự kiện khi OTP được gửi
+-                .build();
+-        PhoneAuthProvider.verifyPhoneNumber(options);
+-    }
+-
+-
+-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+-            new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+-        String phoneNumber = phoneNumberEditText.getText().toString().trim();
+-                @Override
+-                public void onVerificationCompleted(PhoneAuthCredential credential) {
+-                    // Nếu OTP được tự động xác thực thành công
+-                    signInWithPhoneAuthCredential(credential);
+-                }
+-
+-                @Override
+-                public void onVerificationFailed(FirebaseException e) {
+-                    Toast.makeText(EnterSDT.this, "Xác thực thất bại: " + e.getMessage(), Toast.LENGTH_LONG).show();
+-                }
+-
+-                @Override
+-                public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
+-                    super.onCodeSent(verificationId, token);
+-                    // Truyền phoneNumber chính xác từ bên ngoài callback
+-                    Intent intent = new Intent(EnterSDT.this, EnterOTP.class);
+-                    intent.putExtra("phoneNumber", phoneNumber); // Truyền số điện thoại sang màn hình OTP
+-                    intent.putExtra("verificationId", verificationId); // Truyền verificationId
+-                    startActivity(intent);
+-                }
+-            };
+-
+-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+-        FirebaseAuth auth = FirebaseAuth.getInstance();
+-        auth.signInWithCredential(credential)
+-                .addOnCompleteListener(this, task -> {
+-                    if (task.isSuccessful()) {
+-                        // Đăng nhập thành công
+-                        Toast.makeText(EnterSDT.this, "Xác thực thành công!", Toast.LENGTH_SHORT).show();
+-                        // Chuyển sang màn hình chính hoặc trang đăng nhập
+-                        Intent intent = new Intent(EnterSDT.this, MainActivity.class);
+-                        startActivity(intent);
+-                        finish(); // Đóng màn hình hiện tại
+-                    } else {
+-                        // Xác thực thất bại
+-                        Toast.makeText(EnterSDT.this, "Xác thực không thành công.", Toast.LENGTH_SHORT).show();
+-                    }
+-                });
++            if (phoneNumber.isEmpty()) {
++                Toast.makeText(EnterSDT.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
++            } else if (!isValidPhoneNumber(phoneNumber)) {
++                Toast.makeText(EnterSDT.this, "Số điện thoại không hợp lệ. Vui lòng nhập đủ 10 số.", Toast.LENGTH_SHORT).show();
++            } else {
++                checkPhoneNumberInFirebase(phoneNumber);
++            }
++        });
+     }
+ 
+-
+-    // Kiểm tra số điện thoại trong Firebase
+     private void checkPhoneNumberInFirebase(String phoneNumber) {
+         // Kiểm tra xem số điện thoại đã được đăng ký hay chưa
+-        mAuth.fetchSignInMethodsForEmail(phoneNumber + "@example.com") // Tạo email ảo từ số điện thoại để kiểm tra
++        mAuth.fetchSignInMethodsForEmail(phoneNumber + "@example.com")
+                 .addOnCompleteListener(task -> {
+                     if (task.isSuccessful()) {
+                         List<String> signInMethods = task.getResult().getSignInMethods();
+@@ -149,45 +81,20 @@
+                             Intent loginIntent = new Intent(EnterSDT.this, Login.class);
+                             startActivity(loginIntent);
+                         } else {
+-                            // Số điện thoại chưa tồn tại, gửi mã OTP
+-                            sendOTP(phoneNumber);
++                            // Số điện thoại chưa tồn tại, lưu số điện thoại và chuyển sang giao diện nhập thông tin bình thường
++                            savePhoneNumberToFirebase(phoneNumber);
+                         }
+                     }
+                 });
+     }
+ 
+-    // Gửi mã OTP qua Firebase
+-    private void sendOTP(String phoneNumber) {
+-        PhoneAuthOptions options =
+-                PhoneAuthOptions.newBuilder(mAuth)
+-                        .setPhoneNumber("+84" + phoneNumber)       // Số điện thoại cần xác thực
+-                        .setTimeout(60L, TimeUnit.SECONDS) // Thời gian timeout
+-                        .setActivity(this)                 // Activity hiện tại
+-                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+-                            @Override
+-                            public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
+-                                // Xác minh thành công, có thể dùng credential để đăng nhập
+-                            }
+-
+-                            @Override
+-                            public void onVerificationFailed(@NonNull FirebaseException e) {
+-                                // Xác minh thất bại
+-                                Toast.makeText(EnterSDT.this, "Xác minh thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+-                            }
+-
+-                            @Override
+-                            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
+-                                // Lưu verificationId để xác thực mã OTP sau
+-                                EnterSDT.this.verificationId = verificationId;
+-                                // Chuyển sang màn hình OTP
+-                                Intent otpIntent = new Intent(EnterSDT.this, EnterOTP.class);
+-                                otpIntent.putExtra("phoneNumber", phoneNumber);
+-                                otpIntent.putExtra("verificationId", verificationId);
+-                                startActivity(otpIntent);
+-                            }
+-                        })
+-                        .build();
+-        PhoneAuthProvider.verifyPhoneNumber(options);
++    private void savePhoneNumberToFirebase(String phoneNumber) {
++        // Thực hiện các thao tác để lưu số điện thoại vào Firebase
++        Toast.makeText(EnterSDT.this, "Số điện thoại mới, đang chuyển sang giao diện nhập thông tin.", Toast.LENGTH_SHORT).show();
++        // Chuyển sang giao diện nhập thông tin
++        Intent intent = new Intent(EnterSDT.this, NhapThongTinCaNhan.class);
++        intent.putExtra("phoneNumber", phoneNumber); // Truyền số điện thoại sang màn hình nhập thông tin
++        startActivity(intent);
+     }
+ 
+     private boolean isValidPhoneNumber(String phoneNumberEditText){
+Index: app/src/main/java/com/example/project/TaoPassWord.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.project;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport com.example.project.model.Book;\r\n\r\npublic class TaoPassWord extends AppCompatActivity {\r\n\r\n    Button btnContinuePassWord;\r\n    ImageButton imgbtnBackPassword;\r\n    EditText usernameEditText, passwordEditText, confirmPassword;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_tao_pass_word);\r\n        btnContinuePassWord = findViewById(R.id.btnContinuePassWord);\r\n        imgbtnBackPassword = findViewById(R.id.imgbtnBackPassword);\r\n        usernameEditText = findViewById(R.id.usernameEditText);\r\n        passwordEditText = findViewById(R.id.passwordEditText);\r\n        confirmPassword = findViewById(R.id.confirmPassword);\r\n\r\n        imgbtnBackPassword.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent backPassWord = new Intent(TaoPassWord.this, EnterOTP.class);\r\n                startActivity(backPassWord);\r\n            }\r\n        });\r\n\r\n        // Xử lý khi nhấn nút Tiếp tục\r\n        btnContinuePassWord.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String username = usernameEditText.getText().toString().trim();\r\n                String password = passwordEditText.getText().toString().trim();\r\n                String confirm = confirmPassword.getText().toString().trim();\r\n\r\n                // Kiểm tra xem username, password, confirm có được nhập hay không\r\n                if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {\r\n                    Toast.makeText(TaoPassWord.this, \"Vui lòng nhập đủ thông tin\", Toast.LENGTH_SHORT).show();\r\n                } else if (password.length() < 8) {\r\n                    Toast.makeText(TaoPassWord.this, \"Mật khẩu phải có ít nhất 8 ký tự\", Toast.LENGTH_SHORT).show();\r\n                } else if (!password.equals(confirm)) {\r\n                    Toast.makeText(TaoPassWord.this, \"Mật khẩu xác nhận không khớp\", Toast.LENGTH_SHORT).show();\r\n                } else {\r\n                    // Chuyển sang màn hình nhập thông tin cá nhân nếu hợp lệ\r\n                    Intent continueSDT = new Intent(TaoPassWord.this,  NhapThongTinCaNhan.class);\r\n                    startActivity(continueSDT);\r\n                }\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/project/TaoPassWord.java b/app/src/main/java/com/example/project/TaoPassWord.java
+--- a/app/src/main/java/com/example/project/TaoPassWord.java	(revision f8eac1fcc3ba0fdbc3ef82da137c2b7db3d299a8)
++++ b/app/src/main/java/com/example/project/TaoPassWord.java	(date 1730124904544)
+@@ -34,7 +34,7 @@
+         imgbtnBackPassword.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-                Intent backPassWord = new Intent(TaoPassWord.this, EnterOTP.class);
++                Intent backPassWord = new Intent(TaoPassWord.this, EnterSDT.class);
+                 startActivity(backPassWord);
+             }
+         });
+Index: app/src/main/java/com/example/project/EnterOTP.java
+===================================================================
+diff --git a/app/src/main/java/com/example/project/EnterOTP.java b/app/src/main/java/com/example/project/EnterOTP.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/project/EnterOTP.java	(revision f8eac1fcc3ba0fdbc3ef82da137c2b7db3d299a8)
++++ /dev/null	(revision f8eac1fcc3ba0fdbc3ef82da137c2b7db3d299a8)
+@@ -1,127 +0,0 @@
+-package com.example.project;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.text.Editable;
+-import android.text.TextWatcher;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.ImageButton;
+-import android.widget.Toast;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-import com.example.project.model.Book;
+-import com.google.firebase.auth.FirebaseAuth;
+-import com.google.firebase.auth.PhoneAuthCredential;
+-import com.google.firebase.auth.PhoneAuthProvider;
+-
+-import java.util.HashSet;
+-import java.util.Set;
+-
+-public class EnterOTP extends AppCompatActivity {
+-
+-    private EditText otpInput1, otpInput2, otpInput3, otpInput4, otpInput5;
+-    Button btnContinueOTP;
+-    ImageButton imgbtnBackOTP;
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_enter_otp);
+-        btnContinueOTP = findViewById(R.id.btnContinueOTP);
+-        imgbtnBackOTP = findViewById(R.id.imgbtnBackOTP);
+-
+-        // Kết nối với các EditText nhập mã OTP
+-        otpInput1 = findViewById(R.id.otpInput1);
+-        otpInput2 = findViewById(R.id.otpInput2);
+-        otpInput3 = findViewById(R.id.otpInput3);
+-        otpInput4 = findViewById(R.id.otpInput4);
+-        otpInput5 = findViewById(R.id.otpInput5);
+-
+-        // Thiết lập tự động chuyển ô khi nhập
+-        setupOTPInput(otpInput1, otpInput2);
+-        setupOTPInput(otpInput2, otpInput3);
+-        setupOTPInput(otpInput3, otpInput4);
+-        setupOTPInput(otpInput4, otpInput5);
+-    }
+-
+-    private void setupOTPInput(final EditText currentInput, final EditText nextInput) {
+-        currentInput.addTextChangedListener(new TextWatcher() {
+-            @Override
+-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+-
+-            @Override
+-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+-                if (s.length() == 1) {
+-                    nextInput.requestFocus(); // Chuyển đến ô tiếp theo khi nhập xong
+-                }
+-            }
+-
+-            @Override
+-            public void afterTextChanged(Editable s) {}
+-        });
+-
+-        imgbtnBackOTP.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent backOTP = new Intent(EnterOTP.this, EnterSDT.class);
+-                startActivity(backOTP);
+-            }
+-        });
+-
+-        String verificationId = getIntent().getStringExtra("verificationId");
+-        String phoneNumber = getIntent().getStringExtra("phoneNumber");
+-        // Xử lý khi nhấn nút Tiếp tục
+-        btnContinueOTP.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                String otpNumber = otpInput1.getText().toString().trim() +
+-                        otpInput2.getText().toString().trim() +
+-                        otpInput3.getText().toString().trim() +
+-                        otpInput4.getText().toString().trim() +
+-                        otpInput5.getText().toString().trim();
+-
+-                if (otpNumber.length() != 5) {
+-                    Toast.makeText(EnterOTP.this, "Vui lòng nhập đủ mã OTP", Toast.LENGTH_SHORT).show();
+-                } else {
+-                    // Xác minh mã OTP với Firebase
+-                    verifyOTPCode(verificationId, otpNumber);
+-                }
+-            }
+-        });
+-
+-    }
+-
+-    private void verifyOTPCode(String verificationId, String otpCode) {
+-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otpCode);
+-        signInWithPhoneAuthCredential(credential);
+-    }
+-
+-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+-        FirebaseAuth auth = FirebaseAuth.getInstance();
+-        auth.signInWithCredential(credential)
+-                .addOnCompleteListener(this, task -> {
+-                    if (task.isSuccessful()) {
+-                        // Đăng nhập thành công, chuyển sang màn hình tiếp theo
+-                        Intent intent = new Intent(EnterOTP.this, TaoPassWord.class);
+-                        startActivity(intent);
+-                    } else {
+-                        // Nếu OTP sai hoặc hết hạn
+-                        Toast.makeText(EnterOTP.this, "Xác thực OTP không thành công.", Toast.LENGTH_SHORT).show();
+-                    }
+-                });
+-    }
+-
+-    // Hàm kiểm tra tính duy nhất của các số OTP
+-    private boolean areOTPNumbersUnique(String... otpNumbers) {
+-        Set<String> otpSet = new HashSet<>();
+-        for (String otp : otpNumbers) {
+-            if (!otpSet.add(otp)) {
+-                // Nếu không thể thêm một phần tử nào đó vào Set, nghĩa là có số trùng nhau
+-                return false;
+-            }
+-        }
+-        return true;
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_enter_otp.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_enter_otp.xml b/app/src/main/res/layout/activity_enter_otp.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_enter_otp.xml	(revision f8eac1fcc3ba0fdbc3ef82da137c2b7db3d299a8)
++++ /dev/null	(revision f8eac1fcc3ba0fdbc3ef82da137c2b7db3d299a8)
+@@ -1,127 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:id="@+id/main"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:orientation="vertical"
+-    android:background="#357C97"
+-    tools:context="com.example.project.EnterOTP">
+-
+-
+-    <ImageButton
+-        android:id="@+id/imgbtnBackOTP"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:background="@drawable/circle_background"
+-        android:layout_marginLeft="20dp"
+-        android:layout_marginTop="30dp"
+-        app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
+-
+-    <TextView
+-        android:id="@+id/tVNhapOTP"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:textAlignment="center"
+-        android:textColor="@color/white"
+-        android:layout_marginTop="50dp"
+-        android:textSize="25dp"
+-        android:textStyle="bold"
+-        android:text="Vui lòng nhập mã OTP đã gửi" />
+-
+-    <!-- Nhập mã OTP -->
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:orientation="horizontal"
+-        android:layout_gravity="center"
+-        android:layout_marginTop="15dp"
+-        android:gravity="center">
+-
+-        <!-- Các ô nhập mã OTP -->
+-        <EditText
+-            android:id="@+id/otpInput1"
+-            android:layout_width="60dp"
+-            android:layout_height="60dp"
+-            android:background="@drawable/round_shape"
+-            android:textColorHint="#FFFFFF"
+-            android:hint=" "
+-            android:inputType="number"
+-            android:maxLength="1"
+-            android:layout_margin="5dp"
+-            android:textColor="@color/black"/>
+-
+-        <EditText
+-            android:id="@+id/otpInput2"
+-            android:layout_width="60dp"
+-            android:layout_height="60dp"
+-            android:background="@drawable/round_shape"
+-            android:textColorHint="#FFFFFF"
+-            android:hint=" "
+-            android:inputType="number"
+-            android:maxLength="1"
+-            android:layout_margin="5dp"
+-            android:textColor="@color/black"/>
+-
+-        <EditText
+-            android:id="@+id/otpInput3"
+-            android:layout_width="60dp"
+-            android:layout_height="60dp"
+-            android:background="@drawable/round_shape"
+-            android:textColorHint="#FFFFFF"
+-            android:hint=" "
+-            android:inputType="number"
+-            android:maxLength="1"
+-            android:layout_margin="5dp"
+-            android:textColor="@color/black"/>
+-
+-        <EditText
+-            android:id="@+id/otpInput4"
+-            android:layout_width="60dp"
+-            android:layout_height="60dp"
+-            android:background="@drawable/round_shape"
+-            android:textColorHint="#FFFFFF"
+-            android:hint=" "
+-            android:inputType="number"
+-            android:maxLength="1"
+-            android:layout_margin="5dp"
+-            android:textColor="@color/black"/>
+-
+-        <EditText
+-            android:id="@+id/otpInput5"
+-            android:layout_width="60dp"
+-            android:layout_height="60dp"
+-            android:background="@drawable/round_shape"
+-            android:textColorHint="#FFFFFF"
+-            android:hint=" "
+-            android:inputType="number"
+-            android:maxLength="1"
+-            android:layout_margin="5dp"
+-            android:textColor="@color/black"/>
+-
+-
+-    </LinearLayout>
+-
+-
+-    <TextView
+-        android:id="@+id/textView5"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:text="Mã OTP chỉ có tác dụng trong 2 phút và chỉ dùng được 1 lần. Tuyệt đối không chia sẻ với
+-bất kỳ ai!"
+-        android:gravity="start"
+-        android:padding="20dp"
+-        android:alpha="0.5"
+-        android:textSize="17sp"
+-        android:textColor="@android:color/white" />
+-
+-    <Button
+-        android:id="@+id/btnContinueOTP"
+-        android:layout_width="350dp"
+-        android:layout_height="wrap_content"
+-        android:layout_gravity="center"
+-        android:layout_marginTop="80dp"
+-        android:backgroundTint="#55EFC4"
+-        android:text="Tiếp tục" />
+-</LinearLayout>
+\ No newline at end of file

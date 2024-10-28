@@ -1,0 +1,222 @@
+Index: app/src/main/java/com/example/project/EnterSDT.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.project;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.TextUtils;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Spinner;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.example.project.adapter.CountryCodeAdapter;\r\nimport com.google.firebase.FirebaseException;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.PhoneAuthCredential;\r\nimport com.google.firebase.auth.PhoneAuthOptions;\r\nimport com.google.firebase.auth.PhoneAuthProvider;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.concurrent.TimeUnit;\r\n\r\npublic class EnterSDT extends AppCompatActivity {\r\n\r\n    private EditText phoneNumberEditText;\r\n    private Button btnContinueSDT;\r\n    private Spinner countryCodeSpinner;\r\n    private FirebaseAuth mAuth;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_enter_sdt);\r\n\r\n        // Khởi tạo các view\r\n        phoneNumberEditText = findViewById(R.id.phoneNumberEditText);\r\n        btnContinueSDT = findViewById(R.id.btnContinueSDT);\r\n        countryCodeSpinner = findViewById(R.id.countryCodeSpinner);\r\n\r\n        // Khởi tạo Firebase Auth\r\n        mAuth = FirebaseAuth.getInstance();\r\n\r\n        // Tạo danh sách quốc gia\r\n        List<CountryCode> countries = new ArrayList<>();\r\n        countries.add(new CountryCode(R.drawable.vietnam, \"+84\"));\r\n        countries.add(new CountryCode(R.drawable.usa, \"+1\"));\r\n        // Bạn có thể thêm các quốc gia khác ở đây nếu cần\r\n\r\n        // Khởi tạo adapter\r\n        CountryCodeAdapter adapter = new CountryCodeAdapter(this, countries);\r\n        countryCodeSpinner.setAdapter(adapter);\r\n\r\n        // Xử lý sự kiện khi nhấn nút Tiếp tục\r\n        btnContinueSDT.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String mobile = phoneNumberEditText.getText().toString().trim();\r\n                String countryCode = ((CountryCode) countryCodeSpinner.getSelectedItem()).getCountryCode(); // Lấy mã quốc gia\r\n\r\n                // Kiểm tra số điện thoại\r\n                if (TextUtils.isEmpty(mobile)) {\r\n                    Toast.makeText(EnterSDT.this, \"Vui lòng nhập số điện thoại\", Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n\r\n                // Gửi mã xác minh\r\n                sendVerificationCode(countryCode + mobile);\r\n            }\r\n        });\r\n    }\r\n\r\n    private void sendVerificationCode(String mobile) {\r\n        PhoneAuthProvider.verifyPhoneNumber(\r\n                PhoneAuthOptions.newBuilder(mAuth)\r\n                        .setPhoneNumber(mobile)\r\n                        .setTimeout(60L, TimeUnit.SECONDS)\r\n                        .setActivity(this)\r\n                        .setCallbacks(mCallbacks)\r\n                        .build()\r\n        );\r\n    }\r\n\r\n    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {\r\n        @Override\r\n        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {\r\n            String code = credential.getSmsCode();\r\n            if (code != null) {\r\n                navigateToEnterOTP(code);\r\n            }\r\n        }\r\n\r\n        @Override\r\n        public void onVerificationFailed(@NonNull FirebaseException e) {\r\n            Toast.makeText(EnterSDT.this, e.getMessage(), Toast.LENGTH_LONG).show();\r\n        }\r\n\r\n        @Override\r\n        public void onCodeSent(@NonNull String verificationId,\r\n                               @NonNull PhoneAuthProvider.ForceResendingToken token) {\r\n            navigateToEnterOTP(verificationId);\r\n        }\r\n    };\r\n\r\n    private void navigateToEnterOTP(String verificationId) {\r\n        Intent intent = new Intent(EnterSDT.this, EnterOTP.class);\r\n        intent.putExtra(\"verificationId\", verificationId);\r\n        startActivity(intent);\r\n        finish();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/project/EnterSDT.java b/app/src/main/java/com/example/project/EnterSDT.java
+--- a/app/src/main/java/com/example/project/EnterSDT.java	
++++ b/app/src/main/java/com/example/project/EnterSDT.java	
+@@ -1,3 +1,128 @@
++//package com.example.project;
++//
++//import android.content.Intent;
++//import android.os.Bundle;
++//import android.text.TextUtils;
++//import android.view.View;
++//import android.widget.Button;
++//import android.widget.EditText;
++//import android.widget.Spinner;
++//import android.widget.Toast;
++//
++//import androidx.annotation.NonNull;
++//import androidx.appcompat.app.AppCompatActivity;
++//
++//import com.example.project.adapter.CountryCodeAdapter;
++//import com.google.firebase.FirebaseException;
++//import com.google.firebase.FirebaseTooManyRequestsException;
++//import com.google.firebase.auth.FirebaseAuth;
++//import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
++//import com.google.firebase.auth.PhoneAuthCredential;
++//import com.google.firebase.auth.PhoneAuthOptions;
++//import com.google.firebase.auth.PhoneAuthProvider;
++//
++//import java.util.ArrayList;
++//import java.util.List;
++//import java.util.concurrent.TimeUnit;
++//
++//public class EnterSDT extends AppCompatActivity {
++//
++//    private EditText phoneNumberEditText;
++//    private Button btnContinueSDT;
++//    private Spinner countryCodeSpinner;
++//    private FirebaseAuth mAuth;
++//
++//    @Override
++//    protected void onCreate(Bundle savedInstanceState) {
++//        super.onCreate(savedInstanceState);
++//        setContentView(R.layout.activity_enter_sdt);
++//
++//        // Khởi tạo các view
++//        phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
++//        btnContinueSDT = findViewById(R.id.btnContinueSDT);
++//        countryCodeSpinner = findViewById(R.id.countryCodeSpinner);
++//
++//        // Khởi tạo Firebase Auth
++//        mAuth = FirebaseAuth.getInstance();
++//
++//        // Tạo danh sách quốc gia
++//        List<CountryCode> countries = new ArrayList<>();
++//        countries.add(new CountryCode(R.drawable.vietnam, "+84"));
++//        countries.add(new CountryCode(R.drawable.usa, "+1"));
++//        // Bạn có thể thêm các quốc gia khác ở đây nếu cần
++//
++//        // Khởi tạo adapter
++//        CountryCodeAdapter adapter = new CountryCodeAdapter(this, countries);
++//        countryCodeSpinner.setAdapter(adapter);
++//
++//        // Xử lý sự kiện khi nhấn nút Tiếp tục
++//        btnContinueSDT.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View v) {
++//                String mobile = phoneNumberEditText.getText().toString().trim();
++//                String countryCode = ((CountryCode) countryCodeSpinner.getSelectedItem()).getCountryCode(); // Lấy mã quốc gia
++//
++//                // Kiểm tra số điện thoại
++//                if (TextUtils.isEmpty(mobile)) {
++//                    Toast.makeText(EnterSDT.this, "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
++//                    return;
++//                }
++//
++//                // Gửi mã xác minh
++//                sendVerificationCode(countryCode + mobile);
++//            }
++//        });
++//    }
++//
++//    private void sendVerificationCode(String mobile) {
++//        PhoneAuthProvider.verifyPhoneNumber(
++//                PhoneAuthOptions.newBuilder(mAuth)
++//                        .setPhoneNumber(mobile)
++//                        .setTimeout(60L, TimeUnit.SECONDS)
++//                        .setActivity(this)
++//                        .setCallbacks(mCallbacks)
++//                        .build()
++//        );
++//    }
++//
++//    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
++//        @Override
++//        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
++//            String code = credential.getSmsCode();
++//            if (code != null) {
++//                navigateToEnterOTP(code);
++//            }
++//        }
++//
++//        @Override
++//        public void onVerificationFailed(@NonNull FirebaseException e) {
++//            if (e instanceof FirebaseAuthInvalidCredentialsException) {
++//                // Số điện thoại không hợp lệ
++//                Toast.makeText(EnterSDT.this, "Số điện thoại không hợp lệ", Toast.LENGTH_LONG).show();
++//            } else if (e instanceof FirebaseTooManyRequestsException) {
++//                // Quá nhiều yêu cầu OTP đã được gửi
++//                Toast.makeText(EnterSDT.this, "Bạn đã yêu cầu quá nhiều OTP. Hãy thử lại sau.", Toast.LENGTH_LONG).show();
++//            } else {
++//                // Các lỗi khác
++//                Toast.makeText(EnterSDT.this, e.getMessage(), Toast.LENGTH_LONG).show();
++//            }
++//        }
++//
++//        @Override
++//        public void onCodeSent(@NonNull String verificationId,
++//                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
++//            navigateToEnterOTP(verificationId);
++//        }
++//    };
++//
++//    private void navigateToEnterOTP(String verificationId) {
++//        Intent intent = new Intent(EnterSDT.this, EnterOTP.class);
++//        intent.putExtra("verificationId", verificationId);
++//        startActivity(intent);
++//        finish();
++//    }
++//}
++
+ package com.example.project;
+ 
+ import android.content.Intent;
+@@ -14,7 +139,9 @@
+ 
+ import com.example.project.adapter.CountryCodeAdapter;
+ import com.google.firebase.FirebaseException;
++import com.google.firebase.FirebaseTooManyRequestsException;
+ import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+ import com.google.firebase.auth.PhoneAuthCredential;
+ import com.google.firebase.auth.PhoneAuthOptions;
+ import com.google.firebase.auth.PhoneAuthProvider;
+@@ -47,7 +174,6 @@
+         List<CountryCode> countries = new ArrayList<>();
+         countries.add(new CountryCode(R.drawable.vietnam, "+84"));
+         countries.add(new CountryCode(R.drawable.usa, "+1"));
+-        // Bạn có thể thêm các quốc gia khác ở đây nếu cần
+ 
+         // Khởi tạo adapter
+         CountryCodeAdapter adapter = new CountryCodeAdapter(this, countries);
+@@ -94,7 +220,16 @@
+ 
+         @Override
+         public void onVerificationFailed(@NonNull FirebaseException e) {
+-            Toast.makeText(EnterSDT.this, e.getMessage(), Toast.LENGTH_LONG).show();
++            if (e instanceof FirebaseAuthInvalidCredentialsException) {
++                // Số điện thoại không hợp lệ
++                Toast.makeText(EnterSDT.this, "Số điện thoại không hợp lệ", Toast.LENGTH_LONG).show();
++            } else if (e instanceof FirebaseTooManyRequestsException) {
++                // Quá nhiều yêu cầu OTP đã được gửi
++                Toast.makeText(EnterSDT.this, "Bạn đã yêu cầu quá nhiều OTP. Hãy thử lại sau.", Toast.LENGTH_LONG).show();
++            } else {
++                // Các lỗi khác
++                Toast.makeText(EnterSDT.this, e.getMessage(), Toast.LENGTH_LONG).show();
++            }
+         }
+ 
+         @Override
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.google.gms.google.services)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.project\"\r\n    compileSdk = 34\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.project\"\r\n        minSdk = 26\r\n        targetSdk = 34\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_1_8\r\n        targetCompatibility = JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation (\"com.google.android.material:material:1.10.0\")\r\n    implementation (\"com.github.bumptech.glide:glide:4.12.0\")\r\n    implementation (\"com.google.firebase:firebase-auth:21.0.1\")\r\n    implementation(libs.appcompat)\r\n    implementation(libs.material)\r\n    implementation(libs.activity)\r\n    implementation(libs.constraintlayout)\r\n    implementation(libs.circleimageview)\r\n    implementation(libs.firebase.database)\r\n    implementation(libs.firebase.storage)\r\n    implementation(libs.firebase.firestore)\r\n    implementation(libs.glide)\r\n    implementation(libs.glide.transformations)\r\n    implementation(libs.firebase.auth)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.ext.junit)\r\n    androidTestImplementation(libs.espresso.core)\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	
++++ b/app/build.gradle.kts	
+@@ -33,9 +33,16 @@
+ }
+ 
+ dependencies {
++
++    implementation ("com.google.android.gms:play-services-auth-api-phone:17.5.1")
++
++    implementation ("com.google.firebase:firebase-bom:32.0.0") // BOM đảm bảo đồng bộ các phiên bản Firebase
++    implementation ("com.google.firebase:firebase-auth")
++
+     implementation ("com.google.android.material:material:1.10.0")
+     implementation ("com.github.bumptech.glide:glide:4.12.0")
+     implementation ("com.google.firebase:firebase-auth:21.0.1")
++
+     implementation(libs.appcompat)
+     implementation(libs.material)
+     implementation(libs.activity)
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.PROJECT\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".VerifyCode\"\r\n            android:exported=\"false\" />\r\n        <!-- MainActivity được đặt là màn hình khởi động đầu tiên với exported=true -->\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity> <!-- Các activity khác đều được đặt exported=false -->\r\n        <activity\r\n            android:name=\".ui.Ebook\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SearchActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Dialog_Added_Book\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ShareBook\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EnterOTP\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EnterSDT\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".Login\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".NhapThongTinCaNhan\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".TaoPassWord\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Start\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".BookDetail\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.Menu\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.History\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.VanHoc\"\r\n            android:exported=\"false\" />\r\n\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -14,9 +14,6 @@
+         android:supportsRtl="true"
+         android:theme="@style/Theme.PROJECT"
+         tools:targetApi="31">
+-        <activity
+-            android:name=".VerifyCode"
+-            android:exported="false" />
+         <!-- MainActivity được đặt là màn hình khởi động đầu tiên với exported=true -->
+         <activity
+             android:name=".MainActivity"

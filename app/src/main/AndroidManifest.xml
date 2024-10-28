@@ -13,7 +13,6 @@
         android:theme="@style/Theme.PROJECT"
         tools:targetApi="31">
 
-
         <!-- MainActivity được đặt là màn hình khởi động đầu tiên với exported=true -->
         <activity
             android:name=".MainActivity"
@@ -36,9 +35,6 @@
             android:exported="false" />
         <activity
             android:name=".ShareBook"
-            android:exported="false" />
-        <activity
-            android:name=".EnterOTP"
             android:exported="false" />
         <activity
             android:name=".EnterSDT"

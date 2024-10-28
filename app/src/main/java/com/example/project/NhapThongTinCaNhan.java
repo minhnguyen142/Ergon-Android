@@ -73,7 +73,7 @@ public class NhapThongTinCaNhan extends AppCompatActivity {
                     Toast.makeText(NhapThongTinCaNhan.this, "Vui lòng nhập thông tin", Toast.LENGTH_SHORT).show();
                 } else {
                     // Chuyển sang màn hình đăng nhập nếu mã otp hợp lệ
-                    Intent continueSDT = new Intent(NhapThongTinCaNhan.this, Start.class);
+                    Intent continueSDT = new Intent(NhapThongTinCaNhan.this, TaoPassWord.class);
                     startActivity(continueSDT);
                 }
             }

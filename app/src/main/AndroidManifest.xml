@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PROJECT"
         tools:targetApi="31">
-        <activity
-            android:name=".VerifyCode"
-            android:exported="false" />
         <!-- MainActivity được đặt là màn hình khởi động đầu tiên với exported=true -->
         <activity
             android:name=".MainActivity"

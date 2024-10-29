@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.BookDetail;
-import com.example.project.adapter.ImageAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.adapter.ImageOnlyAdapter;

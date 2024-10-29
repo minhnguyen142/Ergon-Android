@@ -1,11 +1,13 @@
 package com.example.project.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.BookDetail;
+import com.example.project.SearchActivity;
 import com.example.project.adapter.ImageOnlyAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
@@ -36,7 +39,8 @@ public class HomePage extends Fragment {
     private List<String> trendingBookImages, dexuatBookImages; // Chỉnh sửa
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook;
-
+    private ImageView btnSearch;
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
@@ -64,8 +68,14 @@ public class HomePage extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("books");
         fetchBooksFromFirebase();
 
+        btnSearch = view.findViewById(R.id.ic_search);
         btnVanHoc = view.findViewById(R.id.ic_van_hoc);
         btnEbook = view.findViewById(R.id.ic_ebook);
+
+        btnSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        });
         btnVanHoc.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), VanHoc.class);
             startActivity(intent);

@@ -4,41 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/border_corner_white"
+    android:background="@drawable/rounded_share_bottom"
     android:padding="16dp"
     tools:context=".ShareBook">
-
-    <ImageView
-        android:id="@+id/closeShareSheet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_close"
-        app:tint="@color/dark_teal"
-        android:layout_gravity="end" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chia sẻ"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Chia sẻ"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingEnd="8dp" />
+
+        <ImageView
+            android:id="@+id/closeShareSheet"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icon_close"
+            app:tint="@color/dark_teal"
+            android:contentDescription="Đóng"
+            android:layout_gravity="end" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3"
+        android:layout_marginVertical="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/facebook_share"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="24dp"
@@ -48,16 +65,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Bài viết trên Facebook" />
+                android:text="Bài viết trên Facebook"
+                android:layout_marginStart="16dp" />
         </LinearLayout>
 
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/messenger_share"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="24dp"
@@ -67,39 +87,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Qua tin nhắn Messenger" />
+                android:text="Qua tin nhắn Messenger"
+                android:layout_marginStart="16dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/copy_link"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/instagram" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Bài viết trên Instagram" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="24dp"
@@ -109,15 +109,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Sao chép liên kết" />
+                android:text="Sao chép liên kết"
+                android:layout_marginStart="16dp" />
         </LinearLayout>
 
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/more_options"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="24dp"
@@ -127,10 +132,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Tùy chọn thêm" />
+                android:text="Tùy chọn thêm"
+                android:layout_marginStart="16dp" />
         </LinearLayout>
-
-
     </LinearLayout>
 </LinearLayout>

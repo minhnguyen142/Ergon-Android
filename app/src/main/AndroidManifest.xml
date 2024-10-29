@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,16 +19,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- Các activity khác đều được đặt exported=false -->
+        <!-- Các activity khác đều được đặt exported=false -->
         <activity
             android:name=".ui.Ebook"
             android:exported="false" />
-
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
@@ -56,15 +54,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.Menu"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".ui.History"
             android:exported="false" />
@@ -75,7 +70,5 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
-
 </manifest>

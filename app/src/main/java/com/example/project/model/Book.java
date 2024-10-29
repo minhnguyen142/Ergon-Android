@@ -10,11 +10,12 @@ public class Book implements Serializable {
     private String genre;
     private String pdfUrl;
     private Boolean trend;
+    private String content;
 
     public Book() {
     }
 
-    public Book(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl, Boolean trend) {
+    public Book(String title, String author, String contentDescription, String coverUrl, String genre, String pdfUrl, Boolean trend, String content) {
         this.title = title;
         this.author = author;
         this.contentDescription = contentDescription;
@@ -22,8 +23,12 @@ public class Book implements Serializable {
         this.genre = genre;
         this.pdfUrl = pdfUrl;
         this.trend = trend;
+        this.content = content;
     }
 
+    public String getContent() {
+        return content;
+    }
     public Boolean getTrend() {
         return trend;
     }

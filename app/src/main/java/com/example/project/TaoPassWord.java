@@ -8,58 +8,73 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.project.model.Book;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class TaoPassWord extends AppCompatActivity {
 
     Button btnContinuePassWord;
     ImageButton imgbtnBackPassword;
     EditText usernameEditText, passwordEditText, confirmPassword;
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tao_pass_word);
+
         btnContinuePassWord = findViewById(R.id.btnContinuePassWord);
         imgbtnBackPassword = findViewById(R.id.imgbtnBackPassword);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmPassword = findViewById(R.id.confirmPassword);
 
-        imgbtnBackPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent backPassWord = new Intent(TaoPassWord.this, EnterSDT.class);
-                startActivity(backPassWord);
-            }
+        // Initialize Firebase Database reference
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+        // Back button to previous screen
+        imgbtnBackPassword.setOnClickListener(v -> {
+            Intent backPassWord = new Intent(TaoPassWord.this, EnterSDT.class);
+            startActivity(backPassWord);
         });
 
-        // Xử lý khi nhấn nút Tiếp tục
-        btnContinuePassWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
-                String confirm = confirmPassword.getText().toString().trim();
+        // Handle Continue button
+        btnContinuePassWord.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
+            String confirm = confirmPassword.getText().toString().trim();
+            String phoneNumber = getIntent().getStringExtra("phoneNumber");
 
-                // Kiểm tra xem username, password, confirm có được nhập hay không
-                if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
-                    Toast.makeText(TaoPassWord.this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (password.length() < 8) {
-                    Toast.makeText(TaoPassWord.this, "Mật khẩu phải có ít nhất 8 ký tự", Toast.LENGTH_SHORT).show();
-                } else if (!password.equals(confirm)) {
-                    Toast.makeText(TaoPassWord.this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Chuyển sang màn hình nhập thông tin cá nhân nếu hợp lệ
-                    Intent continueSDT = new Intent(TaoPassWord.this,  Start.class);
-                    startActivity(continueSDT);
-                }
+            if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+                Toast.makeText(TaoPassWord.this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+            } else if (password.length() < 8) {
+                Toast.makeText(TaoPassWord.this, "Mật khẩu phải có ít nhất 8 ký tự", Toast.LENGTH_SHORT).show();
+            } else if (!password.equals(confirm)) {
+                Toast.makeText(TaoPassWord.this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
+            } else {
+                // Save user details to Firebase
+                saveUserToFirebase(phoneNumber, username, password);
             }
         });
+    }
+
+    private void saveUserToFirebase(String phoneNumber, String username, String password) {
+        User user = new User(phoneNumber, username, password);
+
+        databaseReference.child(phoneNumber).setValue(user)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(TaoPassWord.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TaoPassWord.this, Login.class);
+                        intent.putExtra("phoneNumber", phoneNumber);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(TaoPassWord.this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

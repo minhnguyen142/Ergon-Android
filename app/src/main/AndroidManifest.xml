@@ -21,10 +21,7 @@
         <!-- MainActivity là màn hình khởi động đầu tiên -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity> <!-- Các hoạt động khác -->
-        <activity
-            android:name=".ui.ReadBook"
-            android:exported="true" /> <!-- Đặt exported=true nếu bạn muốn gọi từ hoạt động khác -->
+            android:exported="true"/>
         <activity
             android:name=".ui.Ebook"
             android:exported="false" />

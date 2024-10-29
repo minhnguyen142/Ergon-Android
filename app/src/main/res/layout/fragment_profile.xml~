@@ -182,6 +182,46 @@
                     android:layout_marginRight="17sp" />
             </FrameLayout>
 
+            <!-- Progress Section -->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="333dp"-->
+            <!--                android:layout_height="62dp"-->
+            <!--                android:layout_marginTop="12dp"-->
+            <!--                android:background="@drawable/rounded_background_2"-->
+            <!--                android:gravity="center"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                &lt;!&ndash; Reading Level &ndash;&gt;-->
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tv_level"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginEnd="16dp"-->
+            <!--                    android:text="Cấp độ: Người đọc"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="14sp" />-->
+
+            <!--                &lt;!&ndash; Progress Bar &ndash;&gt;-->
+
+            <!--                &lt;!&ndash; Remaining Time &ndash;&gt;-->
+            <!--                <ProgressBar-->
+            <!--                    android:id="@+id/progress_bar"-->
+            <!--                    style="?android:attr/progressBarStyleHorizontal"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:max="100"-->
+            <!--                    android:progress="60" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tv_remaining_time"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="16dp"-->
+            <!--                    android:text="0 giờ để lên cấp"-->
+            <!--                    android:textColor="@color/gray"-->
+            <!--                    android:textSize="14sp" />-->
+            <!--            </LinearLayout>-->
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -194,6 +234,12 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintWidth_percent="0.85"
             tools:ignore="NotSibling">
+
+            <!-- Books in Library -->
+
+            <!-- Reading Time -->
+
+            <!-- History -->
 
             <LinearLayout
                 android:id="@+id/linearLayout1"

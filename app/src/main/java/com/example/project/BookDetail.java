@@ -22,10 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 public class BookDetail extends AppCompatActivity {
 
     private ImageView bookCoverDetail, btnback;
-    private TextView bookTitleDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
+    private TextView bookTitleDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail, bookAuthorDetail;
     private Button readButton, addLibraryButton;
     private DatabaseReference databaseReference;
-     // Thêm
+
 
 
     @Override
@@ -38,6 +38,7 @@ public class BookDetail extends AppCompatActivity {
         bookGenreDetail = findViewById(R.id.bookGenreDetail);
         bookRatingDetail = findViewById(R.id.bookRatingDetail);
         bookPriceDetail = findViewById(R.id.bookPriceDetail);
+        bookAuthorDetail = findViewById(R.id.bookAuthorDetail);
         readButton = findViewById(R.id.readButton);
         addLibraryButton = findViewById(R.id.addLibrary);
         btnback = findViewById(R.id.IconCLose);
@@ -70,6 +71,7 @@ public class BookDetail extends AppCompatActivity {
                         if (book != null) {
                             bookTitleDetail.setText(book.getTitle());
                             bookGenreDetail.setText(book.getGenre());
+                            bookAuthorDetail.setText(book.getAuthor());
                             bookRatingDetail.setText("5.0 (10 Nhận xét)");
                             bookPriceDetail.setText("Miễn phí - Bạn có thể thêm vào thư viện và đọc trọn vẹn cuốn sách miễn phí");
                         }

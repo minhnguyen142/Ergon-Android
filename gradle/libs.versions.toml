@@ -15,7 +15,22 @@ glide = "5.0.0-rc01"
 compiler = "5.0.0-rc01"
 firebaseFirestore = "25.1.0"
 glideTransformations = "4.3.0"
-firebaseAuth = "23.1.0" # Giữ lại firebaseFirestore từ nhánh main
+firebaseAuth = "23.1.0"
+androidPdfViewer = "3.2.0-beta.1"
+viewpager2 = "1.1.0"
+androidPdfViewerVersion = "2.8.2"
+githubAndroidPdfViewer = "3.1.0"
+pdftron = "9.0.0"
+mupdf = "1.20.0"
+pdfiumandroid = "1.9.0"
+pdfboxAndroid = "2.0.27.0"
+pdfbox = "3.0.3"
+pdfboxAndroidVersion = "2.0.0.0"
+okhttp = "5.0.0-alpha.14"
+itextg = "5.5.10"
+itextpdf = "5.5.13.4"
+itext7Core = "8.0.5"
+githubAndroidPdfViewerVersion = "3.2.0-beta.3" # Giữ lại firebaseFirestore từ nhánh main
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -32,7 +47,22 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "compiler" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 glide-transformations = { group = "jp.wasabeef", name = "glide-transformations", version.ref = "glideTransformations" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" } # Giữ lại từ nhánh main
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+android-pdf-viewer = { group = "com.github.barteksc", name = "android-pdf-viewer", version.ref = "androidPdfViewer" }
+viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
+barteksc-android-pdf-viewer = { group = "com.github.barteksc", name = "android-pdf-viewer", version.ref = "androidPdfViewerVersion" }
+github-android-pdf-viewer = { group = "com.github.barteksc", name = "android-pdf-viewer", version.ref = "githubAndroidPdfViewer" }
+pdftron = { group = "com.pdftron", name = "pdftron", version.ref = "pdftron" }
+mupdf = { group = "com.artifex.mupdf.android", name = "mupdf", version.ref = "mupdf" }
+pdfiumandroid = { group = "com.github.barteksc", name = "pdfiumandroid", version.ref = "pdfiumandroid" }
+pdfbox-android = { group = "com.tom-roush", name = "pdfbox-android", version.ref = "pdfboxAndroid" }
+pdfbox = { group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox" }
+tom-pdfbox-android = { group = "com.tom.pdfbox", name = "pdfbox-android", version.ref = "pdfboxAndroidVersion" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+itextg = { group = "com.itextpdf", name = "itextg", version.ref = "itextg" }
+itextpdf = { group = "com.itextpdf", name = "itextpdf", version.ref = "itextpdf" }
+itext7-core = { group = "com.itextpdf", name = "itext7-core", version.ref = "itext7Core" }
+mhiew-android-pdf-viewer = { group = "com.github.mhiew", name = "android-pdf-viewer", version.ref = "githubAndroidPdfViewerVersion" } # Giữ lại từ nhánh main
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

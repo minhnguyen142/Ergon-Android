@@ -17,10 +17,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-
+import android.app.Dialog;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 public class BookDetail extends AppCompatActivity {
 
-    private ImageView bookCoverDetail, btnback;
+    private ImageView bookCoverDetail, btnback, iconShare;
     private TextView bookTitleDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
     private Button readButton, addLibraryButton;
     private DatabaseReference databaseReference;
@@ -31,6 +32,8 @@ public class BookDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
+        iconShare = findViewById(R.id.IconShare);
+        iconShare.setOnClickListener(v -> showShareBottomSheet());
         bookCoverDetail = findViewById(R.id.bookCoverDetail);
         bookTitleDetail = findViewById(R.id.bookTitleDetail);
         bookGenreDetail = findViewById(R.id.bookGenreDetail);
@@ -58,7 +61,16 @@ public class BookDetail extends AppCompatActivity {
             finish();
         });
     }
+    private void showShareBottomSheet() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.activity_share_book);
 
+        ImageView closeShareSheet = bottomSheetDialog.findViewById(R.id.closeShareSheet);
+        if (closeShareSheet != null) {
+            closeShareSheet.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
+        bottomSheetDialog.show();
+    }
     private void fetchBookDetailsFromFirebase(String bookImage) {
         databaseReference = FirebaseDatabase.getInstance().getReference("books");
         databaseReference.orderByChild("coverUrl").equalTo(bookImage).addListenerForSingleValueEvent(new ValueEventListener() {

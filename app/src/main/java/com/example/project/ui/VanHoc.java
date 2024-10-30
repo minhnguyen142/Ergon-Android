@@ -1,6 +1,5 @@
 package com.example.project.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -11,12 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.project.adapter.VanhocAdapter;
-import com.example.project.BookDetail;
-import com.example.project.adapter.ImageOnlyAdapter;
 
 
 import com.example.project.R;
-import com.example.project.adapter.VanhocAdapter;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

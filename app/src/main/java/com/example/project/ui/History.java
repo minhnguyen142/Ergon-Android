@@ -66,7 +66,7 @@ public class History extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         bookList = new ArrayList<>();
-        bookAdapter = new BookAdapter(this,bookList);
+        bookAdapter = new BookAdapter(this.bookList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(bookAdapter);
     }

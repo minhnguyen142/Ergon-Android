@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_dialog"
     tools:context=".Dialog_Added_Book">
 
-    <FrameLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:background="@drawable/rounded_background_3"
-        android:backgroundTint="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             android:padding="24dp">
 
             <ImageView
@@ -29,7 +29,6 @@
                 android:contentDescription="Book Icon" />
 
             <TextView
-                android:id="@+id/tv_addbook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -79,5 +78,5 @@
 
         </LinearLayout>
 
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

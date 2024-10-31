@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.firestore)
     implementation(libs.viewpager2)
-//    implementation(libs.itextg)
+    implementation(libs.itextg)
     implementation(libs.itext7.core)
     implementation(libs.mhiew.android.pdf.viewer)
     implementation(libs.okhttp) // iText cho xử lý PDF

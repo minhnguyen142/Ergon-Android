@@ -36,8 +36,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Khởi tạo các thành phần giao diện
-        usernameEditText = findViewById(R.id.usernameEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
+        usernameEditText = findViewById(R.id.user);
+        passwordEditText = findViewById(R.id.pass);
         loginButton = findViewById(R.id.button);
         registerButton = findViewById(R.id.btnNoUser);
         backButton = findViewById(R.id.imgbtnBack);

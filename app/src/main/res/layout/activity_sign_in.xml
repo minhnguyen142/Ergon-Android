@@ -23,7 +23,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="728dp"
-        android:layout_marginTop="250sp">
+        android:layout_marginTop="220sp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -31,15 +31,16 @@
             android:layout_marginLeft="90sp"
             android:layout_marginRight="70sp"
             android:layout_marginBottom="20sp"
-            android:background="@color/white">
+            android:background="@drawable/rounded_background_2">
 
             <EditText
                 android:id="@+id/editTextText3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10sp"
+                android:layout_height="45sp"
+                android:layout_marginLeft="20sp"
                 android:ems="10"
                 android:hint="Tài khoản"
+                android:background="@null"
                 android:inputType="text" />
         </TableRow>
 
@@ -48,27 +49,29 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="90sp"
             android:layout_marginRight="70sp"
-            android:background="@color/white">
+            android:background="@drawable/rounded_background_2">
 
             <EditText
                 android:id="@+id/editTextText4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10sp"
+                android:layout_height="45sp"
+                android:layout_marginLeft="20sp"
                 android:ems="10"
                 android:hint="Mật khẩu"
+                android:background="@null"
                 android:inputType="text" />
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="199dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="110sp"
-            android:layout_marginTop="20sp">
+            android:layout_marginLeft="100sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="70sp">
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="77dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#55EFC4"
                 android:text="Đăng ký"
@@ -79,5 +82,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </TableLayout>
+
+    <ImageButton
+        android:id="@+id/back1"
+        android:layout_width="67dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/teal_700"
+        app:srcCompat="@drawable/ic_arrowleft" />
 
 </FrameLayout>

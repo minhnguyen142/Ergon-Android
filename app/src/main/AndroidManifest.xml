@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".Sign_in"
+            android:name=".Sign_up"
             android:exported="false" />
         <activity
             android:name=".ui.PdfViewerActivity"

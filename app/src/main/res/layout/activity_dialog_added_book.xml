@@ -5,13 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Dialog_Added_Book">
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+
+        android:background="@drawable/rounded_background_3"
+        android:backgroundTint="@color/white"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -27,6 +29,7 @@
                 android:contentDescription="Book Icon" />
 
             <TextView
+                android:id="@+id/tv_addbook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -58,16 +61,16 @@
 
                 <Button
                     android:id="@+id/btbDeSau"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/btn_border_round"
+                    android:backgroundTint="@color/light_teal"
                     android:text="Để sau"
-                    android:textColor="@color/button_green" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/btnDocNgay"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/button_green"
                     android:text="Đọc ngay"
@@ -76,5 +79,5 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

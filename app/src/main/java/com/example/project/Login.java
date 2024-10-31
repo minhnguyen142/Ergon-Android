@@ -53,8 +53,7 @@ public class Login extends AppCompatActivity {
 
         // Listener cho nút quay lại
         backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
+            finish();
         });
 
         // Áp dụng Window Insets

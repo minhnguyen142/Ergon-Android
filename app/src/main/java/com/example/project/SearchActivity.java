@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewCategories);
         ivClose = findViewById(R.id.iv_close);
         booksList = new ArrayList<>();
-        bookAdapter = new BookAdapter(this, booksList);
+        bookAdapter = new BookAdapter(this.booksList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(bookAdapter);
 

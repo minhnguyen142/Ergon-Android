@@ -18,44 +18,44 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
+                android:layout_width="96dp"
+                android:layout_height="135dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20sp"
+                android:layout_marginStart="20sp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/bevietnampro_regular"
                     android:layout_height="wrap_content"
                     android:text="EBOOK"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8sp"
+                    android:fontFamily="@font/bevietnampro_semibold"
                     android:text="TextView"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imageButton"
-                        android:layout_width="13dp"
-                        android:layout_height="18dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
                         android:background="@color/white"
                         app:srcCompat="@drawable/ic_canhan" />
 
@@ -65,6 +65,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/bevietnampro_regular"
                         android:text="TextView"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -84,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15sp"
+                android:layout_marginStart="15sp"
                 android:background="@color/white"
                 app:srcCompat="@drawable/ic_arrowdown" />
 

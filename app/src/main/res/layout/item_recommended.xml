@@ -2,13 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_marginEnd="16dp">
+    android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageEbook"
-        android:layout_width="93dp"
-        android:layout_height="133dp"
+        android:id="@+id/image_button2"
+        android:layout_width="115dp"
+        android:layout_height="172dp"
         android:background="@color/white" />
 </LinearLayout>

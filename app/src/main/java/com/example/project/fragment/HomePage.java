@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project.BookDetail;
 //import com.example.project.SearchActivity;
 import com.example.project.SearchActivity;
-import com.example.project.adapter.ImageOnlyAdapter;
+import com.example.project.adapter.RecommendedAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.Ebook;
@@ -36,7 +36,7 @@ import java.util.List;
 
 public class HomePage extends Fragment {
     private RecyclerView recyclerTrending, recyclerDexuat;
-    private ImageOnlyAdapter trendingAdapter, dexuatAdapter;
+    private RecommendedAdapter trendingAdapter, dexuatAdapter;
     private List<String> trendingBookImages, dexuatBookImages;
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook;
@@ -59,7 +59,7 @@ public class HomePage extends Fragment {
         recyclerTrending.setLayoutManager(trendingLayoutManager);
 
         trendingBookImages = new ArrayList<>();
-        trendingAdapter = new ImageOnlyAdapter(trendingBookImages, this::openBookDetail);
+        trendingAdapter = new RecommendedAdapter(trendingBookImages, this::openBookDetail);
         recyclerTrending.setAdapter(trendingAdapter);
 
         // Thiết lập RecyclerView cho sách đề xuất
@@ -68,7 +68,7 @@ public class HomePage extends Fragment {
         recyclerDexuat.setLayoutManager(dexuatLayoutManager);
 
         dexuatBookImages = new ArrayList<>();
-        dexuatAdapter = new ImageOnlyAdapter(dexuatBookImages, this::openBookDetail);
+        dexuatAdapter = new RecommendedAdapter(dexuatBookImages, this::openBookDetail);
         recyclerDexuat.setAdapter(dexuatAdapter);
 
         // Thêm khoảng cách giữa các item

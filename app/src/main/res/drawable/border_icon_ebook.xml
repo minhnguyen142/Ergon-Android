@@ -3,14 +3,12 @@
     android:shape="rectangle">
 
 
-    <solid android:color="@color/button_green"/>
+    <gradient
+        android:angle="-90"
+        android:endColor="#55EFC4"
+        android:startColor="#00B894"
+        android:type="linear" />
 
-
-    <stroke
-        android:width="2dp"
-        android:color="@color/gray"/>
-
-
-    <corners android:radius="16dp"/>
+    <corners android:radius="20dp" />
 
 </shape>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/dark_teal"
+    android:background="@drawable/linear_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BookDetail">
@@ -85,28 +85,30 @@
                 android:background="@drawable/border_rounded"
                 android:elevation="8dp"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:paddingVertical="15dp"
+                android:paddingHorizontal="25dp">
 
                 <TextView
                     android:id="@+id/bookTitleDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/bevietnampro_bold"
+                    android:layout_marginBottom="10dp"
                     android:text="Nhà Giả Kim"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10sp"
+                    android:layout_marginVertical="20sp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10sp"
+                        android:layout_marginEnd="10sp"
                         app:tint="@color/white"
                         android:src="@drawable/canhan_f" />
 
@@ -114,6 +116,7 @@
                         android:id="@+id/bookAuthorDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/bevietnampro_regular"
                         android:text="Paulo Coelho"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
@@ -127,7 +130,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10sp"
+                        android:layout_marginEnd="10sp"
                         app:tint="@color/white"
                         android:src="@drawable/textalignleft" />
 
@@ -135,7 +138,7 @@
                         android:id="@+id/bookGenreDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
+                        android:fontFamily="@font/bevietnampro_regular"
                         android:text="Văn học, Tiểu thuyết"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
@@ -143,13 +146,14 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_marginVertical="20dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10sp"
+                        android:layout_marginEnd="10sp"
                         app:tint="@color/white"
                         android:src="@drawable/star1" />
 
@@ -157,7 +161,7 @@
                         android:id="@+id/bookRatingDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
+                        android:fontFamily="@font/bevietnampro_regular"
                         android:text="5.0 (10 Nhận xét)"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
@@ -166,12 +170,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10sp"
+                        android:layout_marginEnd="10sp"
                         app:tint="@color/white"
                         android:src="@drawable/archive" />
 
@@ -179,7 +184,6 @@
                         android:id="@+id/bookPriceDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
                         android:text="Miễn phí - Bạn có thể thêm vào thư viện và đọc trọn vẹn cuốn sách miễn phí"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
@@ -188,12 +192,14 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10sp"
+                        android:layout_marginEnd="10sp"
                         app:tint="@color/white"
                         android:src="@drawable/archive" />
 
@@ -209,18 +215,19 @@
 
                 <Button
                     android:id="@+id/readButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_width="325dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
                     android:backgroundTint="#55EFC4"
                     android:text="Đọc"
                     android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/addLibrary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_width="325dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:backgroundTint="@color/white"
                     android:text="Thêm vào thư viện"
                     android:textColor="@color/dark_teal" />

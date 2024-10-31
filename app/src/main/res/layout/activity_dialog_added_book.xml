@@ -34,46 +34,49 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bevietnampro_semibold"
                 android:text="Sách đã được thêm vào thư viện"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:fontFamily="@font/bevietnampro_regular"
                 android:gravity="center"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:text="Cảm ơn bạn, chúc bạn đọc sách vui vẻ!"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btbDeSau"
-                    android:layout_width="120dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/light_teal"
+                    android:fontFamily="@font/bevietnampro_semibold"
                     android:text="Để sau"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnDocNgay"
-                    android:layout_width="120dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/button_green"
+                    android:fontFamily="@font/bevietnampro_semibold"
                     android:text="Đọc ngay"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>

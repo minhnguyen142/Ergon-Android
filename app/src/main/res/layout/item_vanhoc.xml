@@ -7,9 +7,10 @@
 
         <ImageView
             android:id="@+id/bookImg"
-            android:layout_width="170dp"
-            android:layout_height="220dp"
+            android:layout_width="155dp"
+            android:layout_height="235dp"
             android:layout_gravity="center"
+            android:src="@drawable/rounded_background_2"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -17,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:paddingTop="8dp"
             android:text="Tên sách"
             android:textSize="16sp"

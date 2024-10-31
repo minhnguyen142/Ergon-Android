@@ -23,9 +23,9 @@
     <TextView
         android:id="@+id/tVNhapPassword"
         android:layout_width="match_parent"
-        android:fontFamily="@font/bevietnampro_bold"
         android:layout_height="wrap_content"
         android:layout_marginVertical="50dp"
+        android:fontFamily="@font/bevietnampro_bold"
         android:text="Đăng nhập"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/bevietnampro_regular"
                 android:hint="Tài khoản"
                 android:inputType="text"
-                android:textColor="#8FC1D3" />
+                android:textColorHint="#8FC1D3" />
 
         </TableRow>
 
@@ -79,7 +79,7 @@
                 android:fontFamily="@font/bevietnampro_regular"
                 android:hint="Mật khẩu"
                 android:inputType="textPassword"
-                android:textColor="#8FC1D3" />
+                android:textColorHint="#8FC1D3" />
 
         </TableRow>
     </TableLayout>
@@ -99,8 +99,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:fontFamily="@font/bevietnampro_semibold"
             android:backgroundTint="#00B894"
+            android:fontFamily="@font/bevietnampro_semibold"
             android:text="Đăng nhập" />
 
         <Button
@@ -109,9 +109,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/bevietnampro_semibold"
             android:layout_weight="1"
             android:backgroundTint="#00B894"
+            android:fontFamily="@font/bevietnampro_semibold"
             android:text="Đăng ký" />
 
     </LinearLayout>

@@ -208,7 +208,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_reading_time"
+                    android:id="@+id/tv_Lib"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="7 cuốn sách"
@@ -236,7 +236,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_history"
+                    android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1h23p"

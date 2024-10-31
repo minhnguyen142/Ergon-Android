@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -46,6 +47,11 @@ public class SearchActivity extends AppCompatActivity {
         bookAdapter = new BookAdapter(this, booksList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(bookAdapter);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("user_id", null);
+        if (userId != null) {
+            databaseReference = FirebaseDatabase.getInstance().getReference("books").child(userId);
+        }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("books");
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -82,6 +88,9 @@ public class SearchActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Book book = snapshot.getValue(Book.class);
                     if (book != null) {
+                        String bookId = snapshot.getKey(); // Lấy bookId từ snapshot key
+                        book.setId(bookId); // Đặt bookId vào đối tượng Book
+
                         String title = book.getTitle().toLowerCase();
                         String author = book.getAuthor().toLowerCase();
                         if (title.contains(query.toLowerCase()) || author.contains(query.toLowerCase())) {
@@ -98,4 +107,5 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -32,8 +32,6 @@ public class PdfViewerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_viewer);
 
         pdfView = findViewById(R.id.pdfView);
-
-        // Nhận URL PDF từ Intent
         pdfUrl = getIntent().getStringExtra("pdfUrl");
 
         if (pdfUrl != null) {

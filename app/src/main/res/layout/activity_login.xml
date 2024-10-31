@@ -11,13 +11,14 @@
 
 
     <ImageButton
-        android:id="@+id/imgbtnBackPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/circle_background"
+        android:id="@+id/imgbtnBack"
+        android:layout_width="55dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
+        android:backgroundTint="@color/teal_700"
+        android:background="@drawable/circle_background"
+        app:srcCompat="@drawable/ic_back" />
 
     <TextView
         android:id="@+id/tVNhapPassword"
@@ -72,4 +73,12 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="#55EFC4"
         android:text="Đăng nhập" />
+    <Button
+        android:id="@+id/btnNoUser"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#55EFC4"
+        android:text="Chưa có tài khoản" />
 </LinearLayout>

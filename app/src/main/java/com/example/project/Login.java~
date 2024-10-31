@@ -34,30 +34,24 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        // Khởi tạo các thành phần giao diện
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.button);
         registerButton = findViewById(R.id.btnNoUser);
         backButton = findViewById(R.id.imgbtnBack);
 
-        // Đặt listener cho nút đăng nhập
         loginButton.setOnClickListener(v -> loginUser());
 
-        // Listener cho nút đăng ký
         registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, Sign_in.class);
             startActivity(intent);
         });
 
-        // Listener cho nút quay lại
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // Áp dụng Window Insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -69,7 +63,6 @@ public class Login extends AppCompatActivity {
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        // Kiểm tra thông tin nhập
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(Login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
@@ -77,7 +70,6 @@ public class Login extends AppCompatActivity {
 
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
 
-        // Kiểm tra tài khoản người dùng
         usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,19 +78,17 @@ public class Login extends AppCompatActivity {
                         String storedPassword = userSnapshot.child("password").getValue(String.class);
                         String userId = userSnapshot.getKey();
 
-                        // Kiểm tra mật khẩu
                         if (storedPassword != null && storedPassword.equals(password)) {
                             Toast.makeText(Login.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                             // Lưu userId vào SharedPreferences
                             SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("user_id", userId); // Lưu userId
+                            editor.putString("user_id", userId);
                             editor.apply();
 
-                            // Chuyển sang Menu Activity
                             Intent intent = new Intent(Login.this, Menu.class);
-                            intent.putExtra("user_id", userId); // Truyền userId vào Intent
+                            intent.putExtra("user_id", userId);
                             startActivity(intent);
                             finish();
                             return;

@@ -1,6 +1,8 @@
 package com.example.project;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,7 +45,6 @@ public class BookDetail extends AppCompatActivity {
 
         initializeViews();
         handleIntentData();
-        setupBackButton();
         loadBookImageAndFetchDetails();
     }
 
@@ -69,7 +70,6 @@ public class BookDetail extends AppCompatActivity {
             Log.d("BookDetail", "User ID: " + userId);
         } else {
             Log.e("BookDetail", "User ID không có trong Intent!");
-            Toast.makeText(this, "User ID không hợp lệ!", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -85,9 +85,16 @@ public class BookDetail extends AppCompatActivity {
         }
     }
 
-    private void setupBackButton() {
+    private void setupBackButton(Book book, String bookId) {
         btnBack.setOnClickListener(v -> finish());
-        addLibraryButton.setOnClickListener(v -> addBookToLibrary());
+        addLibraryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addBookToLibrary(bookId);
+                showBookAddedDialog(book);
+            }
+        });
+
     }
 
     private void showShareBottomSheet() {
@@ -114,6 +121,7 @@ public class BookDetail extends AppCompatActivity {
                                 if (book != null && bookId != null) {
                                     displayBookDetails(book);
                                     setupReadButton(book, bookId);
+                                    setupBackButton(book, bookId);
                                 }
                             }
                         } else {
@@ -166,47 +174,15 @@ public class BookDetail extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void addBookToLibrary() {
-        // Kiem tra xem nguoi dung da dang nhap chua
-        if (userId == null) {
-            // Neu chua dang nhap, hien thi thong bao
-            new AlertDialog.Builder(this)
-                    .setTitle("Thông báo")
-                    .setMessage("Người dùng vui lòng đăng nhập để thêm sách vào thư viện!")
-                    .setNegativeButton("Đăng nhập", (v, d) -> {
-                        Intent intent = new Intent(BookDetail.this, Login.class);
-                        startActivity(intent);
-                    })
-                    .setPositiveButton("OK", null)
-                    .show();
-            return;
-        }
-
-        // Truy cập vào Firebase để thêm sách vào thư viện của người dùng
-        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("library");
-
-        // Lấy thông tin sách hiện tại
-        String bookTitle = bookTitleDetail.getText().toString();
-        String bookCoverUrl = getIntent().getStringExtra("book_image");
-        String bookAuthor = bookAuthorDetail.getText().toString();
-
-        // Tạo một map để lưu thông tin sách
-        Map<String, Object> bookData = new HashMap<>();
-        bookData.put("title", bookTitle);
-        bookData.put("coverUrl", bookCoverUrl);
-        bookData.put("author", bookAuthor);
-
-        // Tạo node với id là "bookXX" và thêm sách vào thư viện
-        String bookId = databaseReference.push().getKey(); // Tạo key ngẫu nhiên cho mỗi sách
-
-        if (bookId != null) {
-            databaseReference.child(bookId).setValue(bookData)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            showBookAddedDialog(new Book()); // Hiển thị thông báo khi thêm sách thành công
-                        }
-                    });
-        }
+    private void addBookToLibrary(String bookId) {
+        DatabaseReference libraryRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("library");
+        libraryRef.child(bookId).setValue(true).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                showToast("Đã thêm này với thư viện.");
+            } else {
+                showToast("Them that bai.");
+            }
+        });
     }
 
     private void showBookAddedDialog(Book book) {
@@ -225,6 +201,9 @@ public class BookDetail extends AppCompatActivity {
         btnDocNgay.setOnClickListener(v -> {
             Intent intent = new Intent(BookDetail.this, PdfViewerActivity.class);
             intent.putExtra("pdfUrl", book.getPdfUrl());
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+            String userId = sharedPreferences.getString("user_id", null);
+            intent.putExtra("user_id", userId);
             startActivity(intent);
         });
 

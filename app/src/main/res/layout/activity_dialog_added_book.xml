@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_dialog"
     tools:context=".Dialog_Added_Book">
 
     <androidx.cardview.widget.CardView
@@ -18,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             android:padding="24dp">
 
             <ImageView
@@ -58,16 +60,16 @@
 
                 <Button
                     android:id="@+id/btbDeSau"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/btn_border_round"
+                    android:backgroundTint="@color/light_teal"
                     android:text="Để sau"
-                    android:textColor="@color/button_green" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/btnDocNgay"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/button_green"
                     android:text="Đọc ngay"

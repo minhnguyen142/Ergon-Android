@@ -48,6 +48,7 @@
             android:background="@drawable/rounded_button_background"
             android:hint="Nhập tài khoản"
             android:inputType="text"
+            android:paddingLeft="20dp"
             android:layout_margin="10dp"
             android:textColor="@color/black"/>
 
@@ -58,6 +59,7 @@
             android:layout_height="60dp"
             android:background="@drawable/rounded_button_background"
             android:hint="Nhập mật khẩu"
+            android:paddingLeft="20dp"
             android:inputType="textPassword"
             android:layout_margin="10dp"
             android:textColor="@color/black"/>

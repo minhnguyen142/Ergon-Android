@@ -33,7 +33,7 @@ import java.util.Map;
 public class BookDetail extends AppCompatActivity {
 
     private ImageView bookCoverDetail, btnBack, iconShare;
-    private TextView bookTitleDetail, bookAuthorDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
+    private TextView bookTitleDetail, bookAuthorDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail, bookDescription;
     private Button readButton, addLibraryButton;
     private DatabaseReference databaseReference;
     private String userId; // Giữ nguyên userId
@@ -55,6 +55,7 @@ public class BookDetail extends AppCompatActivity {
         bookGenreDetail = findViewById(R.id.bookGenreDetail);
         bookRatingDetail = findViewById(R.id.bookRatingDetail);
         bookPriceDetail = findViewById(R.id.bookPriceDetail);
+        bookDescription = findViewById(R.id.bookDescription);
         readButton = findViewById(R.id.readButton);
         addLibraryButton = findViewById(R.id.addLibrary);
         btnBack = findViewById(R.id.IconCLose);
@@ -143,6 +144,7 @@ public class BookDetail extends AppCompatActivity {
         bookGenreDetail.setText(book.getGenre());
         bookRatingDetail.setText("5.0 (10 Nhận xét)"); // Giả định
         bookPriceDetail.setText("Miễn phí - Bạn có thể thêm vào thư viện và đọc trọn vẹn cuốn sách miễn phí");
+        bookDescription.setText(book.getContentDescription());
     }
 
     private void setupReadButton(Book book, String bookId) {

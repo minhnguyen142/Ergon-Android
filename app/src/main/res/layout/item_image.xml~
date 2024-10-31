@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginEnd="16dp">
+
+    <ImageView
+        android:id="@+id/imageEbook"
+        android:layout_width="93dp"
+        android:layout_height="133dp"
+        android:background="@color/white" />
+</LinearLayout>

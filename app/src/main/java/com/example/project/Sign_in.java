@@ -1,10 +1,12 @@
 package com.example.project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,9 @@ public class Sign_in extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
     private Button signUpButton;
     private DatabaseReference databaseReference;
+    private ImageButton btnBack;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,11 @@ public class Sign_in extends AppCompatActivity {
         usernameEditText = findViewById(R.id.editTextText3);
         passwordEditText = findViewById(R.id.editTextText4);
         signUpButton = findViewById(R.id.button2);
+        btnBack = findViewById(R.id.back1);
 
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
         // Xử lý khi nhấn nút Đăng ký
         signUpButton.setOnClickListener(v -> {
             String username = usernameEditText.getText().toString().trim();

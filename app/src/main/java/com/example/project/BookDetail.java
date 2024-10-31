@@ -86,7 +86,7 @@ public class BookDetail extends AppCompatActivity {
         }
     }
 
-    private void setupBackButton(Book book, String bookId) {
+    private void setupButton(Book book, String bookId) {
         btnBack.setOnClickListener(v -> finish());
         addLibraryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +122,7 @@ public class BookDetail extends AppCompatActivity {
                                 if (book != null && bookId != null) {
                                     displayBookDetails(book);
                                     setupReadButton(book, bookId);
-                                    setupBackButton(book, bookId);
+                                    setupButton(book, bookId);
                                 }
                             }
                         } else {

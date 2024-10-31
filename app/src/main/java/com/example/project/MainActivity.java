@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     ImageView imgAvatar;
-    ImageButton imgbtnFb, imgbtnGmail, imgbtnPhone;
+    ImageButton imgbtnFb, imgbtnGmail, imgbtnPhone, imgbtnLogin;
     TextView FacebookLoginText, GmailLoginText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         imgbtnFb = findViewById(R.id.imgbtnFb);
         imgbtnGmail = findViewById(R.id.imgbtnGmail);
         imgbtnPhone = findViewById(R.id.imgbtnPhone);
+        imgbtnLogin = findViewById(R.id.imgbtnLogin);
         FacebookLoginText = findViewById(R.id.FacebookLoginText);
         GmailLoginText = findViewById(R.id.GmailLoginText);
 
@@ -35,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
         // Xử lý sự kiện nhấn nút Gmail
         imgbtnGmail.setOnClickListener(v -> openGmailApp(MainActivity.this));
         GmailLoginText.setOnClickListener(v -> openGmailApp(MainActivity.this));
-
+        imgbtnLogin.setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+        });
         //Xử lý sự kiện nhấn nút Phone
         imgbtnPhone.setOnClickListener(new View.OnClickListener() {
             @Override

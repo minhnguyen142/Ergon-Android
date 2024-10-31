@@ -7,8 +7,8 @@
     android:layout_marginEnd="16dp">
 
     <ImageView
-        android:id="@+id/imgTrend"
-        android:layout_width="112dp"
-        android:layout_height="152dp"
+        android:id="@+id/imageEbook"
+        android:layout_width="93dp"
+        android:layout_height="133dp"
         android:background="@color/white" />
 </LinearLayout>

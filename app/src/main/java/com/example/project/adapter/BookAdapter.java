@@ -1,12 +1,15 @@
+
 package com.example.project.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +24,18 @@ import java.util.List;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> booksList;
     private Context context;
+    private OnBookClickListener listener;
 
-    public BookAdapter(Context context, List<Book> booksList) {
+    // Khai báo interface cho listener
+    public interface OnBookClickListener {
+        void onBookClick(String bookId);
+    }
+
+    // Cập nhật constructor để nhận listener
+    public BookAdapter(Context context, List<Book> booksList, OnBookClickListener listener) {
         this.context = context;
         this.booksList = booksList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,10 +53,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Glide.with(holder.itemView.getContext())
                 .load(book.getCoverUrl())
                 .into(holder.imageView);
+
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, BookDetail.class);
-            intent.putExtra("book_image", book.getCoverUrl());
-            context.startActivity(intent);
+            if (book.getId() != null) {
+                listener.onBookClick(book.getId()); // Gọi phương thức trong listener
+            } else {
+                Toast.makeText(context, "ID sách không hợp lệ", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

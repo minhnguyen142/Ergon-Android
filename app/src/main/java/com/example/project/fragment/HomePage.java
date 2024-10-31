@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.BookDetail;
+//import com.example.project.SearchActivity;
 import com.example.project.SearchActivity;
 import com.example.project.adapter.ImageOnlyAdapter;
 import com.example.project.R;
@@ -40,7 +41,7 @@ public class HomePage extends Fragment {
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook;
     private ImageView btnSearch;
-    private String userId; // Thêm userId
+    private String userId;
 
     @SuppressLint("MissingInflatedId")
     @Override

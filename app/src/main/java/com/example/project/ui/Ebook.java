@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.BookDetail;
 import com.example.project.R;
+import com.example.project.SearchActivity;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.adapter.EbookAdapter;
 import com.example.project.model.Book;
@@ -31,6 +33,7 @@ public class Ebook extends AppCompatActivity {
     private List<Book> bookListDx, bookListTrend, bookListVh;
     private EbookAdapter adapterDx, adapterTrend, adapterVh;
     private ImageButton btnBack;
+    private ImageView btnSearch;
     private DatabaseReference booksRef;
 
     @SuppressLint("MissingInflatedId")
@@ -43,6 +46,7 @@ public class Ebook extends AppCompatActivity {
         initializeFirebase();
         loadBooksFromFirebase();
         setBackButtonListener();
+        setBtnSearchListener();
     }
 
     private void initializeViews() {
@@ -50,7 +54,7 @@ public class Ebook extends AppCompatActivity {
         recyclerDx = findViewById(R.id.ryclerDx);
         recyclerTrend = findViewById(R.id.ryclerTrend);
         recyclerVh = findViewById(R.id.ryclerVh);
-
+        btnSearch = findViewById(R.id.iv_search);
         bookListDx = new ArrayList<>();
         bookListTrend = new ArrayList<>();
         bookListVh = new ArrayList<>();
@@ -113,5 +117,11 @@ public class Ebook extends AppCompatActivity {
 
     private void setBackButtonListener() {
         btnBack.setOnClickListener(v -> finish());
+    }
+    private void setBtnSearchListener() {
+        btnSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(Ebook.this, SearchActivity.class);
+            startActivity(intent);
+        });
     }
 }

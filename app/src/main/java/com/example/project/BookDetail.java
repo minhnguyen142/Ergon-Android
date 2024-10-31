@@ -17,12 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.project.model.Book;
 import com.example.project.ui.PdfViewerActivity;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import android.app.Dialog;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class BookDetail extends AppCompatActivity {
     private TextView bookTitleDetail, bookAuthorDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail;
     private Button readButton, addLibraryButton;
     private DatabaseReference databaseReference;
-    private String userId;
+    private String userId; // Giữ nguyên userId
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,14 @@ public class BookDetail extends AppCompatActivity {
     }
 
     private void handleIntentData() {
+        // Nhận userId từ Intent
         Intent intent = getIntent();
         if (intent.hasExtra("user_id")) {
             userId = intent.getStringExtra("user_id");
             Log.d("BookDetail", "User ID: " + userId);
         } else {
-            Log.e("BookDetail", "User ID not found in Intent!");
-            Toast.makeText(this, "Invalid User ID!", Toast.LENGTH_SHORT).show();
+            Log.e("BookDetail", "User ID không có trong Intent!");
+            Toast.makeText(this, "User ID không hợp lệ!", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -78,7 +80,7 @@ public class BookDetail extends AppCompatActivity {
             Glide.with(this).load(bookImage).into(bookCoverDetail);
             fetchBookDetails(bookImage);
         } else {
-            showToast("Book image not found!");
+            showToast("Không tìm thấy ảnh sách!");
             finish();
         }
     }
@@ -115,14 +117,14 @@ public class BookDetail extends AppCompatActivity {
                                 }
                             }
                         } else {
-                            showToast("Book details not found!");
+                            showToast("Không tìm thấy thông tin sách!");
                             finish();
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        showToast("Firebase connection error: " + error.getMessage());
+                        showToast("Lỗi kết nối Firebase: " + error.getMessage());
                     }
                 });
     }
@@ -131,8 +133,8 @@ public class BookDetail extends AppCompatActivity {
         bookTitleDetail.setText(book.getTitle());
         bookAuthorDetail.setText(book.getAuthor());
         bookGenreDetail.setText(book.getGenre());
-        bookRatingDetail.setText("5.0 (10 reviews)");
-        bookPriceDetail.setText("Free - You can add this book to your library and read it for free");
+        bookRatingDetail.setText("5.0 (10 Nhận xét)"); // Giả định
+        bookPriceDetail.setText("Miễn phí - Bạn có thể thêm vào thư viện và đọc trọn vẹn cuốn sách miễn phí");
     }
 
     private void setupReadButton(Book book, String bookId) {
@@ -153,9 +155,9 @@ public class BookDetail extends AppCompatActivity {
 
         historyRef.child(bookId).setValue(true).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                showToast("Added book to reading history.");
+                showToast("Đã thêm sách vào lịch sử đọc.");
             } else {
-                showToast("Failed to add book to reading history.");
+                showToast("Thêm sách vào lịch sử đọc thất bại.");
             }
         });
     }
@@ -165,11 +167,13 @@ public class BookDetail extends AppCompatActivity {
     }
 
     private void addBookToLibrary() {
+        // Kiem tra xem nguoi dung da dang nhap chua
         if (userId == null) {
+            // Neu chua dang nhap, hien thi thong bao
             new AlertDialog.Builder(this)
-                    .setTitle("Notification")
-                    .setMessage("Please log in to add books to your library!")
-                    .setNegativeButton("Log in", (v, d) -> {
+                    .setTitle("Thông báo")
+                    .setMessage("Người dùng vui lòng đăng nhập để thêm sách vào thư viện!")
+                    .setNegativeButton("Đăng nhập", (v, d) -> {
                         Intent intent = new Intent(BookDetail.this, Login.class);
                         startActivity(intent);
                     })
@@ -178,30 +182,35 @@ public class BookDetail extends AppCompatActivity {
             return;
         }
 
+        // Truy cập vào Firebase để thêm sách vào thư viện của người dùng
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("library");
 
+        // Lấy thông tin sách hiện tại
         String bookTitle = bookTitleDetail.getText().toString();
         String bookCoverUrl = getIntent().getStringExtra("book_image");
         String bookAuthor = bookAuthorDetail.getText().toString();
 
+        // Tạo một map để lưu thông tin sách
         Map<String, Object> bookData = new HashMap<>();
         bookData.put("title", bookTitle);
         bookData.put("coverUrl", bookCoverUrl);
         bookData.put("author", bookAuthor);
 
-        String bookId = databaseReference.push().getKey();
+        // Tạo node với id là "bookXX" và thêm sách vào thư viện
+        String bookId = databaseReference.push().getKey(); // Tạo key ngẫu nhiên cho mỗi sách
 
         if (bookId != null) {
             databaseReference.child(bookId).setValue(bookData)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            showBookAddedDialog(new Book());
+                            showBookAddedDialog(new Book()); // Hiển thị thông báo khi thêm sách thành công
                         }
                     });
         }
     }
 
     private void showBookAddedDialog(Book book) {
+        // Tạo một AlertDialog để hiển thị thông báo sách đã thêm vào thư viện
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_dialog_added_book, null);
@@ -209,16 +218,17 @@ public class BookDetail extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
 
-        Button btnReadNow = dialogView.findViewById(R.id.btnDocNgay);
-        Button btnLater = dialogView.findViewById(R.id.btbDeSau);
+        // Ánh xạ các nút "Đọc ngay" và "Để sau" trong dialog
+        Button btnDocNgay = dialogView.findViewById(R.id.btnDocNgay);
+        Button btbDeSau = dialogView.findViewById(R.id.btbDeSau);
 
-        btnReadNow.setOnClickListener(v -> {
+        btnDocNgay.setOnClickListener(v -> {
             Intent intent = new Intent(BookDetail.this, PdfViewerActivity.class);
             intent.putExtra("pdfUrl", book.getPdfUrl());
             startActivity(intent);
         });
 
-        btnLater.setOnClickListener(v -> dialog.dismiss());
+        btbDeSau.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
     }

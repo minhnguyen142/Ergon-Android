@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
 
         if (userId != null) {
             CountBook(userId, tvLib); // Gọi hàm CountBook để đếm sách
-            Nameuser(userId, tvUser);
+            UserName(userId, tvUser);
         }
 
         LinearLayout linearHistory = view.findViewById(R.id.linear_History);
@@ -91,7 +91,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    public void Nameuser(String userId, TextView tvUser) {
+    public void UserName(String userId, TextView tvUser) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("username");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

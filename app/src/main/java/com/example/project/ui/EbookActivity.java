@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
-import com.example.project.SpaceItemDecoration;
 import com.example.project.adapter.EbookAdapter;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
@@ -73,7 +72,6 @@ public class EbookActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(2));
     }
 
     private void loadBooksFromFirebase() {

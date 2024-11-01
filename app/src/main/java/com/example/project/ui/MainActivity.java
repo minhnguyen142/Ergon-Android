@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.project.EnterSDT;
 import com.example.project.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
         imgbtnLogin.setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
-        });
-        //Xử lý sự kiện nhấn nút Phone
-        imgbtnPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EnterSDT.class);
-                startActivity(intent);
-            }
         });
     }
 

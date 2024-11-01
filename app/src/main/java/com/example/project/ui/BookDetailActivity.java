@@ -180,7 +180,6 @@ public class BookDetailActivity extends AppCompatActivity {
     }
 
     private void showBookAddedDialog(Book book) {
-        // Tạo một AlertDialog để hiển thị thông báo sách đã thêm vào thư viện
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_dialog_added_book, null);

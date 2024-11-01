@@ -22,7 +22,6 @@ import com.example.project.ui.BookDetailActivity;
 import com.example.project.ui.SearchActivity;
 import com.example.project.adapter.RecommendedAdapter;
 import com.example.project.R;
-import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.EbookActivity;
 import com.example.project.ui.TuDuyActivity;
 import com.example.project.ui.VanHocActivity;
@@ -73,11 +72,6 @@ public class HomePageFragment extends Fragment {
         dexuatBookImages = new ArrayList<>();
         dexuatAdapter = new RecommendedAdapter(dexuatBookImages, this::openBookDetail);
         recyclerDexuat.setAdapter(dexuatAdapter);
-
-        // Thêm khoảng cách giữa các item
-        int spaceInPixels = getResources().getDimensionPixelSize(R.dimen.item_space);
-        recyclerTrending.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
-        recyclerDexuat.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
 
         // Khởi tạo DatabaseReference
         databaseReference = FirebaseDatabase.getInstance().getReference("books");

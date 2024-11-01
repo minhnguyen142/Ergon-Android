@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project.adapter.TrendingAdapter;
 import com.example.project.ui.BookDetailActivity;
 //import com.example.project.ui.SearchActivity;
 import com.example.project.ui.SearchActivity;
@@ -37,7 +38,8 @@ import java.util.List;
 
 public class HomePageFragment extends Fragment {
     private RecyclerView recyclerTrending, recyclerDexuat;
-    private RecommendedAdapter trendingAdapter, dexuatAdapter;
+    private RecommendedAdapter dexuatAdapter;
+    private TrendingAdapter trendingAdapter;
     private List<String> trendingBookImages, dexuatBookImages;
     private DatabaseReference databaseReference;
     private ImageButton btnVanHoc, btnEbook, btnTuDuy;
@@ -60,7 +62,7 @@ public class HomePageFragment extends Fragment {
         recyclerTrending.setLayoutManager(trendingLayoutManager);
 
         trendingBookImages = new ArrayList<>();
-        trendingAdapter = new RecommendedAdapter(trendingBookImages, this::openBookDetail);
+        trendingAdapter = new TrendingAdapter(trendingBookImages, this::openBookDetail);
         recyclerTrending.setAdapter(trendingAdapter);
 
         // Thiết lập RecyclerView cho sách đề xuất

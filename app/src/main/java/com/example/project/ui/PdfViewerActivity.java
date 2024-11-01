@@ -1,14 +1,18 @@
 package com.example.project.ui;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
 
 import java.io.File;
@@ -25,17 +29,31 @@ public class PdfViewerActivity extends AppCompatActivity {
 
     private PDFView pdfView;
     private String pdfUrl;
+    private ImageButton backpdf;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf_viewer);
 
+        // Ánh xạ các view
+        backpdf = findViewById(R.id.backpdf);
+
         pdfView = findViewById(R.id.pdfView);
+
+        // Lấy dữ liệu từ Intent
         pdfUrl = getIntent().getStringExtra("pdfUrl");
 
+
+        // Nút quay lại
+        backpdf.setOnClickListener(v -> finish());
+
+        // Tải và hiển thị PDF nếu URL không null
         if (pdfUrl != null) {
             downloadAndDisplayPdf(pdfUrl);
+        } else {
+            Toast.makeText(this, "Không tìm thấy URL của tài liệu", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -47,6 +65,7 @@ public class PdfViewerActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(PdfViewerActivity.this, "Lỗi khi tải tài liệu", Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -65,6 +84,8 @@ public class PdfViewerActivity extends AppCompatActivity {
 
                     // Hiển thị file PDF bằng PDFView
                     runOnUiThread(() -> displayPdf(pdfFile));
+                } else {
+                    runOnUiThread(() -> Toast.makeText(PdfViewerActivity.this, "Không thể tải tài liệu", Toast.LENGTH_SHORT).show());
                 }
             }
         });
@@ -77,8 +98,20 @@ public class PdfViewerActivity extends AppCompatActivity {
                 .swipeHorizontal(false)
                 .enableDoubletap(true)
                 .enableAnnotationRendering(true)
+                .onLoad(new OnLoadCompleteListener() {
+                    @Override
+                    public void loadComplete(int nbPages) {
+                        Toast.makeText(PdfViewerActivity.this, "Tài liệu đã được tải xong", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onPageError(new OnPageErrorListener() {
+                    @Override
+                    public void onPageError(int page, Throwable t) {
+                        Toast.makeText(PdfViewerActivity.this, "Lỗi khi hiển thị trang " + page, Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .spacing(10)
-                .pageFitPolicy(FitPolicy.BOTH)    
+                .pageFitPolicy(FitPolicy.BOTH)
                 .load();
     }
 }

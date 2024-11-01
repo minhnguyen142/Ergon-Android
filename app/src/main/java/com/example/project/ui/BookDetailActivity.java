@@ -195,6 +195,7 @@ public class BookDetailActivity extends AppCompatActivity {
         btnDocNgay.setOnClickListener(v -> {
             Intent intent = new Intent(BookDetailActivity.this, PdfViewerActivity.class);
             intent.putExtra("pdfUrl", book.getPdfUrl());
+//            intent.putExtra("bookTitle", book.getTitle());
             SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
             String userId = sharedPreferences.getString("user_id", null);
             intent.putExtra("user_id", userId);

@@ -59,11 +59,11 @@
                 android:fontFamily="@font/bevietnampro_regular"
                 android:hint="Mật khẩu"
                 android:background="@null"
-                android:inputType="text" />
+                android:inputType="textPassword" />
         </TableRow>
 
         <TableRow
-            android:layout_width="199dp"
+            android:layout_width="269dp"
             android:layout_height="match_parent"
             android:layout_marginStart="100sp"
             android:layout_marginTop="20sp"
@@ -72,10 +72,10 @@
             <Button
                 android:id="@+id/button2"
                 android:layout_width="77dp"
-                android:fontFamily="@font/bevietnampro_semibold"
-                android:layout_marginTop="30sp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
                 android:backgroundTint="#00B894"
+                android:fontFamily="@font/bevietnampro_semibold"
                 android:text="Đăng ký"
                 android:textSize="20sp" />
         </TableRow>

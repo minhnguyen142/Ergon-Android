@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cse441.ergon"
+    namespace = "com.example.project"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.cse441.ergon"
+        applicationId = "com.example.project"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

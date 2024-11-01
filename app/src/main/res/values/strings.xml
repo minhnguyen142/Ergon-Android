@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PROJECT</string>
+    <string name="app_name">Ergon</string>
 
     <string-array name="spinner_items" type="boil">
         <item>Mới nhất</item>

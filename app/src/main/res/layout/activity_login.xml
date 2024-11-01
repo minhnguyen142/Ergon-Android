@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#357C97"
     android:orientation="vertical"
-    tools:context="com.example.project.ui.LoginActivity">
+    tools:context="com.cse441.ergon.ui.LoginActivity">
 
 
     <ImageButton

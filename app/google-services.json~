@@ -29,7 +29,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1045501397437:android:f93255086e5ce951206ad4",
         "android_client_info": {
-          "package_name": "com.cse441.ergon"
+          "package_name": "com.example.project"
         }
       },
       "oauth_client": [],

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.project.BookDetail;
+import com.example.project.ui.BookDetailActivity;
 import com.example.project.R;
 import com.example.project.model.Book;
 
@@ -48,7 +48,7 @@ public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocView
                 .into(holder.imageView);
         holder.bookTitle.setText(book.getTitle());
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, BookDetail.class);
+            Intent intent = new Intent(context, BookDetailActivity.class);
             intent.putExtra("book_image", book.getCoverUrl());
             SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
             String userId = sharedPreferences.getString("user_id", null);

@@ -2,15 +2,15 @@ package com.example.project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project.model.User;
+import com.example.project.ui.LoginActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -68,7 +68,7 @@ public class TaoPassWord extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(TaoPassWord.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TaoPassWord.this, Login.class);
+                        Intent intent = new Intent(TaoPassWord.this, LoginActivity.class);
                         intent.putExtra("phoneNumber", phoneNumber);
                         startActivity(intent);
                         finish();

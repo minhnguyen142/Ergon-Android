@@ -16,14 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.BookDetail;
-//import com.example.project.SearchActivity;
-import com.example.project.SearchActivity;
+import com.example.project.ui.BookDetailActivity;
+//import com.example.project.ui.SearchActivity;
+import com.example.project.ui.SearchActivity;
 import com.example.project.adapter.RecommendedAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
-import com.example.project.ui.Ebook;
-import com.example.project.ui.VanHoc;
+import com.example.project.ui.EbookActivity;
+import com.example.project.ui.VanHocActivity;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage extends Fragment {
+public class HomePageFragment extends Fragment {
     private RecyclerView recyclerTrending, recyclerDexuat;
     private RecommendedAdapter trendingAdapter, dexuatAdapter;
     private List<String> trendingBookImages, dexuatBookImages;
@@ -91,13 +91,13 @@ public class HomePage extends Fragment {
         });
 
         btnVanHoc.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), VanHoc.class);
+            Intent intent = new Intent(getActivity(), VanHocActivity.class);
             intent.putExtra("user_id", userId);
             startActivity(intent);
         });
 
         btnEbook.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), Ebook.class);
+            Intent intent = new Intent(getActivity(), EbookActivity.class);
             intent.putExtra("user_id", userId);
             startActivity(intent);
         });
@@ -137,7 +137,7 @@ public class HomePage extends Fragment {
     }
 
     private void openBookDetail(String bookImage) {
-        Intent intent = new Intent(getActivity(), BookDetail.class);
+        Intent intent = new Intent(getActivity(), BookDetailActivity.class);
         intent.putExtra("book_image", bookImage);
         intent.putExtra("user_id", userId); // Truyền userId vào BookDetail
         startActivity(intent);

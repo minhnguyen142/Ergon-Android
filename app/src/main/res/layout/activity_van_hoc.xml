@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_background"
-    tools:context=".ui.VanHoc">
+    tools:context=".ui.VanHocActivity">
 
 
     <ImageButton

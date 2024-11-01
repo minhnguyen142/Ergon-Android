@@ -15,12 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.BookDetail;
 import com.example.project.R;
 import com.example.project.adapter.BookAdapter;
 import com.example.project.model.Book;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class History extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private BookAdapter bookAdapter;
@@ -90,13 +87,13 @@ public class History extends AppCompatActivity {
                             loadBookDetails(bookId); // Gọi phương thức để lấy chi tiết sách
                         }
                     } else {
-                        Toast.makeText(History.this, "Không có lịch sử đọc nào", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HistoryActivity.this, "Không có lịch sử đọc nào", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(History.this, "Failed to load reading history: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HistoryActivity.this, "Failed to load reading history: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -121,7 +118,7 @@ public class History extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(History.this, "Failed to load book details: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HistoryActivity.this, "Failed to load book details: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -132,7 +129,7 @@ public class History extends AppCompatActivity {
 
 
     private void openBookDetail(String bookId) {
-        Intent intent = new Intent(History.this, BookDetail.class);
+        Intent intent = new Intent(HistoryActivity.this, BookDetailActivity.class);
         intent.putExtra("book_id", bookId);
         startActivity(intent);
     }

@@ -2,7 +2,6 @@ package com.example.project.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.BookDetail;
 import com.example.project.R;
-import com.example.project.SearchActivity;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.adapter.EbookAdapter;
 import com.example.project.model.Book;
@@ -27,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ebook extends AppCompatActivity {
+public class EbookActivity extends AppCompatActivity {
 
     private RecyclerView recyclerDx, recyclerTrend, recyclerVh;
     private List<Book> bookListDx, bookListTrend, bookListVh;
@@ -100,7 +97,7 @@ public class Ebook extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Ebook.this, "Failed to load books: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EbookActivity.this, "Failed to load books: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -120,7 +117,7 @@ public class Ebook extends AppCompatActivity {
     }
     private void setBtnSearchListener() {
         btnSearch.setOnClickListener(v -> {
-            Intent intent = new Intent(Ebook.this, SearchActivity.class);
+            Intent intent = new Intent(EbookActivity.this, SearchActivity.class);
             startActivity(intent);
         });
     }

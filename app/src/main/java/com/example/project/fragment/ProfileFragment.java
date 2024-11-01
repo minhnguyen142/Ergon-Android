@@ -17,8 +17,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.project.MainActivity;
-import com.example.project.ui.History;
+import com.example.project.ui.MainActivity;
+import com.example.project.ui.HistoryActivity;
 import com.example.project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Profile extends Fragment {
+public class ProfileFragment extends Fragment {
     private TextView tvLib, tvUser;
     private ImageButton btnLogout;
 
@@ -68,7 +68,7 @@ public class Profile extends Fragment {
         });
 
         linearHistory.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), History.class);
+            Intent intent = new Intent(getActivity(), HistoryActivity.class);
             startActivity(intent);
         });
 

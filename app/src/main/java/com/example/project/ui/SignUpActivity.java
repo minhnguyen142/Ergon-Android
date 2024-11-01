@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project.R;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,7 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 
 import java.util.HashMap;
 
-public class Sign_up extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
     private Button signUpButton;
@@ -50,7 +51,7 @@ public class Sign_up extends AppCompatActivity {
             if (!username.isEmpty() && !password.isEmpty()) {
                 createUserIdAndSave(username, password);
             } else {
-                Toast.makeText(Sign_up.this, "Vui lòng nhập tài khoản và mật khẩu!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Vui lòng nhập tài khoản và mật khẩu!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -78,7 +79,7 @@ public class Sign_up extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Sign_up.this, "Lỗi khi kiểm tra ID người dùng.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Lỗi khi kiểm tra ID người dùng.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -90,12 +91,12 @@ public class Sign_up extends AppCompatActivity {
         userData.put("password", password);
         databaseReference.child(userId).setValue(userData).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(Sign_up.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Sign_up.this, Login.class);
+                Toast.makeText(SignUpActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish(); // Để không quay lại màn hình đăng ký
             } else {
-                Toast.makeText(Sign_up.this, "Đăng ký thất bại!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Đăng ký thất bại!", Toast.LENGTH_SHORT).show();
             }
         });
     }

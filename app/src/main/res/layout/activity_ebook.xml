@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_background_2"
-    tools:context=".ui.Ebook">
+    tools:context=".ui.EbookActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

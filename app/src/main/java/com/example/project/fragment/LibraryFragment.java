@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project.BookDetail;
+import com.example.project.ui.BookDetailActivity;
 import com.example.project.R;
 import com.example.project.adapter.BookAdapter;
 import com.example.project.model.Book;
@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Library extends Fragment {
+public class LibraryFragment extends Fragment {
 
     private BookAdapter bookAdapter;
     private List<Book> bookList;
@@ -102,13 +102,13 @@ public class Library extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Library.this.getContext(), "Failed to load book details: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show(); // Sửa thành Library.this
+                Toast.makeText(LibraryFragment.this.getContext(), "Failed to load book details: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show(); // Sửa thành Library.this
             }
         });
     }
 
     private void openBookDetail(String bookId) {
-        Intent intent = new Intent(getContext(), BookDetail.class);
+        Intent intent = new Intent(getContext(), BookDetailActivity.class);
         intent.putExtra("book_id", bookId);
         startActivity(intent);
     }

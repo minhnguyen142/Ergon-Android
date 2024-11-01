@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.model;
 
 public class User {
     private String phoneNumber;

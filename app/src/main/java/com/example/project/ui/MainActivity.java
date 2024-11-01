@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.project.EnterSDT;
+import com.example.project.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         imgbtnGmail.setOnClickListener(v -> openGmailApp(MainActivity.this));
         GmailLoginText.setOnClickListener(v -> openGmailApp(MainActivity.this));
         imgbtnLogin.setOnClickListener(v ->{
-            Intent intent = new Intent(MainActivity.this, Login.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         });
         //Xử lý sự kiện nhấn nút Phone

@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,20 +17,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.project.R;
 import com.example.project.model.Book;
-import com.example.project.ui.PdfViewerActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import android.app.Dialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class BookDetail extends AppCompatActivity {
+public class BookDetailActivity extends AppCompatActivity {
 
     private ImageView bookCoverDetail, btnBack, iconShare;
     private TextView bookTitleDetail, bookAuthorDetail, bookGenreDetail, bookRatingDetail, bookPriceDetail, bookDescription;
@@ -201,7 +197,7 @@ public class BookDetail extends AppCompatActivity {
         Button btbDeSau = dialogView.findViewById(R.id.btbDeSau);
 
         btnDocNgay.setOnClickListener(v -> {
-            Intent intent = new Intent(BookDetail.this, PdfViewerActivity.class);
+            Intent intent = new Intent(BookDetailActivity.this, PdfViewerActivity.class);
             intent.putExtra("pdfUrl", book.getPdfUrl());
             SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
             String userId = sharedPreferences.getString("user_id", null);

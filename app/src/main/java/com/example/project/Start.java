@@ -7,13 +7,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.adapter.ButtonAdapter;
-import com.example.project.fragment.HomePage;
+import com.example.project.fragment.HomePageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +71,7 @@ public class Start extends AppCompatActivity {
         btnContinueStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Start.this, HomePage.class);
+                Intent intent = new Intent(Start.this, HomePageFragment.class);
                 startActivity(intent);
             }
         });

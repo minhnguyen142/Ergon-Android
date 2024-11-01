@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.project.BookDetail;
+import com.example.project.ui.BookDetailActivity;
 import com.example.project.R;
 import com.example.project.model.Book;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -60,7 +60,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             if (book.getId() != null) {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                 String userId = sharedPreferences.getString("user_id", null);
-                Intent intent = new Intent(context, BookDetail.class);
+                Intent intent = new Intent(context, BookDetailActivity.class);
                 intent.putExtra("book_image", book.getCoverUrl());
                 intent.putExtra("book_id", book.getId());
                 intent.putExtra("user_id", userId);

@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.project.fragment.HomePage;
-import com.example.project.fragment.Library;
-import com.example.project.fragment.Profile;
+import com.example.project.fragment.HomePageFragment;
+import com.example.project.fragment.LibraryFragment;
+import com.example.project.fragment.ProfileFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
@@ -25,13 +25,13 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new HomePage();
+                return new HomePageFragment();
             case 1:
-                return new Library();
+                return new LibraryFragment();
             case 2:
-                return new Profile();
+                return new ProfileFragment();
             default:
-                return new HomePage();
+                return new HomePageFragment();
         }
     }
 

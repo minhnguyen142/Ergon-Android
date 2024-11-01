@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,14 +15,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.project.ui.Menu;
+import com.example.project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
     private Button loginButton, registerButton;
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
 
         // Listener cho nút đăng ký
         registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, Sign_up.class);
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(intent);
         });
 
@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity {
 
         // Kiểm tra thông tin nhập
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(Login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
 
                         // Kiểm tra mật khẩu
                         if (storedPassword != null && storedPassword.equals(password)) {
-                            Toast.makeText(Login.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
                             // Lưu userId vào SharedPreferences
                             SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -95,22 +95,22 @@ public class Login extends AppCompatActivity {
                             editor.apply();
 
                             // Chuyển sang Menu Activity
-                            Intent intent = new Intent(Login.this, Menu.class);
+                            Intent intent = new Intent(LoginActivity.this, Menu.class);
                             intent.putExtra("user_id", userId); // Truyền userId vào Intent
                             startActivity(intent);
                             finish();
                             return;
                         }
                     }
-                    Toast.makeText(Login.this, "Mật khẩu không đúng.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Mật khẩu không đúng.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Login.this, "Tài khoản không tồn tại.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Tài khoản không tồn tại.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Login.this, "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Lỗi: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

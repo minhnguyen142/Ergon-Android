@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_background"
-    tools:context=".BookDetail">
+    tools:context=".ui.BookDetailActivity">
 
 
     <ScrollView

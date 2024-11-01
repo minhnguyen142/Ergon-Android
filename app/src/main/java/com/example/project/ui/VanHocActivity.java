@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanHoc extends AppCompatActivity {
+public class VanHocActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton btnBack;
     private VanhocAdapter vanhocAdapter;
@@ -72,7 +72,7 @@ public class VanHoc extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(VanHoc.this, "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VanHocActivity.this, "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

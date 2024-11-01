@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         imgAvatar = findViewById(R.id.imgAvatar);
         imgbtnFb = findViewById(R.id.imgbtnFb);
         imgbtnGmail = findViewById(R.id.imgbtnGmail);
+        imgbtnPhone = findViewById(R.id.imgbtnPhone);
         imgbtnLogin = findViewById(R.id.imgbtnLogin);
         FacebookLoginText = findViewById(R.id.FacebookLoginText);
         GmailLoginText = findViewById(R.id.GmailLoginText);

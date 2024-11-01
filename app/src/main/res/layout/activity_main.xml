@@ -115,19 +115,10 @@
         android:gravity="center">
 
         <ImageButton
-            android:id="@+id/imgbtnPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#357C97"
-            app:srcCompat="@drawable/phone" />
-
-        <ImageButton
             android:id="@+id/imgbtnLogin"
             android:layout_width="43dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginStart="50sp"
             android:background="@drawable/round_shape"
             android:backgroundTint="@color/white"
             app:srcCompat="@drawable/baseline_login_24" />

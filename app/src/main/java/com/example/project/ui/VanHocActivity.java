@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
-import com.example.project.adapter.VanhocAdapter;
+import com.example.project.adapter.VanHocAdapter;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +26,7 @@ import java.util.List;
 public class VanHocActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton btnBack;
-    private VanhocAdapter vanhocAdapter;
+    private VanHocAdapter vanhocAdapter;
     private List<Book> bookList;
     private DatabaseReference booksRef;
 
@@ -46,7 +46,7 @@ public class VanHocActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         bookList = new ArrayList<>();
-        vanhocAdapter = new VanhocAdapter(bookList, this);
+        vanhocAdapter = new VanHocAdapter(bookList, this);
         recyclerView.setAdapter(vanhocAdapter);
 
         booksRef = FirebaseDatabase.getInstance().getReference("books");

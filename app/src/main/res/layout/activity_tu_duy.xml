@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_background"
-    tools:context=".ui.VanHocActivity">
+    tools:context=".ui.TuDuyActivity">
 
 
     <ImageButton
-        android:id="@+id/btnVhback"
+        android:id="@+id/btnTdback"
         android:layout_width="43dp"
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
@@ -20,7 +21,6 @@
 
 
     <TextView
-        android:id="@+id/textView5"
         android:layout_width="107dp"
         android:layout_height="36dp"
         android:layout_alignParentStart="true"
@@ -28,12 +28,12 @@
         android:layout_marginVertical="70dp"
         android:layout_marginStart="25dp"
         android:fontFamily="@font/bevietnampro_bold"
-        android:text="Văn Học"
+        android:text="Tư duy"
         android:textColor="@color/white"
         android:textSize="26sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerVanHoc"
+        android:id="@+id/recyclerTuDuy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="150dp"

@@ -166,7 +166,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/ic_ki_nang"
+                        android:id="@+id/ic_tu_duy"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_marginBottom="5dp"

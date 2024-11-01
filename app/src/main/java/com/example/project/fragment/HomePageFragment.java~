@@ -23,7 +23,6 @@ import com.example.project.adapter.RecommendedAdapter;
 import com.example.project.R;
 import com.example.project.SpaceItemDecoration;
 import com.example.project.ui.EbookActivity;
-import com.example.project.ui.TuDuyActivity;
 import com.example.project.ui.VanHocActivity;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +39,7 @@ public class HomePageFragment extends Fragment {
     private RecommendedAdapter trendingAdapter, dexuatAdapter;
     private List<String> trendingBookImages, dexuatBookImages;
     private DatabaseReference databaseReference;
-    private ImageButton btnVanHoc, btnEbook, btnTuDuy;
+    private ImageButton btnVanHoc, btnEbook;
     private ImageView btnSearch;
     private String userId;
 
@@ -85,7 +84,6 @@ public class HomePageFragment extends Fragment {
         btnSearch = view.findViewById(R.id.ic_search);
         btnVanHoc = view.findViewById(R.id.ic_van_hoc);
         btnEbook = view.findViewById(R.id.ic_ebook);
-        btnTuDuy = view.findViewById(R.id.ic_tu_duy);
 
         btnSearch.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
@@ -100,12 +98,6 @@ public class HomePageFragment extends Fragment {
 
         btnEbook.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EbookActivity.class);
-            intent.putExtra("user_id", userId);
-            startActivity(intent);
-        });
-
-        btnTuDuy.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), TuDuyActivity.class);
             intent.putExtra("user_id", userId);
             startActivity(intent);
         });

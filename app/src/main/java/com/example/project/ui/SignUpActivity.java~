@@ -92,6 +92,8 @@ public class SignUpActivity extends AppCompatActivity {
         databaseReference.child(userId).setValue(userData).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(SignUpActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
                 finish(); // Để không quay lại màn hình đăng ký
             } else {
                 Toast.makeText(SignUpActivity.this, "Đăng ký thất bại!", Toast.LENGTH_SHORT).show();

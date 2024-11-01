@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
-import com.example.project.adapter.VanhocAdapter;
+import com.example.project.adapter.TuDuyAdapter;
 import com.example.project.model.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,20 +23,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanHocActivity extends AppCompatActivity {
+public class TuDuyActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton btnBack;
-    private VanhocAdapter vanhocAdapter;
+    private TuDuyAdapter tuDuyAdapter;
     private List<Book> bookList;
     private DatabaseReference booksRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_van_hoc);
+        setContentView(R.layout.activity_tu_duy);
 
-        recyclerView = findViewById(R.id.recyclerVanHoc);
-        btnBack = findViewById(R.id.btnVhback);
+        recyclerView = findViewById(R.id.recyclerTuDuy);
+        btnBack = findViewById(R.id.btnTdback);
 
         // Lấy userId từ SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -46,8 +46,8 @@ public class VanHocActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         bookList = new ArrayList<>();
-        vanhocAdapter = new VanhocAdapter(bookList, this);
-        recyclerView.setAdapter(vanhocAdapter);
+        tuDuyAdapter = new TuDuyAdapter(bookList, this);
+        recyclerView.setAdapter(tuDuyAdapter);
 
         booksRef = FirebaseDatabase.getInstance().getReference("books");
         loadBooksFromFirebase();
@@ -56,7 +56,7 @@ public class VanHocActivity extends AppCompatActivity {
     }
 
     private void loadBooksFromFirebase() {
-        Query query = booksRef.orderByChild("genre").equalTo("Văn học");
+        Query query = booksRef.orderByChild("genre").equalTo("Tư duy");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -67,12 +67,12 @@ public class VanHocActivity extends AppCompatActivity {
                         bookList.add(book);
                     }
                 }
-                vanhocAdapter.notifyDataSetChanged();
+                tuDuyAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(VanHocActivity.this, "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TuDuyActivity.this, "Failed to load books data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -59,7 +59,7 @@
                 android:fontFamily="@font/bevietnampro_regular"
                 android:hint="Mật khẩu"
                 android:background="@null"
-                android:inputType="textPassword" />
+                android:inputType="text" />
         </TableRow>
 
         <TableRow

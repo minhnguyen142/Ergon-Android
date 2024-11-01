@@ -60,9 +60,9 @@ public class LibraryFragment extends Fragment {
         String userId = sharedPreferences.getString("user_id", null);
 
         if (userId != null) {
-            DatabaseReference libraryRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("library");
+            DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("library");
 
-            libraryRef.addValueEventListener(new ValueEventListener() {
+            historyRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -72,7 +72,7 @@ public class LibraryFragment extends Fragment {
                             loadBookDetails(bookId); // Gọi phương thức để lấy chi tiết sách
                         }
                     } else {
-                        Toast.makeText(getContext(), "Không có sách trong thư viện!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Không có lịch sử đọc nào", Toast.LENGTH_SHORT).show();
                     }
                 }
 

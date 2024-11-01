@@ -6,7 +6,7 @@
     android:padding="8dp">
 
         <ImageView
-            android:id="@+id/bookImg"
+            android:id="@+id/bookImgVanHoc"
             android:layout_width="155dp"
             android:layout_height="235dp"
             android:layout_gravity="center"
@@ -14,7 +14,7 @@
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/bookTitle"
+            android:id="@+id/bookTitleVanHoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

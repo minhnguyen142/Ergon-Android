@@ -16,15 +16,18 @@
         android:theme="@style/Theme.PROJECT"
         tools:targetApi="31">
         <activity
-            android:name=".ui.LibraryMenuActivity"
+            android:name=".ui.TuDuyActivity"
             android:exported="false" />
-        <!-- MainActivity là màn hình khởi động đầu tiên -->
+        <activity
+            android:name=".ui.LibraryMenuActivity"
+            android:exported="false" /> <!-- MainActivity là màn hình khởi động đầu tiên -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

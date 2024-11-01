@@ -21,12 +21,12 @@ import com.example.project.model.Book;
 
 import java.util.List;
 
-public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocViewHolder> {
+public class TuDuyAdapter extends RecyclerView.Adapter<TuDuyAdapter.VanhocViewHolder> {
 
     private List<Book> bookList;
     private Context context;
 
-    public VanhocAdapter(List<Book> bookList, Context context) {
+    public TuDuyAdapter(List<Book> bookList, Context context) {
         this.context = context;
         this.bookList = bookList;
     }
@@ -34,7 +34,7 @@ public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocView
     @NonNull
     @Override
     public VanhocViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vanhoc, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tuduy, parent, false);
         return new VanhocViewHolder(view);
     }
 
@@ -69,8 +69,8 @@ public class VanhocAdapter extends RecyclerView.Adapter<VanhocAdapter.VanhocView
 
         public VanhocViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.bookImgVanHoc);
-            bookTitle = itemView.findViewById(R.id.bookTitleVanHoc);
+            imageView = itemView.findViewById(R.id.bookImg);
+            bookTitle = itemView.findViewById(R.id.bookTitle);
         }
     }
 }

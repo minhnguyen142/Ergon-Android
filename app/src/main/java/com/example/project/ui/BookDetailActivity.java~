@@ -174,9 +174,13 @@ public class BookDetailActivity extends AppCompatActivity {
 
     private void addBookToLibrary(String bookId) {
         DatabaseReference libraryRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("library");
-        libraryRef.child(bookId).setValue(true).addOnFailureListener(
-                e -> showToast("Lỗi kết nối Firebase: " + e.getMessage())
-        );
+        libraryRef.child(bookId).setValue(true).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                showToast("Đã thêm này với thư viện.");
+            } else {
+                showToast("Them that bai.");
+            }
+        });
     }
 
     private void showBookAddedDialog(Book book) {

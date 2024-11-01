@@ -21,7 +21,6 @@ public class ShareBook extends AppCompatActivity {
         LinearLayout facebookShare = findViewById(R.id.facebook_share);
         LinearLayout messengerShare = findViewById(R.id.messenger_share);
         LinearLayout copyLink = findViewById(R.id.copy_link);
-        LinearLayout moreOptions = findViewById(R.id.more_options);
 
 
     }

@@ -64,19 +64,19 @@
                     android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/light_teal"
                     android:fontFamily="@font/bevietnampro_semibold"
-                    android:textSize="16sp"
                     android:text="Để sau"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btnDocNgay"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/button_green"
+                    android:backgroundTint="#00B894"
                     android:fontFamily="@font/bevietnampro_semibold"
                     android:text="Đọc ngay"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>

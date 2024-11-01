@@ -60,7 +60,7 @@
                 <Button
                     android:id="@+id/btbDeSau"
                     android:layout_width="140dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="55dp"
                     android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/light_teal"
                     android:fontFamily="@font/bevietnampro_semibold"
@@ -71,8 +71,8 @@
                 <Button
                     android:id="@+id/btnDocNgay"
                     android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/button_green"
+                    android:layout_height="55dp"
+                    android:backgroundTint="#00B894"
                     android:fontFamily="@font/bevietnampro_semibold"
                     android:text="Đọc ngay"
                     android:textColor="@android:color/white"

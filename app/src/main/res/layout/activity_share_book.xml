@@ -5,41 +5,41 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@drawable/rounded_share_bottom"
-    android:padding="16dp"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ShareBook">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/bevietnampro_bold"
             android:text="Chia sẻ"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingEnd="8dp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/closeShareSheet"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/icon_close"
-            app:tint="@color/dark_teal"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="end"
             android:contentDescription="Đóng"
-            android:layout_gravity="end" />
+            android:src="@drawable/icon_close"
+            app:tint="@color/dark_teal" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#D3D3D3"
-        android:layout_marginVertical="8dp" />
+        android:layout_marginVertical="8dp"
+        android:background="#D3D3D3" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,11 +51,11 @@
             android:id="@+id/facebook_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="12dp"
-            android:gravity="center_vertical"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -65,19 +65,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/bevietnampro_regular"
                 android:text="Bài viết trên Facebook"
-                android:layout_marginStart="16dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/messenger_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="12dp"
-            android:gravity="center_vertical"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -87,19 +89,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/bevietnampro_regular"
                 android:text="Qua tin nhắn Messenger"
-                android:layout_marginStart="16dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/copy_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="12dp"
-            android:gravity="center_vertical"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="12dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -109,31 +113,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/bevietnampro_regular"
                 android:text="Sao chép liên kết"
-                android:layout_marginStart="16dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/more_options"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="12dp"
-            android:gravity="center_vertical"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/more" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tùy chọn thêm"
-                android:layout_marginStart="16dp" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

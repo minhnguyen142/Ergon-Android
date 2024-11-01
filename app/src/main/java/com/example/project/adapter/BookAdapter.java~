@@ -77,12 +77,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     private void showMenuBottomSheet() {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this.context);
-        bottomSheetDialog.setContentView(R.layout.activity_library_menu);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.activity_share_book);
 
-        ImageView closeMenuSheet = bottomSheetDialog.findViewById(R.id.closeMenuSheet);
-        if (closeMenuSheet != null) {
-            closeMenuSheet.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        ImageView closeShareSheet = bottomSheetDialog.findViewById(R.id.closeShareSheet);
+        if (closeShareSheet != null) {
+            closeShareSheet.setOnClickListener(v -> bottomSheetDialog.dismiss());
         }
         bottomSheetDialog.show();
     }

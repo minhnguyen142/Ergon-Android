@@ -189,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bevietnampro_semibold"
-                    android:text="cuốn sách"
+                    android:text="? cuốn sách"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
